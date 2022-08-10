@@ -1,0 +1,35 @@
+{
+  "name": "doctor_appointment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.17.3",
+    "express-ejs-layouts": "^2.5.1",
+    "express-rate-limit": "^6.3.0",
+    "helmet": "^5.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.3.1",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.4",
+    "node-fetch": "^2.6.7",
+    "nodemailer": "^6.7.3",
+    "nodemon": "^2.0.15",
+    "path": "^0.12.7",
+    "pdf-lib": "^1.17.1",
+    "pdfkit": "^0.13.0",
+    "pdfreader": "^2.0.0",
+    "socket.io": "^4.5.1",
+    "xss-clean": "^0.1.1"
+  }
+}

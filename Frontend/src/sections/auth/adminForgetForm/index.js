@@ -1,0 +1,1 @@
+export {default as AdminForgotForm} from './AdminForgotForm'

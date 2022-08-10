@@ -1,0 +1,9 @@
+// export { default as Doctor } from './Doctor';
+// export { default as Download } from './Download';
+// export { default as Form } from './Form';
+// export { default as SocialMedia } from './SocialMedia';
+// export { default as Topbar } from './Topbar';
+// export { default as Logo } from './Logo';
+// export { default as Footer } from './Footer';
+// export { default as SearchBar } from './SearchBar';
+// export { default as TabBtn } from './TabBtn';

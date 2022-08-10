@@ -1,0 +1,1 @@
+export {default as DoctorLoginForm} from './DoctorLoginForm';

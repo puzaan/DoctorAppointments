@@ -1,0 +1,130 @@
+import * as Yup from 'yup';
+import { useNavigate } from 'react-router-dom';
+// material
+import { IconButton, InputAdornment, Stack, TextField } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Form, FormikProvider, useFormik } from 'formik';
+
+import { DoctorForgotPasswordChange } from '../../../apigetway/actions/DoctorAction';
+import Error from '../../../pages/Error';
+import Iconify from '../../../components/Iconify';
+import { DOCTOR_FORGOT_PASSWORD_RESET } from '../../../apigetway/constants/DoctorConstants';
+
+// ----------------------------------------------------------------------
+
+export default function DoctorForgotForm() {
+  const navigate = useNavigate();
+
+  const [message, setMessage] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const doctorForgotPassword = useSelector((state) => state.doctorForgotPassword);
+  const { error: errorData, success } = doctorForgotPassword;
+
+  const ForgotSchema = Yup.object().shape({
+    email: Yup.string().email('Email must be a valid email address').required('email is required'),
+    password: Yup.string().min(4, 'Too Short!').required('Password is required'),
+    confirmPassword: Yup.string().min(4, 'Too Short!').required('Password is required'),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+      confirmPassword: '',
+    },
+    validationSchema: ForgotSchema,
+    onSubmit: () => {
+      if (values.password !== values.confirmPassword) {
+        setMessage('Passwords do not match');
+      } else {
+        dispatch(DoctorForgotPasswordChange(values.email, values.password));
+      }
+      // dispatch(DoctorForgotPasswordChange(values.email, values.password));
+    },
+  });
+  // eslint-disable-next-line
+  const { errors, touched, values, handleSubmit, getFieldProps } = formik;
+
+  const goback = () => {
+    navigate('/doctor/login', { replace: true });
+  };
+  const handleShowPassword = () => {
+    setShowPassword((show) => !show);
+  };
+  useEffect(() => {
+    if (success) {
+      dispatch({ type: DOCTOR_FORGOT_PASSWORD_RESET });
+      navigate('/doctor/login', { replace: true });
+    }
+  });
+  return (
+    <FormikProvider value={formik}>
+      {errorData && <Error>{errorData}</Error>}
+      {message && <Error>{message}</Error>}
+      <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
+        <Stack spacing={3}>
+          <TextField
+            fullWidth
+            autoComplete="email"
+            type="email"
+            label="Email Id"
+            {...getFieldProps('email')}
+            error={Boolean(touched.email && errors.email)}
+            helperText={touched.email && errors.email}
+          />
+          <TextField
+            fullWidth
+            autoComplete="current-password"
+            type={showPassword ? 'text' : 'password'}
+            label="Password"
+            {...getFieldProps('password')}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleShowPassword} edge="end">
+                    <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            error={Boolean(touched.password && errors.password)}
+            helperText={touched.password && errors.password}
+          />
+          <TextField
+            fullWidth
+            autoComplete="current-password"
+            type={showPassword ? 'text' : 'password'}
+            label="Confir Password"
+            {...getFieldProps('confirmPassword')}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton onClick={handleShowPassword} edge="end">
+                    <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            error={Boolean(touched.confirmPassword && errors.confirmPassword)}
+            helperText={touched.confirmPassword && errors.confirmPassword}
+          />
+        </Stack>
+        {/* {loading && <Loder />} */}
+
+        <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={3} sx={{ my: 2 }}>
+          <LoadingButton fullWidth size="large" type="submit" variant="contained">
+            submin
+          </LoadingButton>
+          <LoadingButton fullWidth size="large" variant="contained" onClick={goback}>
+            Go Back
+          </LoadingButton>
+        </Stack>
+      </Form>
+    </FormikProvider>
+  );
+}
