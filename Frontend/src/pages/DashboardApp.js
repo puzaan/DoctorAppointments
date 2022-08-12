@@ -1,47 +1,63 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 // @mui
-import { useTheme } from '@mui/material/styles';
-import { Grid, Container, Typography } from '@mui/material';
+import { Grid, Container, Typography } from "@mui/material";
 // components
-import Page from '../components/Page';
+import Page from "../components/Page";
 
 // sections
-import { AppCurrentVisits, AppWidgetSummary } from '../sections/@dashboard/app';
+import { ListAdmins } from "../apigetway/actions/AdminAction";
+import { ListDoctors } from "../apigetway/actions/DoctorAction";
+import { ListBookings } from "../apigetway/actions/BookingAction";
+import DashboardAppBooking from "./DashboardAppBooking";
+import DashboardAppDoctor from "./DashboardAppDoctor";
+import DashboardAppAdmin from "./DashboardAppAdmin";
+import Loder from "./Loading";
 
 // ----------------------------------------------------------------------
 
 export default function DashboardApp() {
-  const theme = useTheme();
+  const [loadings, setLoading] = useState(true);
+  const admindispatch = useDispatch();
+  const docdispatch = useDispatch();
+  const bookdispatch = useDispatch();
+  const adminList = useSelector((state) => state.adminList);
+  const { admins, loading } = adminList;
+  const doctorList = useSelector((state) => state.doctorList);
+  const { doctors, loading: docLoading } = doctorList;
+  const bookingList = useSelector((state) => state.bookingList);
+  const { bookings, loading: bookLoading } = bookingList;
+  useEffect(() => {
+    admindispatch(ListAdmins());
+    docdispatch(ListDoctors());
+    bookdispatch(ListBookings());
+    if (!loading && !docLoading && !bookLoading) {
+      setLoading(false);
+    }
+  }, [admindispatch, docdispatch, bookdispatch]);
 
   return (
-    <Page title="Dashboard">
+    <Page title="Super Admin Dashboard">
       <Container maxWidth="xl">
-        <Typography variant="h4" sx={{ mb: 5 }} align={'center'}>
+        <Typography variant="h4" sx={{ mb: 5 }} align={"center"}>
           Hi, Welcome back to Super Admin Dashboard
         </Typography>
-
-        <Grid container spacing={3} justifyContent={'center'}>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Admin List" total={100} icon={'ant-design:android-filled'} />
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Doctor List" total={100} color="info" icon={'ant-design:android-filled'} />
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="Client List" total={150} color="warning" icon={'ant-design:android-filled'} />
-          </Grid>
-          <Grid item xs={12} md={6} lg={4}>
-            <AppCurrentVisits
-              title="All User "
-              chartData={[
-                { label: 'Doctor', value: 100 },
-                { label: 'Admin', value: 90 },
-                { label: 'Client', value: 10 },
-              ]}
-              chartColors={[theme.palette.primary.main, theme.palette.chart.blue[0], theme.palette.chart.violet[0]]}
-            />
-          </Grid>
+        <Grid container spacing={3} justifyContent={"center"}>
+          {loadings ? (
+            <Loder />
+          ) : (
+            <>
+              <DashboardAppAdmin
+                adminNO={admins}
+                path={"/superadmin/admin/list"}
+              />
+              <DashboardAppDoctor docNo={doctors} path={"/superadmin/doctor"} />
+              <DashboardAppBooking
+                bookNo={bookings}
+                path={"/superadmin/booking/list"}
+              />
+            </>
+          )}
         </Grid>
       </Container>
     </Page>

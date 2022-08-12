@@ -86,10 +86,11 @@ export const DoctorListReducer = (state = { doctors: [] }, action) => {
     case DOCTOR_LIST_SUCCESS:
       return {
         loading: false,
+        success: true,
         doctors: action.payload,
       };
     case DOCTOR_LIST_FAIL:
-      return { loading: false, error: action.payload };
+      return { success: false, loading: false, error: action.payload };
     case DOCTOR_LIST_RESET:
       return { doctors: [] };
     default:

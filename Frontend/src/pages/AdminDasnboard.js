@@ -1,40 +1,49 @@
 // @mui
-import { Grid, Container, Typography } from '@mui/material';
+import { Grid, Container, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 // components
-import Page from '../components/Page';
+import Page from "../components/Page";
 // sections
-import { AppWidgetSummary } from '../sections/@dashboard/app';
+import { AdminListDoctors } from "../apigetway/actions/DoctorAction";
+import { AdminListBookings } from "../apigetway/actions/BookingAction";
+import Loder from "./Loading";
+import DashboardAppDoctor from "./DashboardAppDoctor";
+import DashboardAppBooking from "./DashboardAppBooking";
 
 // ----------------------------------------------------------------------
 
 export default function AdminDashboard() {
-  
+  const [loadings, setLoading] = useState(true);
+  const docdispatch = useDispatch();
+  const bookdispatch = useDispatch();
+  const doctorList = useSelector((state) => state.doctorList);
+  const { doctors, loading: docLoading } = doctorList;
+  const bookingList = useSelector((state) => state.bookingList);
+  const { bookings, loading: bookLoading } = bookingList;
+  useEffect(() => {
+    docdispatch(AdminListDoctors());
+    bookdispatch(AdminListBookings());
+    if (!docLoading && !bookLoading) {
+      setLoading(false);
+    }
+  }, [docdispatch, bookdispatch]);
   return (
     <Page title="AdminDashboard">
       <Container maxWidth="xl">
-        <Typography variant="h4" sx={{ mb: 5 }} align={'center'}>
+        <Typography variant="h4" sx={{ mb: 5 }} align={"center"}>
           Hi, Welcome back to Admin Dashboard
         </Typography>
 
-        <Grid container spacing={3} justifyContent={'center'}>
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="New Doctor List" total={100} color="info" icon={'ant-design:android-filled'} />
-          </Grid>
-
-          <Grid item xs={12} sm={6} md={3}>
-            <AppWidgetSummary title="New Client List" total={150} color="warning" icon={'ant-design:android-filled'} />
-          </Grid>
-          {/* <Grid item xs={12} md={6} lg={4}>
-            <AppCurrentVisits
-              title="Current User"
-              chartData={[
-                { label: 'Doctor', value: 4344 },
-                { label: 'Admin', value: 5435 },
-                { label: 'Client', value: 1443 },
-              ]}
-              chartColors={[theme.palette.primary.main, theme.palette.chart.blue[0], theme.palette.chart.violet[0]]}
-            />
-          </Grid> */}
+        <Grid container spacing={3} justifyContent={"center"}>
+          {loadings ? (
+            <Loder />
+          ) : (
+            <>
+              <DashboardAppDoctor docNo={doctors} path={"/admin/doctor"} />
+              <DashboardAppBooking bookNo={bookings} path={"/admin/booking"} />
+            </>
+          )}
         </Grid>
       </Container>
     </Page>

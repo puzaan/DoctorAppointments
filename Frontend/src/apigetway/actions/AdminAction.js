@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import {
   ADMIN_CREATE_FAIL,
   ADMIN_CREATE_REQUEST,
@@ -24,17 +24,18 @@ import {
   ADMIN_UPDATE_REQUEST,
   ADMIN_UPDATE_RESET,
   ADMIN_UPDATE_SUCCESS,
-} from '../constants/AdminConstants';
-import { SUPERADMIN_LOGOUT } from '../constants/SuperAdminConstants';
-import url from '../mainUrl';
+} from "../constants/AdminConstants";
+import { SUPERADMIN_LOGOUT } from "../constants/SuperAdminConstants";
+import url from "../mainUrl";
 
 export const SuperAdminLogout = () => (dispatch) => {
-  localStorage.removeItem('superAdminInfo');
+  localStorage.removeItem("superAdminInfo");
   dispatch({ type: SUPERADMIN_LOGOUT });
-  document.location.href = '/superadmin/login';
+  document.location.href = "/superadmin/login";
 };
 export const CreateAdmin =
-  (fullName, dob, gender, address, contactNumber, emailId, password) => async (dispatch, getState) => {
+  (fullName, dob, gender, address, contactNumber, emailId, password) =>
+  async (dispatch, getState) => {
     try {
       dispatch({
         type: ADMIN_CREATE_REQUEST,
@@ -47,7 +48,7 @@ export const CreateAdmin =
       const config = {
         headers: {
           API_KEY: `${superAdminInfo.toke}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       };
 
@@ -61,8 +62,11 @@ export const CreateAdmin =
         payload: data,
       });
     } catch (error) {
-      const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-      if (message === 'No valid api Key Used') {
+      const message =
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.message;
+      if (message === "No valid api Key Used") {
         dispatch(SuperAdminLogout());
       }
       dispatch({
@@ -83,7 +87,7 @@ export const ListAdmins = () => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: `${superAdminInfo.toke}`,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
     const { data } = await axios.get(`${url}/api/v1/admin/view/all`, config);
@@ -92,8 +96,11 @@ export const ListAdmins = () => async (dispatch, getState) => {
       payload: data.data,
     });
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(SuperAdminLogout());
     }
     dispatch({
@@ -116,7 +123,7 @@ export const deleteAdmin = (id) => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: `${superAdminInfo.toke}`,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
@@ -126,8 +133,11 @@ export const deleteAdmin = (id) => async (dispatch, getState) => {
       type: ADMIN_DELETE_SUCCESS,
     });
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(SuperAdminLogout());
     }
     dispatch({
@@ -150,7 +160,7 @@ export const UpdateAdmin = (id, field, value) => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: `${superAdminInfo.toke}`,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
     const { data } = await axios.put(
@@ -168,8 +178,11 @@ export const UpdateAdmin = (id, field, value) => async (dispatch, getState) => {
 
     dispatch({ type: ADMIN_DETAILS_RESET });
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(SuperAdminLogout());
     }
     dispatch({
@@ -192,7 +205,7 @@ export const ViewAdmin = (id) => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: `${superAdminInfo.toke}`,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
     const { data } = await axios.get(`${url}/api/v1/admin/view/${id}`, config);
@@ -202,8 +215,11 @@ export const ViewAdmin = (id) => async (dispatch, getState) => {
       payload: data.data,
     });
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(SuperAdminLogout());
     }
     dispatch({
@@ -228,9 +244,12 @@ export const AdminLogin = (email, password) => async (dispatch) => {
       playload: data.data,
     });
     // to save SUPERADMIN info into local storage
-    localStorage.setItem('adminInfo', JSON.stringify(data.data));
+    localStorage.setItem("adminInfo", JSON.stringify(data.data));
   } catch (err) {
-    const message = err.response && err.response.data.msg ? err.response.data.msg : err.message;
+    const message =
+      err.response && err.response.data.msg
+        ? err.response.data.msg
+        : err.message;
     dispatch({
       type: ADMIN_LOGIN_FAIL,
       payload: message,
@@ -301,48 +320,52 @@ export const AdminLogin = (email, password) => async (dispatch) => {
 //   }
 // };
 
-export const AdminUpdateAdmin = (id, field, value) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: ADMIN_UPDATE_REQUEST,
-    });
+export const AdminUpdateAdmin =
+  (id, field, value) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: ADMIN_UPDATE_REQUEST,
+      });
 
-    const {
-      adminLogin: { adminInfo },
-    } = getState();
+      const {
+        adminLogin: { adminInfo },
+      } = getState();
 
-    const config = {
-      headers: {
-        API_KEY: `${adminInfo.token}`,
-        'Content-Type': 'application/json',
-      },
-    };
-    const { data } = await axios.put(
-      `${url}/api/v1/admin/update/${id}`,
-      {
-        field: `${field}`,
-        value: `${value}`,
-      },
-      config
-    );
+      const config = {
+        headers: {
+          API_KEY: `${adminInfo.token}`,
+          "Content-Type": "application/json",
+        },
+      };
+      const { data } = await axios.put(
+        `${url}/api/v1/admin/update/${id}`,
+        {
+          field: `${field}`,
+          value: `${value}`,
+        },
+        config
+      );
 
-    dispatch({ type: ADMIN_UPDATE_SUCCESS, payload: data.data });
-    localStorage.setItem('adminInfo', JSON.stringify(data.data));
+      dispatch({ type: ADMIN_UPDATE_SUCCESS, payload: data.data });
+      localStorage.setItem("adminInfo", JSON.stringify(data.data));
 
-    // dispatch({ type: ADMIN_DETAILS_SUCCESS, payload: data });
+      // dispatch({ type: ADMIN_DETAILS_SUCCESS, payload: data });
 
-    dispatch({ type: ADMIN_UPDATE_RESET });
-  } catch (error) {
-    const message = error.response && error.response.data.message ? error.response.data.message : error.message;
-    if (message === 'No valid api Key Used') {
-      dispatch(Logout());
+      dispatch({ type: ADMIN_UPDATE_RESET });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+      if (message === "No valid api Key Used") {
+        dispatch(Logout());
+      }
+      dispatch({
+        type: ADMIN_UPDATE_FAIL,
+        payload: message,
+      });
     }
-    dispatch({
-      type: ADMIN_UPDATE_FAIL,
-      payload: message,
-    });
-  }
-};
+  };
 
 export const AdminViewAdmin = (id) => async (dispatch, getState) => {
   try {
@@ -357,7 +380,7 @@ export const AdminViewAdmin = (id) => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: `${adminInfo.token}`,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
     const { data } = await axios.get(`${url}/api/v1/admin/view/${id}`, config);
@@ -367,8 +390,11 @@ export const AdminViewAdmin = (id) => async (dispatch, getState) => {
       payload: data.data,
     });
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(Logout());
     }
     dispatch({
@@ -378,41 +404,49 @@ export const AdminViewAdmin = (id) => async (dispatch, getState) => {
   }
 };
 
-export const AdminPasswordChange = (id, password) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: ADMIN_PASSWORD_CHANGE_REQUEST,
-    });
-    const {
-      adminLogin: { adminInfo },
-    } = getState();
+export const AdminPasswordChange =
+  (id, password) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: ADMIN_PASSWORD_CHANGE_REQUEST,
+      });
+      const {
+        adminLogin: { adminInfo },
+      } = getState();
 
-    const config = {
-      headers: {
-        API_KEY: adminInfo.token,
-        'Content-Type': 'application/json',
-      },
-    };
+      const config = {
+        headers: {
+          API_KEY: adminInfo.token,
+          "Content-Type": "application/json",
+        },
+      };
 
-    const { data } = await axios.put(`${url}/api/v1/admin/change/password/${id}?password=${password}`, {}, config);
-    dispatch({
-      type: ADMIN_PASSWORD_CHANGE_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
-      dispatch(Logout());
+      const { data } = await axios.put(
+        `${url}/api/v1/admin/change/password/${id}?password=${password}`,
+        {},
+        config
+      );
+      dispatch({
+        type: ADMIN_PASSWORD_CHANGE_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.message;
+      if (message === "No valid api Key Used") {
+        dispatch(Logout());
+      }
+      dispatch({
+        type: ADMIN_PASSWORD_CHANGE_FAIL,
+        payload: message,
+      });
     }
-    dispatch({
-      type: ADMIN_PASSWORD_CHANGE_FAIL,
-      payload: message,
-    });
-  }
-};
+  };
 
 export const Logout = () => (dispatch) => {
-  localStorage.removeItem('adminInfo');
+  localStorage.removeItem("adminInfo");
   dispatch({ type: ADMIN_LOGOUT });
-  document.location.href = '/admin/login';
+  document.location.href = "/admin/login";
 };

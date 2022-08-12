@@ -22,10 +22,11 @@ export const AdminListReducer = (state = { admins: [] }, action) => {
     case ADMIN_LIST_SUCCESS:
       return {
         loading: false,
+        success: true,
         admins: action.payload,
       };
     case ADMIN_LIST_FAIL:
-      return { loading: false, error: action.payload };
+      return { success: false, loading: false, error: action.payload };
     case ADMIN_LIST_RESET:
       return { admins: [] };
     default:

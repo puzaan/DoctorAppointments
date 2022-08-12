@@ -114,7 +114,7 @@ io.on("connection", (socket) => {
 mongodb.connect(databaseurl.databaseurl).then(() => {
   console.log("Connection Successful to database");
   server.listen(port, () => {
-    console.log("Server started at port 5050");
+    console.log(`Server started at port ${port}`);
   })
 }).catch((e) => {
   console.log(e);

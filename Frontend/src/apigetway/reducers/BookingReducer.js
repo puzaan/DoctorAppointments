@@ -22,10 +22,11 @@ export const BookingListReducer = (state = { bookings: [] }, action) => {
     case BOOKING_LIST_SUCCESS:
       return {
         loading: false,
+        success:true,
         bookings: action.payload,
       };
     case BOOKING_LIST_FAIL:
-      return { loading: false, error: action.payload };
+      return { success: false, loading: false, error: action.payload };
     case BOOKING_LIST_RESET:
       return { bookings: [] };
     default:
