@@ -4,7 +4,7 @@ const {doctorSchema}=require("../database/doctor_schema");
 const adminVerification=(req,res,next)=>{
     const apiKeyUsed=req.headers["api_key"];
     //debug purpose only
-    //console.log(apiKey+"used api key"+apiKeyUsed);
+    console.log(apiKey+"used api key"+apiKeyUsed);
 
     if(apiKey===apiKeyUsed){
         //for debug only
