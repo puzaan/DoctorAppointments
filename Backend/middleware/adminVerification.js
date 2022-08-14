@@ -27,6 +27,7 @@ const adminVerification=(req,res,next)=>{
                 next();
             }else{
                 console.log("no valid api key used..part"+"done"+done);
+                console.log("error if:"+error);
                 res.status(400).json({"msg":"No valid api Key Used"});
                 return;
             }
