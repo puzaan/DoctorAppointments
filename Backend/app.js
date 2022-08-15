@@ -62,7 +62,7 @@ app.use(express.json());
 
 
 
-app.get("/", (req, res) => {
+app.get("/test", (req, res) => {
   res.send("APP For Doctors API");
 })
 //creating super admin
