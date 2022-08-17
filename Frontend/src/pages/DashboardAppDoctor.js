@@ -1,6 +1,8 @@
 import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
+
 import { AppWidgetSummary } from "../sections/@dashboard/app";
 
 DashboardAppDoctor.propTypes = {
@@ -19,7 +21,7 @@ export default function DashboardAppDoctor({ docNo, path }) {
         title="Doctor List"
         total={doctorList}
         color="info"
-        icon={"ant-design:android-filled"}
+        icon={<LocalHospitalIcon />}
         path={path}
       />
     </Grid>

@@ -1,5 +1,7 @@
 import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import BookOnlineIcon from "@mui/icons-material/BookOnline";
+
 import PropTypes from "prop-types";
 import { AppWidgetSummary } from "../sections/@dashboard/app";
 
@@ -19,7 +21,7 @@ export default function DashboardAppBooking({ bookNo, path }) {
         title="Client List"
         total={booingList}
         color="warning"
-        icon={"ant-design:android-filled"}
+        icon={<BookOnlineIcon />}
         path={path}
       />
     </Grid>

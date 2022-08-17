@@ -4,8 +4,8 @@ import { NavLink as RouterLink, matchPath, useLocation } from 'react-router-dom'
 // material
 import { alpha, useTheme, styled } from '@mui/material/styles';
 import { Box, List, Collapse, ListItemText, ListItemIcon, ListItemButton } from '@mui/material';
-//
-import Iconify from './Iconify';
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 
 // ----------------------------------------------------------------------
 
@@ -70,10 +70,11 @@ function NavItem({ item, active }) {
           <ListItemIconStyle>{icon && icon}</ListItemIconStyle>
           <ListItemText disableTypography primary={title} />
           {info && info}
-          <Iconify
+          {open ? <ExpandMoreIcon /> : <NavigateNextIcon />}
+          {/* <Iconify
             icon={open ? 'eva:arrow-ios-downward-fill' : 'eva:arrow-ios-forward-fill'}
             sx={{ width: 16, height: 16, ml: 1 }}
-          />
+          /> */}
         </ListItemStyle>
 
         <Collapse in={open} timeout="auto" unmountOnExit>

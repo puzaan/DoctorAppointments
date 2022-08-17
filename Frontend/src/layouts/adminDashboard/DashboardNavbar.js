@@ -5,12 +5,10 @@ import { useSelector } from 'react-redux';
 // material
 import { alpha, styled } from '@mui/material/styles';
 import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material';
+import MenuIcon from "@mui/icons-material/Menu";
 // components
-import Iconify from '../../components/Iconify';
 //
-import Searchbar from './Searchbar';
 import AccountPopover from './AccountPopover';
-import NotificationsPopover from './NotificationsPopover';
 
 
 // ----------------------------------------------------------------------
@@ -58,14 +56,12 @@ export default function DashboardNavbar({ onOpenSidebar }) {
     <RootStyle>
       <ToolbarStyle>
         <IconButton onClick={onOpenSidebar} sx={{ mr: 1, color: 'text.primary', display: { lg: 'none' } }}>
-          <Iconify icon="eva:menu-2-fill" />
+          {/* <Iconify icon="eva:menu-2-fill" /> */}
+          <MenuIcon />
         </IconButton>
-
-        <Searchbar />
         <Box sx={{ flexGrow: 1 }} />
 
         <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
-          <NotificationsPopover />
           <AccountPopover/>
         </Stack>
       </ToolbarStyle>

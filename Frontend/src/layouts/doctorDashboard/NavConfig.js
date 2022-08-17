@@ -1,15 +1,10 @@
-// component
-import Iconify from '../../components/Iconify';
-
-// ----------------------------------------------------------------------
-
-const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
+import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 
 const navConfig = [
   {
-    title: 'Meeting List',
-    path: '/doctor/booking',
-    icon: getIcon('el:comment-alt'),
+    title: "Meeting List",
+    path: "/doctor/booking",
+    icon: <LocalHospitalIcon />,
   },
 ];
 

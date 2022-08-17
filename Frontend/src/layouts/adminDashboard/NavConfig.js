@@ -1,25 +1,23 @@
-// component
-import Iconify from '../../components/Iconify';
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import BookOnlineIcon from "@mui/icons-material/BookOnline";
+import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 
-// ----------------------------------------------------------------------
-
-const getIcon = (name) => <Iconify icon={name} width={22} height={22} />;
 
 const navConfig = [
   {
-    title: 'Dashboard',
-    path: '/admin/app',
-    icon: getIcon('eva:pie-chart-2-fill'),
+    title: "Dashboard",
+    path: "/admin/app",
+    icon: <DashboardIcon />,
   },
   {
-    title: 'Doctor',
-    path: '/admin/doctor',
-    icon: getIcon('eva:people-fill'),
+    title: "Doctor",
+    path: "/admin/doctor",
+    icon: <LocalHospitalIcon />,
   },
   {
-    title: 'BookingList',
-    path: '/admin/booking',
-    icon: getIcon('eva:people-fill'),
+    title: "BookingList",
+    path: "/admin/booking",
+    icon: <BookOnlineIcon />,
   },
 ];
 

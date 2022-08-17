@@ -6,10 +6,11 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { Box, Card, Stack, Container, Typography, IconButton, FormControlLabel, Chip } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
+import EditIcon from "@mui/icons-material/Edit";
+
 
 // components
 import Page from '../components/Page';
-import Iconify from '../components/Iconify';
 import { MeetingList } from '../apigetway/actions/MeetingAction';
 
 const MatEdit = ({ index }) => {
@@ -25,8 +26,12 @@ const MatEdit = ({ index }) => {
   return (
     <FormControlLabel
       control={
-        <IconButton color="secondary" aria-label="add an alarm" onClick={handleEditClick}>
-          <Iconify icon="eva:edit-fill" width={24} height={24} />
+        <IconButton
+          color="secondary"
+          aria-label="add an alarm"
+          onClick={handleEditClick}
+        >
+          <EditIcon />
         </IconButton>
       }
     />

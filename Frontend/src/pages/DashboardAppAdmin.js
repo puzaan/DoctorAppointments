@@ -1,6 +1,7 @@
 import { Grid } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { AppWidgetSummary } from "../sections/@dashboard/app";
 
 DashboardAppAdmin.propTypes = {
@@ -19,7 +20,7 @@ export default function DashboardAppAdmin({ adminNO, path }) {
       <AppWidgetSummary
         title="Admin List"
         total={adminList}
-        icon={"ant-design:android-filled"}
+        icon={<AdminPanelSettingsIcon />}
         path={path}
       />
     </Grid>

@@ -51,6 +51,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const { adminInfo} = adminLogin;
   const [name, setName] = useState(adminAccount.displayName);
   const [profile, setProfile] = useState(adminAccount.femalephotoURL);
+  const [role, setRole] = useState(adminAccount.role);
 
   useEffect(() => {
     if (isOpenSidebar) {
@@ -58,6 +59,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     }
     if (adminInfo) {
       setName(adminInfo.fullName);
+      setRole(adminInfo.role);
       if (adminInfo.gender.toLowerCase() === 'male') {
         setProfile(adminAccount.malephotoURL);
       }
@@ -85,7 +87,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
                 {name}
               </Typography>
               <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {account.role}
+                {role}
               </Typography>
             </Box>
           </AccountStyle>

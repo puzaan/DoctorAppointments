@@ -177,7 +177,7 @@ const DoctorUpdateProfile = () => {
   useEffect(() => {
     dispatch(DoctorView(id));
     setDate(new Date(dateTime).getTime() / 1000.0);
-    // console.log(date);
+    console.log(doctor);
     if (
       success ||
       deleteNumberSuccess ||
@@ -219,77 +219,98 @@ const DoctorUpdateProfile = () => {
         <>
           <Box
             component={Card}
-            variant={'outlined'}
+            variant={"outlined"}
             spacing={2}
             padding={2}
             margin={4}
-            bgcolor={'transparent'}
-            display={'flex'}
-            flexDirection={{ xs: 'column', sm: 'row' }}
+            bgcolor={"transparent"}
+            display={"flex"}
+            flexDirection={{ xs: "column", sm: "row" }}
           >
-            <Box component={Grid} display={'flex'} container alignItems={'center'} spacing={2}>
+            <Box
+              component={Grid}
+              display={"flex"}
+              container
+              alignItems={"center"}
+              spacing={2}
+            >
               <Grid item xs={12} sm={12} md={8}>
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+                <Typography variant={"subtitle2"} sx={{ marginBottom: 2 }}>
                   Full Name
                 </Typography>
                 <TextField
                   label={doctor.fullName}
                   variant="outlined"
-                  name={'fullName'}
+                  name={"fullName"}
                   fullWidth
                   value={fullName}
                   onChange={(e) => setName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={4} marginTop={{ md: 5 }}>
-                <Button variant="outlined" disabled={fullName === ''} onClick={updateName} startIcon={<EditIcon />}>
+                <Button
+                  variant="outlined"
+                  disabled={fullName === ""}
+                  onClick={updateName}
+                  startIcon={<EditIcon />}
+                >
                   Update
                 </Button>
               </Grid>
               <Grid item xs={12} sm={12} md={8}>
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+                <Typography variant={"subtitle2"} sx={{ marginBottom: 2 }}>
                   Address
                 </Typography>
                 <TextField
                   label={doctor.address}
                   variant="outlined"
-                  name={'address'}
+                  name={"address"}
                   fullWidth
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={4} marginTop={{ md: 5 }}>
-                <Button variant="outlined" disabled={address === ''} onClick={updateAddress} startIcon={<EditIcon />}>
+                <Button
+                  variant="outlined"
+                  disabled={address === ""}
+                  onClick={updateAddress}
+                  startIcon={<EditIcon />}
+                >
                   Update
                 </Button>
               </Grid>
               <Grid item xs={12} sm={12} md={8}>
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+                <Typography variant={"subtitle2"} sx={{ marginBottom: 2 }}>
                   Gender
                 </Typography>
                 <TextField
                   label={doctor.gender}
                   variant="outlined"
-                  name={'gender'}
+                  name={"gender"}
                   fullWidth
                   value={gender}
                   onChange={(e) => setGender(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={4} marginTop={{ md: 5 }}>
-                <Button variant="outlined" disabled={gender === ''} onClick={updateGender} startIcon={<EditIcon />}>
+                <Button
+                  variant="outlined"
+                  disabled={gender === ""}
+                  onClick={updateGender}
+                  startIcon={<EditIcon />}
+                >
                   Update
                 </Button>
               </Grid>
               <Grid item xs={12} sm={12} md={8}>
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+                <Typography variant={"subtitle2"} sx={{ marginBottom: 2 }}>
                   NMC Number
                 </Typography>
                 <TextField
                   label={doctor.NMC_number}
                   variant="outlined"
-                  name={'NMC_number'}
+                  name={"NMC_number"}
                   fullWidth
                   value={NMCnumber}
                   onChange={(e) => setNMCnumber(e.target.value)}
@@ -298,7 +319,7 @@ const DoctorUpdateProfile = () => {
               <Grid item xs={12} sm={12} md={4} marginTop={{ md: 5 }}>
                 <Button
                   variant="outlined"
-                  disabled={NMCnumber === ''}
+                  disabled={NMCnumber === ""}
                   onClick={updateNMCNumber}
                   startIcon={<EditIcon />}
                 >
@@ -306,45 +327,55 @@ const DoctorUpdateProfile = () => {
                 </Button>
               </Grid>
               <Grid item xs={12} sm={12} md={8}>
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+                <Typography variant={"subtitle2"} sx={{ marginBottom: 2 }}>
                   email Id
                 </Typography>
                 <TextField
                   label={doctor.emailId}
                   variant="outlined"
-                  name={'emailId'}
+                  name={"emailId"}
                   fullWidth
-                  type={'email'}
+                  type={"email"}
                   value={emailId}
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={4} marginTop={{ md: 5 }}>
-                <Button variant="outlined" disabled={emailId === ''} onClick={updateEmail} startIcon={<EditIcon />}>
+                <Button
+                  variant="outlined"
+                  disabled={emailId === ""}
+                  onClick={updateEmail}
+                  startIcon={<EditIcon />}
+                >
                   Update
                 </Button>
               </Grid>
               <Grid item xs={12} sm={12} md={8}>
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+                <Typography variant={"subtitle2"} sx={{ marginBottom: 2 }}>
                   Fee
                 </Typography>
                 <TextField
                   label={`रू: ${doctor.fee}`}
                   variant="outlined"
-                  name={'fee'}
+                  name={"fee"}
                   fullWidth
                   value={fee}
                   onChange={(e) => setfee(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={4} marginTop={{ md: 5 }}>
-                <Button variant="outlined" disabled={fee === ''} onClick={updateFee} startIcon={<EditIcon />}>
+                <Button
+                  variant="outlined"
+                  disabled={fee === ""}
+                  onClick={updateFee}
+                  startIcon={<EditIcon />}
+                >
                   Update
                 </Button>
               </Grid>
               <Grid item xs={12} sm={12} md={8}>
                 {addTimeError && <Error>{addTimeError}</Error>}
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+                <Typography variant={"subtitle2"} sx={{ marginBottom: 2 }}>
                   Date & Time
                 </Typography>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
@@ -360,14 +391,18 @@ const DoctorUpdateProfile = () => {
                 </LocalizationProvider>
               </Grid>
               <Grid item xs={12} sm={12} md={4} marginTop={{ md: 5 }}>
-                <Button variant="outlined" onClick={addTime} startIcon={<EditIcon />}>
+                <Button
+                  variant="outlined"
+                  onClick={addTime}
+                  startIcon={<EditIcon />}
+                >
                   Add
                 </Button>
               </Grid>
 
               <Grid item xs={12} sm={12} md={8}>
                 {videoError && <Error> {videoError} </Error>}
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+                <Typography variant={"subtitle2"} sx={{ marginBottom: 2 }}>
                   Video Links
                 </Typography>
                 <TextField
@@ -379,13 +414,18 @@ const DoctorUpdateProfile = () => {
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={4} marginTop={{ md: 5 }}>
-                <Button variant="outlined" onClick={addVideo} disabled={videoList === ''} startIcon={<EditIcon />}>
+                <Button
+                  variant="outlined"
+                  onClick={addVideo}
+                  disabled={videoList === ""}
+                  startIcon={<EditIcon />}
+                >
                   Add
                 </Button>
               </Grid>
               <Grid item xs={12} sm={12} md={8}>
                 {tagError && <Error> {tagError} </Error>}
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+                <Typography variant={"subtitle2"} sx={{ marginBottom: 2 }}>
                   Tag
                 </Typography>
                 <TextField
@@ -397,33 +437,43 @@ const DoctorUpdateProfile = () => {
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={4} marginTop={{ md: 5 }}>
-                <Button variant="outlined" onClick={addTag} disabled={tag === ''} startIcon={<EditIcon />}>
+                <Button
+                  variant="outlined"
+                  onClick={addTag}
+                  disabled={tag === ""}
+                  startIcon={<EditIcon />}
+                >
                   Add
                 </Button>
               </Grid>
               <Grid item xs={12} sm={12} md={8}>
                 {numberError && <Error> {numberError} </Error>}
 
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+                <Typography variant={"subtitle2"} sx={{ marginBottom: 2 }}>
                   Contact Number
                 </Typography>
                 <TextField
                   label="Contact Number"
                   variant="outlined"
-                  name={'fullName'}
+                  name={"fullName"}
                   fullWidth
                   value={contactNumber}
                   onChange={(e) => setContactNumber(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={4} marginTop={{ md: 5 }}>
-                <Button variant="outlined" onClick={addNumber} disabled={contactNumber === ''} startIcon={<EditIcon />}>
+                <Button
+                  variant="outlined"
+                  onClick={addNumber}
+                  disabled={contactNumber === ""}
+                  startIcon={<EditIcon />}
+                >
                   Add
                 </Button>
               </Grid>
               <Grid item xs={12} sm={12} md={8}>
                 {educationError && <Error> {educationError} </Error>}
-                <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
+                <Typography variant={"subtitle2"} sx={{ marginBottom: 2 }}>
                   Education Background
                 </Typography>
                 <TextField
@@ -435,29 +485,46 @@ const DoctorUpdateProfile = () => {
                 />
               </Grid>
               <Grid item xs={12} sm={12} md={4} marginTop={{ md: 5 }}>
-                <Button variant="outlined" onClick={addEducation} disabled={education === ''} startIcon={<EditIcon />}>
+                <Button
+                  variant="outlined"
+                  onClick={addEducation}
+                  disabled={education === ""}
+                  startIcon={<EditIcon />}
+                >
                   Add
                 </Button>
               </Grid>
             </Box>
-            <Box component={Grid} container display={'flex'} alignItems={'center'} marginTop={2} flexDirection={'row'}>
+            <Box
+              component={Grid}
+              container
+              display={"flex"}
+              alignItems={"center"}
+              marginTop={2}
+              flexDirection={"row"}
+            >
               <Box
                 component={Grid}
                 container
-                display={'flex'}
-                alignItems={'center'}
+                display={"flex"}
+                alignItems={"center"}
                 marginTop={2}
-                flexDirection={'column'}
+                flexDirection={"column"}
               >
                 <Avatar
                   alt={doctor.fullName}
-                  src=""
+                  src={doctor.profilePhotoLink}
                   sx={{ width: 200, height: 200, marginBottom: 5 }}
                   variant="square"
                 />
                 <div className="from-group">
                   {/* <lable>Select Single File</lable> */}
-                  <input accept="image/*" type="file" className="form-control" onChange={(e) => singleFileChange(e)} />
+                  <input
+                    accept="image/*"
+                    type="file"
+                    className="form-control"
+                    onChange={(e) => singleFileChange(e)}
+                  />
                 </div>
                 <div className="row">
                   <div className="col-10">
@@ -467,10 +534,20 @@ const DoctorUpdateProfile = () => {
                   </div>
                 </div>
               </Box>
-              <Box component={Grid} container display={'flex'} marginTop={2} flexDirection={'row'}>
+              <Box
+                component={Grid}
+                container
+                display={"flex"}
+                marginTop={2}
+                flexDirection={"row"}
+              >
                 <Grid item sm={12} xs={12} md={8}>
                   {deleteNumberError && <Error>{deleteNumberError} </Error>}
-                  <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+                  <Typography
+                    sx={{ mt: 4, mb: 2 }}
+                    variant="h6"
+                    component="div"
+                  >
                     Contact Number
                   </Typography>
                   {viewSuccess && (
@@ -480,7 +557,11 @@ const DoctorUpdateProfile = () => {
                           <ListItem
                             key={index}
                             secondaryAction={
-                              <IconButton edge="end" aria-label="delete" onClick={() => deleteNumber(item)}>
+                              <IconButton
+                                edge="end"
+                                aria-label="delete"
+                                onClick={() => deleteNumber(item)}
+                              >
                                 <DeleteIcon />
                               </IconButton>
                             }
@@ -493,11 +574,23 @@ const DoctorUpdateProfile = () => {
                   )}
                 </Grid>
               </Box>
-              <Box component={Grid} container display={'flex'} marginTop={2} flexDirection={'row'}>
+              <Box
+                component={Grid}
+                container
+                display={"flex"}
+                marginTop={2}
+                flexDirection={"row"}
+              >
                 <Grid item sm={12} xs={12} md={8}>
-                  {deleteEducationError && <Error>{deleteEducationError}</Error>}
+                  {deleteEducationError && (
+                    <Error>{deleteEducationError}</Error>
+                  )}
 
-                  <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+                  <Typography
+                    sx={{ mt: 4, mb: 2 }}
+                    variant="h6"
+                    component="div"
+                  >
                     Education Background
                   </Typography>
 
@@ -508,7 +601,11 @@ const DoctorUpdateProfile = () => {
                           <ListItem
                             key={index}
                             secondaryAction={
-                              <IconButton edge="end" aria-label="delete" onClick={() => deleteEducation(item)}>
+                              <IconButton
+                                edge="end"
+                                aria-label="delete"
+                                onClick={() => deleteEducation(item)}
+                              >
                                 <DeleteIcon />
                               </IconButton>
                             }
@@ -522,7 +619,13 @@ const DoctorUpdateProfile = () => {
                 </Grid>
               </Box>
 
-              <Box component={Grid} container display={'flex'} marginTop={2} flexDirection={'row'}>
+              <Box
+                component={Grid}
+                container
+                display={"flex"}
+                marginTop={2}
+                flexDirection={"row"}
+              >
                 <Grid item sm={12} xs={12} md={8}>
                   {deleteVideoErro && <Error>{deleteVideoErro}</Error>}
                   <Typography sx={{ mt: 4, mb: 2 }} variant="h6">
@@ -535,7 +638,11 @@ const DoctorUpdateProfile = () => {
                           <ListItem
                             key={index}
                             secondaryAction={
-                              <IconButton edge="end" aria-label="delete" onClick={() => deleteVideo(item)}>
+                              <IconButton
+                                edge="end"
+                                aria-label="delete"
+                                onClick={() => deleteVideo(item)}
+                              >
                                 <DeleteIcon />
                               </IconButton>
                             }
@@ -548,10 +655,20 @@ const DoctorUpdateProfile = () => {
                   )}
                 </Grid>
               </Box>
-              <Box component={Grid} container display={'flex'} marginTop={2} flexDirection={'row'}>
+              <Box
+                component={Grid}
+                container
+                display={"flex"}
+                marginTop={2}
+                flexDirection={"row"}
+              >
                 <Grid item sm={12} xs={12} md={8}>
                   {deleteTagError && <Error> {deleteTagError} </Error>}
-                  <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
+                  <Typography
+                    sx={{ mt: 4, mb: 2 }}
+                    variant="h6"
+                    component="div"
+                  >
                     Tags
                   </Typography>
                   {viewSuccess && (
@@ -561,7 +678,11 @@ const DoctorUpdateProfile = () => {
                           <ListItem
                             key={index}
                             secondaryAction={
-                              <IconButton edge="end" aria-label="delete" onClick={() => deleteTag(item)}>
+                              <IconButton
+                                edge="end"
+                                aria-label="delete"
+                                onClick={() => deleteTag(item)}
+                              >
                                 <DeleteIcon />
                               </IconButton>
                             }
@@ -576,7 +697,7 @@ const DoctorUpdateProfile = () => {
               </Box>
             </Box>
           </Box>
-          <Box display={'flex'} justifyContent={'center'}>
+          <Box display={"flex"} justifyContent={"center"}>
             <PasswordChange docId={id} />
           </Box>
         </>
