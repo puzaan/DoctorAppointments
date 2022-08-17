@@ -17,10 +17,11 @@ import {
   CircularProgress,
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useSelector, useDispatch } from 'react-redux';
 import { Login } from '../../../apigetway/actions/SuperAdminAction';
 // component
-import Iconify from '../../../components/Iconify';
 
 // ----------------------------------------------------------------------
 
@@ -66,7 +67,7 @@ export default function SuperLoginForm({ paths }) {
   return (
     <FormikProvider value={formik}>
       {error && (
-        <Stack sx={{ width: '100%', marginBottom: 4 }} spacing={2}>
+        <Stack sx={{ width: "100%", marginBottom: 4 }} spacing={2}>
           <Alert severity="error">
             <AlertTitle>Error</AlertTitle>
             User Name or Password did not match — <strong>Try Again!!</strong>
@@ -80,7 +81,7 @@ export default function SuperLoginForm({ paths }) {
             autoComplete="username"
             type="text"
             label="User Name"
-            {...getFieldProps('username')}
+            {...getFieldProps("username")}
             error={Boolean(touched.username && errors.username)}
             helperText={touched.username && errors.username}
           />
@@ -88,14 +89,18 @@ export default function SuperLoginForm({ paths }) {
           <TextField
             fullWidth
             autoComplete="current-password"
-            type={showPassword ? 'text' : 'password'}
+            type={showPassword ? "text" : "password"}
             label="Password"
-            {...getFieldProps('password')}
+            {...getFieldProps("password")}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton onClick={handleShowPassword} edge="end">
-                    <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
+                    {showPassword ? (
+                      <RemoveRedEyeIcon />
+                    ) : (
+                      <VisibilityOffIcon />
+                    )}
                   </IconButton>
                 </InputAdornment>
               ),
@@ -105,9 +110,19 @@ export default function SuperLoginForm({ paths }) {
           />
         </Stack>
 
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          sx={{ my: 2 }}
+        >
           <FormControlLabel
-            control={<Checkbox {...getFieldProps('remember')} checked={values.remember} />}
+            control={
+              <Checkbox
+                {...getFieldProps("remember")}
+                checked={values.remember}
+              />
+            }
             label="Remember me"
           />
 
@@ -116,7 +131,9 @@ export default function SuperLoginForm({ paths }) {
           </Link> */}
         </Stack>
         {loading && (
-          <Box sx={{ display: 'flex', justifyContent: 'center', marginBottom: 3 }}>
+          <Box
+            sx={{ display: "flex", justifyContent: "center", marginBottom: 3 }}
+          >
             <CircularProgress />
           </Box>
         )}

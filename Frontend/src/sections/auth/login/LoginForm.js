@@ -6,8 +6,8 @@ import { useFormik, Form, FormikProvider } from 'formik';
 // material
 import { Link, Stack, Checkbox, TextField, IconButton, InputAdornment, FormControlLabel } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
-// component
-import Iconify from '../../../components/Iconify';
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 // ----------------------------------------------------------------------
 
@@ -52,7 +52,7 @@ export default function LoginForm({paths}) {
             autoComplete="username"
             type="email"
             label="Email address"
-            {...getFieldProps('email')}
+            {...getFieldProps("email")}
             error={Boolean(touched.email && errors.email)}
             helperText={touched.email && errors.email}
           />
@@ -60,14 +60,18 @@ export default function LoginForm({paths}) {
           <TextField
             fullWidth
             autoComplete="current-password"
-            type={showPassword ? 'text' : 'password'}
+            type={showPassword ? "text" : "password"}
             label="Password"
-            {...getFieldProps('password')}
+            {...getFieldProps("password")}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton onClick={handleShowPassword} edge="end">
-                    <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
+                    {showPassword ? (
+                      <RemoveRedEyeIcon />
+                    ) : (
+                      <VisibilityOffIcon />
+                    )}
                   </IconButton>
                 </InputAdornment>
               ),
@@ -77,18 +81,39 @@ export default function LoginForm({paths}) {
           />
         </Stack>
 
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          sx={{ my: 2 }}
+        >
           <FormControlLabel
-            control={<Checkbox {...getFieldProps('remember')} checked={values.remember} />}
+            control={
+              <Checkbox
+                {...getFieldProps("remember")}
+                checked={values.remember}
+              />
+            }
             label="Remember me"
           />
 
-          <Link component={RouterLink} variant="subtitle2" to="#" underline="hover">
+          <Link
+            component={RouterLink}
+            variant="subtitle2"
+            to="#"
+            underline="hover"
+          >
             Forgot password?
           </Link>
         </Stack>
 
-        <LoadingButton fullWidth size="large" type="submit" variant="contained" loading={isSubmitting}>
+        <LoadingButton
+          fullWidth
+          size="large"
+          type="submit"
+          variant="contained"
+          loading={isSubmitting}
+        >
           Login
         </LoadingButton>
       </Form>

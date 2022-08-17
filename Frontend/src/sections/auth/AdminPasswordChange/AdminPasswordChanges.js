@@ -7,10 +7,11 @@ import { LoadingButton } from '@mui/lab';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Form, FormikProvider, useFormik } from 'formik';
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 
 // import { AdminDoctorPasswordChange } from '../../../apigetway/actions/DoctorAction';
 import Error from '../../../pages/Error';
-import Iconify from '../../../components/Iconify';
 import { ADMIN_UPDATE_RESET } from '../../../apigetway/constants/AdminConstants';
 import { AdminPasswordChange } from '../../../apigetway/actions/AdminAction';
 
@@ -58,11 +59,11 @@ export default function AdminPasswordChanges({ adminId }) {
   return (
     <Box
       component={Card}
-      variant={'outlined'}
+      variant={"outlined"}
       spacing={2}
       padding={2}
       margin={4}
-      bgcolor={'transparent'}
+      bgcolor={"transparent"}
       maxWidth={500}
     >
       <Typography variant="h4" gutterBottom>
@@ -75,14 +76,18 @@ export default function AdminPasswordChanges({ adminId }) {
           <Stack spacing={3}>
             <TextField
               fullWidth
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               label="Password"
-              {...getFieldProps('password')}
+              {...getFieldProps("password")}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton onClick={handleShowPassword} edge="end">
-                      <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
+                      {showPassword ? (
+                        <RemoveRedEyeIcon />
+                      ) : (
+                        <VisibilityOffIcon />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -92,14 +97,18 @@ export default function AdminPasswordChanges({ adminId }) {
             />
             <TextField
               fullWidth
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               label="Confir Password"
-              {...getFieldProps('confirmPassword')}
+              {...getFieldProps("confirmPassword")}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton onClick={handleShowPassword} edge="end">
-                      <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
+                      {showPassword ? (
+                        <RemoveRedEyeIcon />
+                      ) : (
+                        <VisibilityOffIcon />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -108,8 +117,19 @@ export default function AdminPasswordChanges({ adminId }) {
               helperText={touched.confirmPassword && errors.confirmPassword}
             />
           </Stack>
-          <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={3} sx={{ my: 2 }}>
-            <LoadingButton fullWidth size="large" type="submit" variant="contained">
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            spacing={3}
+            sx={{ my: 2 }}
+          >
+            <LoadingButton
+              fullWidth
+              size="large"
+              type="submit"
+              variant="contained"
+            >
               Change Password
             </LoadingButton>
           </Stack>

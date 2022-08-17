@@ -48,7 +48,6 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const isDesktop = useResponsive("up", "lg");
   const doctorLogin = useSelector((state) => state.doctorLogin);
   const { doctorInfo } = doctorLogin;
-  console.log(doctorInfo.profilePhotoLink);
   const [name, setName] = useState("Doctor");
   const [profile, setProfile] = useState(account.photoURL);
   const [role, setRole] = useState(account.role);
@@ -60,6 +59,8 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     if (doctorInfo) {
       setName(doctorInfo.fullName);
       setRole(doctorInfo.role);
+      setProfile(doctorInfo.profilePhotoLink);
+
       if (doctorInfo.profilePhotoLink) {
         setProfile(doctorInfo.profilePhotoLink);
       }

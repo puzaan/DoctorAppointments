@@ -6,12 +6,13 @@ import { useFormik, Form, FormikProvider } from 'formik';
 // material
 import { Link, Stack, Checkbox, TextField, IconButton, InputAdornment, FormControlLabel } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useSelector, useDispatch } from 'react-redux';
 import { AdminLogin } from '../../../apigetway/actions/AdminAction';
 import Error from '../../../pages/Error';
 import Loder from '../../../pages/Loading';
 // component
-import Iconify from '../../../components/Iconify';
 
 // ----------------------------------------------------------------------
 
@@ -64,7 +65,7 @@ export default function AdminLoginForm({ paths }) {
             autoComplete="email"
             type="text"
             label="Email Id"
-            {...getFieldProps('email')}
+            {...getFieldProps("email")}
             error={Boolean(touched.email && errors.email)}
             helperText={touched.email && errors.email}
           />
@@ -72,14 +73,18 @@ export default function AdminLoginForm({ paths }) {
           <TextField
             fullWidth
             autoComplete="current-password"
-            type={showPassword ? 'text' : 'password'}
+            type={showPassword ? "text" : "password"}
             label="Password"
-            {...getFieldProps('password')}
+            {...getFieldProps("password")}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton onClick={handleShowPassword} edge="end">
-                    <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
+                    {showPassword ? (
+                      <RemoveRedEyeIcon />
+                    ) : (
+                      <VisibilityOffIcon />
+                    )}
                   </IconButton>
                 </InputAdornment>
               ),
@@ -89,13 +94,28 @@ export default function AdminLoginForm({ paths }) {
           />
         </Stack>
 
-        <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ my: 2 }}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          sx={{ my: 2 }}
+        >
           <FormControlLabel
-            control={<Checkbox {...getFieldProps('remember')} checked={values.remember} />}
+            control={
+              <Checkbox
+                {...getFieldProps("remember")}
+                checked={values.remember}
+              />
+            }
             label="Remember me"
           />
 
-          <Link component={RouterLink} variant="subtitle2" to="/admin/forgot" underline="hover">
+          <Link
+            component={RouterLink}
+            variant="subtitle2"
+            to="/admin/forgot"
+            underline="hover"
+          >
             Forgot password?
           </Link>
         </Stack>

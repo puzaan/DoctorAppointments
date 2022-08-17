@@ -6,10 +6,10 @@ import { LoadingButton } from '@mui/lab';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Form, FormikProvider, useFormik } from 'formik';
-
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { DoctorForgotPasswordChange } from '../../../apigetway/actions/DoctorAction';
 import Error from '../../../pages/Error';
-import Iconify from '../../../components/Iconify';
 import { DOCTOR_FORGOT_PASSWORD_RESET } from '../../../apigetway/constants/DoctorConstants';
 
 // ----------------------------------------------------------------------
@@ -73,21 +73,25 @@ export default function DoctorForgotForm() {
             autoComplete="email"
             type="email"
             label="Email Id"
-            {...getFieldProps('email')}
+            {...getFieldProps("email")}
             error={Boolean(touched.email && errors.email)}
             helperText={touched.email && errors.email}
           />
           <TextField
             fullWidth
             autoComplete="current-password"
-            type={showPassword ? 'text' : 'password'}
+            type={showPassword ? "text" : "password"}
             label="Password"
-            {...getFieldProps('password')}
+            {...getFieldProps("password")}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton onClick={handleShowPassword} edge="end">
-                    <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
+                    {showPassword ? (
+                      <RemoveRedEyeIcon />
+                    ) : (
+                      <VisibilityOffIcon />
+                    )}
                   </IconButton>
                 </InputAdornment>
               ),
@@ -98,14 +102,18 @@ export default function DoctorForgotForm() {
           <TextField
             fullWidth
             autoComplete="current-password"
-            type={showPassword ? 'text' : 'password'}
+            type={showPassword ? "text" : "password"}
             label="Confir Password"
-            {...getFieldProps('confirmPassword')}
+            {...getFieldProps("confirmPassword")}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton onClick={handleShowPassword} edge="end">
-                    <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
+                    {showPassword ? (
+                      <RemoveRedEyeIcon />
+                    ) : (
+                      <VisibilityOffIcon />
+                    )}
                   </IconButton>
                 </InputAdornment>
               ),
@@ -116,11 +124,27 @@ export default function DoctorForgotForm() {
         </Stack>
         {/* {loading && <Loder />} */}
 
-        <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={3} sx={{ my: 2 }}>
-          <LoadingButton fullWidth size="large" type="submit" variant="contained">
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          spacing={3}
+          sx={{ my: 2 }}
+        >
+          <LoadingButton
+            fullWidth
+            size="large"
+            type="submit"
+            variant="contained"
+          >
             submin
           </LoadingButton>
-          <LoadingButton fullWidth size="large" variant="contained" onClick={goback}>
+          <LoadingButton
+            fullWidth
+            size="large"
+            variant="contained"
+            onClick={goback}
+          >
             Go Back
           </LoadingButton>
         </Stack>

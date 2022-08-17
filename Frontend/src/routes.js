@@ -6,12 +6,10 @@ import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 import SuperAdminDashboardLayout from './layouts/superAdminDashboard';
 import DoctorDashboardLayout from './layouts/doctorDashboard';
 //
-import Login from './pages/Login';
 import NotFound from './pages/Page404';
 import SuperAdminNotFound from './pages/SuperAdmin404';
 import AdminPageNotFound from './pages/AdminPage404';
 import DoctorPage from './pages/Doctor404';
-import Register from './pages/Register';
 import DashboardApp from './pages/DashboardApp';
 import AdminDashboard from './pages/AdminDasnboard';
 import SuperAdminLogin from './pages/SuperAdminLogin';
@@ -277,11 +275,11 @@ export default function Router() {
       element: <LogoOnlyLayout />,
       children: [
         // { path: '/', element: <Navigate to="/dashboard/app" /> },
-        { path: 'login', element: <Login /> },
+        // { path: 'login', element: <Login /> },
         { path: 'superAdminlogin', element: <SuperAdminLogin /> },
         // { path: 'form', element: <HomePage /> },
 
-        { path: 'register', element: <Register /> },
+        // { path: 'register', element: <Register /> },
         { path: '404', element: <NotFound /> },
         { path: '*', element: <Navigate to="/404" /> },
       ],

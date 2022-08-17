@@ -4,13 +4,14 @@ import PropTypes from 'prop-types';
 // material
 import { Box, Card, IconButton, InputAdornment, Stack, TextField, Typography } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
+import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Form, FormikProvider, useFormik } from 'formik';
 
 import { AdminDoctorPasswordChange } from '../../../apigetway/actions/DoctorAction';
 import Error from '../../../pages/Error';
-import Iconify from '../../../components/Iconify';
 import { DOCTOR_UPDATE_RESET } from '../../../apigetway/constants/DoctorConstants';
 
 // ----------------------------------------------------------------------
@@ -57,11 +58,11 @@ export default function AdminPasswordChangeDoctor({ docId }) {
   return (
     <Box
       component={Card}
-      variant={'outlined'}
+      variant={"outlined"}
       spacing={2}
       padding={2}
       margin={4}
-      bgcolor={'transparent'}
+      bgcolor={"transparent"}
       maxWidth={500}
     >
       <Typography variant="h4" gutterBottom>
@@ -74,14 +75,18 @@ export default function AdminPasswordChangeDoctor({ docId }) {
           <Stack spacing={3}>
             <TextField
               fullWidth
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               label="Password"
-              {...getFieldProps('password')}
+              {...getFieldProps("password")}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton onClick={handleShowPassword} edge="end">
-                      <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
+                      {showPassword ? (
+                        <RemoveRedEyeIcon />
+                      ) : (
+                        <VisibilityOffIcon />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -91,14 +96,18 @@ export default function AdminPasswordChangeDoctor({ docId }) {
             />
             <TextField
               fullWidth
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               label="Confir Password"
-              {...getFieldProps('confirmPassword')}
+              {...getFieldProps("confirmPassword")}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
                     <IconButton onClick={handleShowPassword} edge="end">
-                      <Iconify icon={showPassword ? 'eva:eye-fill' : 'eva:eye-off-fill'} />
+                      {showPassword ? (
+                        <RemoveRedEyeIcon />
+                      ) : (
+                        <VisibilityOffIcon />
+                      )}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -107,8 +116,19 @@ export default function AdminPasswordChangeDoctor({ docId }) {
               helperText={touched.confirmPassword && errors.confirmPassword}
             />
           </Stack>
-          <Stack direction="row" alignItems="center" justifyContent="space-between" spacing={3} sx={{ my: 2 }}>
-            <LoadingButton fullWidth size="large" type="submit" variant="contained">
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="space-between"
+            spacing={3}
+            sx={{ my: 2 }}
+          >
+            <LoadingButton
+              fullWidth
+              size="large"
+              type="submit"
+              variant="contained"
+            >
               Change Password
             </LoadingButton>
           </Stack>
