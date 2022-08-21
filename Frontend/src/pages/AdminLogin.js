@@ -68,7 +68,7 @@ export default function AdminLogin() {
         {mdUp && (
           <SectionStyle>
             <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-              Hi, Welcome Back TO XYBA Admin Page
+              Hi, Welcome Back TO XYBA Admin Page.
             </Typography>
             <img
               src="/static/illustrations/illustration_register.png"

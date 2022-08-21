@@ -70,7 +70,7 @@ export default function SuperAdminLogin() {
         {mdUp && (
           <SectionStyle>
             <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-              Hi, Welcome Back TO XYBA Super Admin Page
+              Hi, Welcome Back TO XYBA Super Admin Page.
             </Typography>
             <img
               src="/static/illustrations/illustration_login.png"
