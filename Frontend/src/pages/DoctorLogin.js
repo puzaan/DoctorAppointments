@@ -79,7 +79,7 @@ export default function DoctorLogin() {
         <Container maxWidth="sm">
           <ContentStyle>
             <Typography variant="h4" gutterBottom>
-              Sign in to Doctor Page
+              Sign in to Doctor Page.
             </Typography>
             <Typography sx={{ color: "text.secondary", mb: 5 }}>
               Enter your details below.
