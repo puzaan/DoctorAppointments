@@ -4,7 +4,6 @@ import { Box, Stack } from '@mui/material';
 import { Topbar } from './components/Topbar';
 import { SearchBar } from './components/SearchBar';
 import { TabBtn } from './components/TabBtn';
-import { Footer } from './components/Footer';
 import { Logo } from './components/Logo';
 import Page from '../../components/Page';
 import url from '../../apigetway/mainUrl';
@@ -31,9 +30,6 @@ const HomePage = () => {
         <Box >
           <TabBtn />
         </Box>
-        <Stack bgcolor="#F2F2F2" >
-          <Footer />
-        </Stack>
       </Stack>
     </Page>
   );

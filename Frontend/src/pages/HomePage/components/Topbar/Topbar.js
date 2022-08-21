@@ -1,54 +1,82 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Box from '@mui/material/Box';
+import React from "react";
+import PropTypes from "prop-types";
+import Box from "@mui/material/Box";
 
-import { Link } from 'react-router-dom';
-import { Typography } from '@mui/material';
+import { Link } from "react-router-dom";
+import { Button, Typography } from "@mui/material";
 
 const Topbar = ({ colorInvert = false }) => {
-  const linkColor = colorInvert ? 'common.white' : 'text.primary';
+  const linkColor = colorInvert ? "common.white" : "text.primary";
 
   return (
-    <Box display={'flex'} justifyContent={'end'} alignItems={'center'} width={1} paddingTop={3}>
-      <Box sx={{ display: { xs: 'flex' } }} alignItems={'center'} >
-        <Box marginLeft={1}>
+    <Box
+      display={"flex"}
+      justifyContent={"space-around"}
+      alignItems={"center"}
+      width={1}
+      paddingTop={3}
+      flexDirection={{ xs: "column", lg: "row" }}
+      // paddingRight={1}
+    >
+      <Box>
+        <Button
+          variant="contained"
+          color="primary"
+          component={Link}
+          target="blank"
+          to="/doctor/login"
+          size="large"
+        >
+          LogIn
+        </Button>
+      </Box>
+      <Box sx={{ display: { xs: "flex" } }} alignItems={"center"} Spac>
+        <Box marginRight={2}>
           <Typography
             // style={{ textDecoration: 'underline' }}
             color={linkColor}
             component={Link}
             to="/"
+            align="center"
+            variant="h6"
           >
             About Us
           </Typography>
         </Box>
-        <Box marginLeft={1}>
+        <Box marginRight={2}>
           <Typography
             // style={{ textDecoration: 'underline' }}
             color={linkColor}
             component={Link}
             to="/"
+            align="center"
+            variant="h6"
           >
-            Our Specialist
+            Our Specialists
           </Typography>
         </Box>
-        <Box marginLeft={1}>
+        <Box marginRight={2}>
           <Typography
             // style={{ textDecoration: 'underline' }}
             color={linkColor}
             component={Link}
             to="/"
+            align="center"
+            variant="h6"
           >
             Our Health Tech
           </Typography>
         </Box>
-        <Box marginLeft={1}>
+        <Box marginRight={2}>
           <Typography
             // style={{ textDecoration: 'underline' }}
             color={linkColor}
             component={Link}
             to="/"
+            align="center"
+            variant="h6"
           >
-            Our Patner Clinic
+            Our Partner Clinics
           </Typography>
         </Box>
       </Box>
