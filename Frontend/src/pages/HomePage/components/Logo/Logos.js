@@ -1,6 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Box, IconButton } from '@mui/material';
+import { Box, IconButton, Typography } from '@mui/material';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { FaTiktok, FaViber, FaFacebookMessenger } from 'react-icons/fa';
 import PhoneIcon from '@mui/icons-material/Phone';
@@ -16,12 +15,10 @@ const SocialMedia = () => (
       flexDirection={{ xs: "column", lg: "row" }}
     >
       <Box
-        // paddingLeft={5}
         display={"flex"}
         justifyContent={"center"}
         alignContent={"center"}
         flexDirection={{ xm: "row", lg: "column" }}
-        // display={{ xm: 'none' }}
       >
         <Box height={1} width={1}>
           <IconButton
@@ -68,9 +65,10 @@ const SocialMedia = () => (
         justifyContent={"center"}
         alignContent={"center"}
         alignItems={"center"}
-        component={Link}
+        flexDirection={"column"}
+        // component={Link}
         // sx={{ ':hover': { backgroundColor: 'white' } }}
-        to="/"
+        // to="/"
         title="XYB"
         // width={{ xs: 150, md: 200 }}
       >
@@ -80,6 +78,9 @@ const SocialMedia = () => (
           height={{ xs: 100, md: 100 }}
           width={{ xs: 100, md: 130 }}
         />
+        <Typography variant={"body2"}>
+          Health Management, Wellness Interaction
+        </Typography>
       </Box>
       <Box
         // paddingRight={5}

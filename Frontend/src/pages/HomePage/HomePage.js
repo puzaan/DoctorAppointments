@@ -21,7 +21,7 @@ const HomePage = () => {
   }, []);
   return (
     <Page title="Form">
-      <Stack direction="column" spacing={2}>
+      <Stack direction="column" spacing={1}>
         <Topbar />
         <Logo />
         <Box display={'flex'} justifyContent={'center'} marginTop={4} marginBottom={4}>

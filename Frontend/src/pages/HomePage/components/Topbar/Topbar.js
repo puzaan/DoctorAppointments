@@ -30,7 +30,7 @@ const Topbar = ({ colorInvert = false }) => {
           LogIn
         </Button>
       </Box>
-      <Box sx={{ display: { xs: "flex" } }} alignItems={"center"} Spac>
+      <Box sx={{ display: { xs: "flex" } }} alignItems={"center"}>
         <Box marginRight={2}>
           <Typography
             // style={{ textDecoration: 'underline' }}
