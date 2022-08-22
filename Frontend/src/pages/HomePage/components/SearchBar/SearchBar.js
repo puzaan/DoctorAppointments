@@ -55,7 +55,7 @@ const SearchBar = (props) => {
     <Box display={'flex'} flexDirection={'column'}>
       <Box
         component={TextField}
-        placeholder="Search by doctor name, disease, specialist "
+        placeholder="Search by doctor name, disease, specialization "
         variant="outlined"
         color="primary"
         fullWidth

@@ -30,12 +30,6 @@ const validationSchema = yup.object({
     .min(2, 'Please enter a valid name')
     .max(50, 'Please enter a valid name')
     .required('Please specify your Full name'),
-  address: yup
-    .string()
-    .trim()
-    .min(2, 'Please enter a valid address')
-    .max(50, 'Please enter a valid address')
-    .required('Please your address'),
   email: yup.string().trim().email('Please enter a valid email address').required('Please enter your email id'),
   contact: yup
     .string()
@@ -170,7 +164,7 @@ const Form = (props) => {
           <Box component={Grid} marginBottom={{ xs: 10, sm: 0 }} container spacing={4}>
             <Grid item xs={12} sm={6}>
               <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-                Please tell us your Full Name
+                Full Name
               </Typography>
               <TextField
                 label="First name"
@@ -221,7 +215,7 @@ const Form = (props) => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-                Please enter your contact number
+                Phone number
               </Typography>
               <TextField
                 label="contact number"
@@ -236,7 +230,7 @@ const Form = (props) => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-                Please tell us your address (optional)
+                Address (optional)
               </Typography>
               <TextField
                 label="Address"
@@ -245,13 +239,13 @@ const Form = (props) => {
                 fullWidth
                 value={formik.values.address}
                 onChange={formik.handleChange}
-                error={formik.touched.address && Boolean(formik.errors.address)}
-                helperText={formik.touched.address && formik.errors.address}
+                // error={formik.touched.address && Boolean(formik.errors.address)}
+                // helperText={formik.touched.address && formik.errors.address}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
               <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-                Please enter your email address
+                Email Address
               </Typography>
               <TextField
                 label="Email"
@@ -266,7 +260,7 @@ const Form = (props) => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <Typography variant={'subtitle2'} sx={{ marginBottom: 2 }}>
-                Please enter your Occupation
+                Occupation
               </Typography>
               <TextField
                 label="Occupation"
@@ -423,7 +417,7 @@ const Form = (props) => {
                 </DialogActions>
               </Dialog>
               <Typography variant={'subtitle2'} color={'textSecondary'} sx={{ marginTop: 2 }} align={'center'}>
-                After confirming we will soon notice you.
+                After confirming, we will soon notify you.
               </Typography>
             </Grid>
           </Box>

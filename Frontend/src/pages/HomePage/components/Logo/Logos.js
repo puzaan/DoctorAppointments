@@ -33,20 +33,32 @@ const SocialMedia = () => (
           </IconButton>
         </Box>
         <Box height={1} width={1}>
-          <IconButton
-            size={"large"}
-            sx={{ color: (theme) => theme.palette.primary.youtube }}
+          <a
+            href="https://www.youtube.com/channel/UCEZxPozsMFLcLhlmnhYGmSg/featured"
+            rel="noreferrer"
+            target="_blank"
           >
-            <YouTubeIcon sx={{ fontSize: "60px" }} />
-          </IconButton>
+            <IconButton
+              size={"large"}
+              sx={{ color: (theme) => theme.palette.primary.youtube }}
+            >
+              <YouTubeIcon sx={{ fontSize: "60px" }} />
+            </IconButton>
+          </a>
         </Box>
         <Box height={1} width={1}>
-          <IconButton
-            size={"large"}
-            sx={{ color: (theme) => theme.palette.primary.viber }}
+          <a
+            href="https://www.tiktok.com/@xybahealth?is_from_webapp=1&sender_device=pc"
+            rel="noreferrer"
+            target="_blank"
           >
-            <FaTiktok fontSize={"2.57rem"} />
-          </IconButton>
+            <IconButton
+              size={"large"}
+              sx={{ color: (theme) => theme.palette.primary.viber }}
+            >
+              <FaTiktok fontSize={"2.57rem"} />
+            </IconButton>
+          </a>
         </Box>
       </Box>
 
