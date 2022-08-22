@@ -27,6 +27,7 @@ export default function AdminDashboard() {
     if (!docLoading && !bookLoading) {
       setLoading(false);
     }
+    // eslint-disable-next-line
   }, [docdispatch, bookdispatch]);
   return (
     <Page title="AdminDashboard">

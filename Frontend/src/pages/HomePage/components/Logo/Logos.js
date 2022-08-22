@@ -1,9 +1,9 @@
-import React from 'react';
-import { Box, IconButton, Typography } from '@mui/material';
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import { FaTiktok, FaViber, FaFacebookMessenger } from 'react-icons/fa';
-import PhoneIcon from '@mui/icons-material/Phone';
-import FacebookIcon from '@mui/icons-material/Facebook';
+import React from "react";
+import { Box, IconButton, Typography } from "@mui/material";
+import YouTubeIcon from "@mui/icons-material/YouTube";
+import { FaTiktok, FaViber, FaFacebookMessenger } from "react-icons/fa";
+import PhoneIcon from "@mui/icons-material/Phone";
+import FacebookIcon from "@mui/icons-material/Facebook";
 
 const SocialMedia = () => (
   <Box>
@@ -21,13 +21,19 @@ const SocialMedia = () => (
         flexDirection={{ xm: "row", lg: "column" }}
       >
         <Box height={1} width={1}>
-          <IconButton
-            aria-label="delete"
-            size={"large"}
-            sx={{ color: (theme) => theme.palette.primary.facebook }}
+          <a
+            href="https://www.facebook.com/Xyba-Health-106379275529379"
+            rel="noreferrer"
+            target="_blank"
           >
-            <FacebookIcon sx={{ fontSize: "60px" }} />
-          </IconButton>
+            <IconButton
+              aria-label="delete"
+              size={"large"}
+              sx={{ color: (theme) => theme.palette.primary.facebook }}
+            >
+              <FacebookIcon sx={{ fontSize: "60px" }} />
+            </IconButton>
+          </a>
         </Box>
         <Box height={1} width={1}>
           <a

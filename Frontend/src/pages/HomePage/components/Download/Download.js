@@ -70,12 +70,12 @@ const Download = () => (
               fontWeight: 700,
             }}
           >
-            One app, every health solution
+            Manage your cases and patients better
           </Typography>
         </Box>
         <Box marginBottom={3}>
           <Typography variant="h6" component="p" color="text.secondary">
-            Healthcare services at one stop !
+            AI Enabled
           </Typography>
         </Box>
         <Box display="flex" marginTop={1}>
