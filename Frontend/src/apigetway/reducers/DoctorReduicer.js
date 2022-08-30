@@ -58,11 +58,19 @@ import {
   DOCTOR_PASSWORD_CHANGE_REQUEST,
   DOCTOR_PASSWORD_CHANGE_RESET,
   DOCTOR_PASSWORD_CHANGE_SUCCESS,
+  DOCTOR_SIGNUP_FAIL,
+  DOCTOR_SIGNUP_LIST_FAIL,
+  DOCTOR_SIGNUP_LIST_REQUEST,
+  DOCTOR_SIGNUP_LIST_RESET,
+  DOCTOR_SIGNUP_LIST_SUCCESS,
+  DOCTOR_SIGNUP_REQUEST,
+  DOCTOR_SIGNUP_RESET,
+  DOCTOR_SIGNUP_SUCCESS,
   DOCTOR_UPDATE_FAIL,
   DOCTOR_UPDATE_REQUEST,
   DOCTOR_UPDATE_RESET,
   DOCTOR_UPDATE_SUCCESS,
-} from '../constants/DoctorConstants';
+} from "../constants/DoctorConstants";
 
 export const DoctorCreateReducer = (state = {}, action) => {
   switch (action.type) {
@@ -143,7 +151,6 @@ export const DoctorDetailsReducer = (
     case DOCTOR_DETAILS_REQUEST:
       return { ...state, loading: true };
     case DOCTOR_DETAILS_SUCCESS:
-      
       return { loading: false, success: true, doctor: action.payload };
     case DOCTOR_DETAILS_FAIL:
       return { loading: false, error: action.payload };
@@ -172,7 +179,11 @@ export const DoctorAddContactReducer = (state = {}, action) => {
     case DOCTOR_ADD_NUMBER_REQUEST:
       return { loading: true };
     case DOCTOR_ADD_NUMBER_SUCCESS:
-      return { loading: false, success: true, doctorContactInfo: action.payload };
+      return {
+        loading: false,
+        success: true,
+        doctorContactInfo: action.payload,
+      };
     case DOCTOR_ADD_NUMBER_FAIL:
       return { loading: false, error: action.payload };
 
@@ -211,7 +222,11 @@ export const DoctorAddVideoReducer = (state = {}, action) => {
     case DOCTOR_ADD_VIDEO_REQUEST:
       return { loading: true };
     case DOCTOR_ADD_VIDEO_SUCCESS:
-      return { loading: false, success: true, doctorEducationInfo: action.payload };
+      return {
+        loading: false,
+        success: true,
+        doctorEducationInfo: action.payload,
+      };
     case DOCTOR_ADD_VIDEO_FAIL:
       return { loading: false, error: action.payload };
     case DOCTOR_ADD_VIDEO_RESET:
@@ -238,7 +253,11 @@ export const DoctorAddEducationReducer = (state = {}, action) => {
     case DOCTOR_ADD_EDUCATION_REQUEST:
       return { loading: true };
     case DOCTOR_ADD_EDUCATION_SUCCESS:
-      return { loading: false, success: true, doctorEducationInfo: action.payload };
+      return {
+        loading: false,
+        success: true,
+        doctorEducationInfo: action.payload,
+      };
     case DOCTOR_ADD_EDUCATION_FAIL:
       return { loading: false, error: action.payload };
     case DOCTOR_ADD_EDUCATION_RESET:
@@ -247,7 +266,10 @@ export const DoctorAddEducationReducer = (state = {}, action) => {
       return state;
   }
 };
-export const DoctorDeleteEducationtReducer = (state = { doctor: {} }, action) => {
+export const DoctorDeleteEducationtReducer = (
+  state = { doctor: {} },
+  action
+) => {
   switch (action.type) {
     case DOCTOR_DELETE_EDUCATION_REQUEST:
       return { loading: true };
@@ -292,7 +314,11 @@ export const DoctorAddProfileReducer = (state = {}, action) => {
     case DOCTOR_ADD_PROFILE_REQUEST:
       return { loading: true };
     case DOCTOR_ADD_PROFILE_SUCCESS:
-      return { loading: false, success: true, doctorProfileInfo: action.payload };
+      return {
+        loading: false,
+        success: true,
+        doctorProfileInfo: action.payload,
+      };
     case DOCTOR_ADD_PROFILE_FAIL:
       return { loading: false, error: action.payload };
     default:
@@ -320,7 +346,11 @@ export const DoctorForgotPasswordReducer = (state = {}, action) => {
     case DOCTOR_FORGOT_PASSWORD_REQUEST:
       return { loading: true };
     case DOCTOR_FORGOT_PASSWORD_SUCCESS:
-      return { loading: false, success: true, doctorPasswordInfo: action.payload };
+      return {
+        loading: false,
+        success: true,
+        doctorPasswordInfo: action.payload,
+      };
     case DOCTOR_FORGOT_PASSWORD_FAIL:
       return { loading: false, error: action.payload };
     case DOCTOR_FORGOT_PASSWORD_RESET:
@@ -335,11 +365,78 @@ export const DoctorPasswordChangeReducer = (state = {}, action) => {
     case DOCTOR_PASSWORD_CHANGE_REQUEST:
       return { loading: true };
     case DOCTOR_PASSWORD_CHANGE_SUCCESS:
-      return { loading: false, success: true, doctorPasswordInfo: action.payload };
+      return {
+        loading: false,
+        success: true,
+      };
     case DOCTOR_PASSWORD_CHANGE_FAIL:
       return { loading: false, error: action.payload };
     case DOCTOR_PASSWORD_CHANGE_RESET:
       return {};
+    default:
+      return state;
+  }
+};
+
+export const DoctorSignUpReducer = (state = {}, action) => {
+  switch (action.type) {
+    case DOCTOR_SIGNUP_REQUEST:
+      return { loading: true };
+    case DOCTOR_SIGNUP_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+      };
+    case DOCTOR_SIGNUP_FAIL:
+      return { loading: false, error: action.payload };
+    case DOCTOR_SIGNUP_RESET:
+      return { success: false };
+    default:
+      return state;
+  }
+};
+
+export const DoctorSignupListReducer = (
+  state = { doctorsignup: [] },
+  action
+) => {
+  switch (action.type) {
+    case DOCTOR_SIGNUP_LIST_REQUEST:
+      return { loading: true, doctorsignup: [] };
+    case DOCTOR_SIGNUP_LIST_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        doctorsignup: action.payload,
+      };
+    case DOCTOR_SIGNUP_LIST_FAIL:
+      return { success: false, loading: false, error: action.payload };
+    case DOCTOR_SIGNUP_LIST_RESET:
+      return { doctorsignup: [] };
+    default:
+      return state;
+  }
+};
+
+export const DoctorSignupDetailsReducer = (
+  state = {
+    doctorSignup: {
+      fellowshipName: [],
+      institution: [],
+      specializationKey: [],
+      fellowShipFile: [],
+      Affilation: [],
+    },
+  },
+  action
+) => {
+  switch (action.type) {
+    case DOCTOR_DETAILS_REQUEST:
+      return { ...state, loading: true };
+    case DOCTOR_DETAILS_SUCCESS:
+      return { loading: false, success: true, doctorSignup: action.payload };
+    case DOCTOR_DETAILS_FAIL:
+      return { loading: false, error: action.payload };
     default:
       return state;
   }

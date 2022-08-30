@@ -12,6 +12,7 @@ import {
   Typography,
   IconButton,
   FormControlLabel,
+  Chip,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import AddIcon from "@mui/icons-material/Add";
@@ -19,8 +20,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 // components
 import {
-  AdmindeleteDoctor,
-  AdminListDoctors,
+  AdmindeleteDoctorSignup,
+  AdminListDoctorSignup,
 } from "../apigetway/actions/DoctorAction";
 import Page from "../components/Page";
 import Error from "./Error";
@@ -30,7 +31,7 @@ import Loder from "./Loading";
 const MatEdit = ({ index }) => {
   const navigate = useNavigate();
   const handleEditClick = () => {
-    navigate(`/admin/doctor/update/${index}`, { replace: true });
+    navigate(`/admin/signup/doctor/${index}`, { replace: true });
   };
 
   return (
@@ -61,10 +62,11 @@ const MatDelete = ({ index }) => {
   }, [sucessDelete]);
 
   const handleDeleteClick = (id) => {
-    // eslint-disable-next-line
+    // eslint - disable - next - line;
     if (window.confirm("Are you sure")) {
-      dispatch(AdmindeleteDoctor(id));
+      dispatch(AdmindeleteDoctorSignup(id));
     }
+    console.log(id);
   };
 
   return (
@@ -103,7 +105,7 @@ const columns = [
     ),
   },
   {
-    field: "emailId",
+    field: "email",
     headerName: "Email",
     width: 190,
     editable: false,
@@ -118,13 +120,13 @@ const columns = [
     editable: false,
     sortable: false,
     disableColumnMenu: true,
-    renderCell: (params) => (
-      <ul className="flex">
-        {params.value.map((role, index) => (
-          <li key={index}>{role}</li>
-        ))}
-      </ul>
-    ),
+    // renderCell: (params) => (
+    //   <ul className="flex">
+    //     {params.value.map((role, index) => (
+    //       <li key={index}>{role}</li>
+    //     ))}
+    //   </ul>
+    // ),
   },
   //   {
   //     field: 'available_dates',
@@ -166,16 +168,44 @@ const columns = [
     disableColumnMenu: true,
   },
   {
-    field: "dob",
-    headerName: "DOB",
+    field: "approved",
+    headerName: "Approved",
+    type: "boolean",
+    width: 110,
+    editable: false,
+    sortable: false,
+    disableColumnMenu: true,
+    renderCell: (params) =>
+      params.row.approved ? (
+        <Stack direction="row" spacing={1}>
+          <Chip label="Approved" size="small" color="success" />
+        </Stack>
+      ) : (
+        <Stack direction="row" spacing={1}>
+          <Chip label="Not Approved" size="small" color="error" />
+        </Stack>
+      ),
+  },
+
+  {
+    field: "NMC_number",
+    headerName: "Nmc Number",
     type: "number",
     width: 120,
     editable: false,
     sortable: false,
     menubar: false,
     disableColumnMenu: true,
-    renderCell: (params) =>
-      new Date(params.row.dob).toLocaleDateString("en-US"),
+  },
+  {
+    field: "MBBS",
+    headerName: "MBBS",
+    type: "number",
+    width: 120,
+    editable: false,
+    sortable: false,
+    menubar: false,
+    disableColumnMenu: true,
   },
   {
     field: "actions",
@@ -192,28 +222,27 @@ const columns = [
         style={{ cursor: "pointer" }}
         padding={1}
       >
-        <MatEdit index={params.row.doctorId} />
-        <MatDelete index={params.row.doctorId} />
+        <MatEdit index={params.row.doctorSinId} />
+        <MatDelete index={params.row.doctorSinId} />
       </div>
     ),
   },
 ];
 
-export default function AdminDoctorList() {
+export default function AdminDoctorSignupList() {
   const dispatch = useDispatch();
-  const doctorList = useSelector((state) => state.doctorList);
-  const { loading, error, doctors } = doctorList;
+  const DoctorSignupList = useSelector((state) => state.DoctorSignupList);
+  const { loading, error, doctorsignup } = DoctorSignupList;
 
   useEffect(() => {
-    dispatch(AdminListDoctors());
+    dispatch(AdminListDoctorSignup());
   }, [dispatch]);
-  console.log(doctors);
 
   const doctorDelete = useSelector((state) => state.doctorDelete);
   const { error: deletError, loading: deleteLoading } = doctorDelete;
 
   return (
-    <Page title="Doctor List">
+    <Page title="Doctor sign up List">
       <Container>
         <Stack
           direction="row"
@@ -222,18 +251,18 @@ export default function AdminDoctorList() {
           mb={5}
         >
           <Typography variant="h4" gutterBottom>
-            Doctor List
+            Sign up Doctor List
           </Typography>
-          <Button
+          {/* <Button
             variant="contained"
             component={RouterLink}
             to="/admin/doctor/create"
             startIcon={<AddIcon />}
           >
             New Doctor
-          </Button>
+          </Button> */}
         </Stack>
-        {deletError && <Error>{deletError.msg}</Error>}
+        {deletError && <Error>{deletError}</Error>}
         {deleteLoading && <Loder />}
 
         <Card>
@@ -249,8 +278,8 @@ export default function AdminDoctorList() {
             <DataGrid
               loading={loading}
               error={error}
-              getRowId={(row) => row.doctorId}
-              rows={doctors}
+              getRowId={(row) => row.doctorSinId}
+              rows={doctorsignup}
               columns={columns}
               pageSize={5}
               rowsPerPageOptions={[5]}

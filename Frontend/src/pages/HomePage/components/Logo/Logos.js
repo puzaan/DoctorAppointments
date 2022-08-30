@@ -4,6 +4,7 @@ import YouTubeIcon from "@mui/icons-material/YouTube";
 import { FaTiktok, FaViber, FaFacebookMessenger } from "react-icons/fa";
 import PhoneIcon from "@mui/icons-material/Phone";
 import FacebookIcon from "@mui/icons-material/Facebook";
+import { Link } from "react-router-dom";
 
 const SocialMedia = () => (
   <Box>
@@ -72,9 +73,9 @@ const SocialMedia = () => (
         alignContent={"center"}
         alignItems={"center"}
         flexDirection={"column"}
-        // component={Link}
+        component={Link}
         // sx={{ ':hover': { backgroundColor: 'white' } }}
-        // to="/"
+        to="/"
         title="XYB"
         // width={{ xs: 150, md: 200 }}
       >

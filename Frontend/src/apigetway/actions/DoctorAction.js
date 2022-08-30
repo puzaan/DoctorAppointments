@@ -1,6 +1,6 @@
 /*eslint-disable */
-import axios from 'axios';
-import { ADMIN_LOGOUT } from '../constants/AdminConstants';
+import axios from "axios";
+import { ADMIN_LOGOUT } from "../constants/AdminConstants";
 import {
   DOCTOR_ADD_EDUCATION_FAIL,
   DOCTOR_ADD_EDUCATION_REQUEST,
@@ -59,27 +59,44 @@ import {
   DOCTOR_PASSWORD_CHANGE_FAIL,
   DOCTOR_PASSWORD_CHANGE_REQUEST,
   DOCTOR_PASSWORD_CHANGE_SUCCESS,
+  DOCTOR_SIGNUP_FAIL,
+  DOCTOR_SIGNUP_LIST_FAIL,
+  DOCTOR_SIGNUP_LIST_REQUEST,
+  DOCTOR_SIGNUP_LIST_SUCCESS,
+  DOCTOR_SIGNUP_REQUEST,
+  DOCTOR_SIGNUP_SUCCESS,
   DOCTOR_UPDATE_FAIL,
   DOCTOR_UPDATE_REQUEST,
   DOCTOR_UPDATE_RESET,
   DOCTOR_UPDATE_SUCCESS,
-} from '../constants/DoctorConstants';
-import { SUPERADMIN_LOGOUT } from '../constants/SuperAdminConstants';
-import url from '../mainUrl';
+} from "../constants/DoctorConstants";
+import { SUPERADMIN_LOGOUT } from "../constants/SuperAdminConstants";
+import url from "../mainUrl";
 
 export const AdminLogout = () => (dispatch) => {
-  localStorage.removeItem('adminInfo');
+  localStorage.removeItem("adminInfo");
   dispatch({ type: ADMIN_LOGOUT });
-  document.location.href = '/admin/login';
+  document.location.href = "/admin/login";
 };
 export const SuperAdminLogout = () => (dispatch) => {
-  localStorage.removeItem('superAdminInfo');
+  localStorage.removeItem("superAdminInfo");
   dispatch({ type: SUPERADMIN_LOGOUT });
-  document.location.href = '/superadmin/login';
+  document.location.href = "/superadmin/login";
 };
 
 export const CreateDoctor =
-  (fullName, emailId, password, contactNumber, gender, address, dob, speciality, NMC_number, fee) =>
+  (
+    fullName,
+    emailId,
+    password,
+    contactNumber,
+    gender,
+    address,
+    dob,
+    speciality,
+    NMC_number,
+    fee
+  ) =>
   async (dispatch, getState) => {
     try {
       dispatch({
@@ -93,13 +110,24 @@ export const CreateDoctor =
       const config = {
         headers: {
           API_KEY: superAdminInfo.toke,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       };
 
       const { data } = await axios.post(
         `${url}/api/v1/doctor/create`,
-        { fullName, emailId, password, contactNumber, gender, address, dob, speciality, NMC_number, fee },
+        {
+          fullName,
+          emailId,
+          password,
+          contactNumber,
+          gender,
+          address,
+          dob,
+          speciality,
+          NMC_number,
+          fee,
+        },
         config
       );
       dispatch({
@@ -107,8 +135,11 @@ export const CreateDoctor =
         payload: data,
       });
     } catch (error) {
-      const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-      if (message === 'No valid api Key Used') {
+      const message =
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.message;
+      if (message === "No valid api Key Used") {
         dispatch(SuperAdminLogout());
       }
       dispatch({
@@ -128,7 +159,7 @@ export const ListDoctors = () => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: superAdminInfo.toke,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
     const { data } = await axios.get(`${url}/api/v1/doctor/view/all`, config);
@@ -138,8 +169,11 @@ export const ListDoctors = () => async (dispatch, getState) => {
       payload: data.data,
     });
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(SuperAdminLogout());
     }
     dispatch({
@@ -155,7 +189,7 @@ export const deleteDoctor = (id) => async (dispatch, getState) => {
       type: DOCTOR_DELETE_REQUEST,
     });
 
-    const token = 'BA673A414C3B44C98478BB5CF10A0F832574090C';
+    const token = "BA673A414C3B44C98478BB5CF10A0F832574090C";
     const {
       superAdminLogin: { superAdminInfo },
     } = getState();
@@ -163,7 +197,7 @@ export const deleteDoctor = (id) => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: `${superAdminInfo.toke}`,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
@@ -173,8 +207,11 @@ export const deleteDoctor = (id) => async (dispatch, getState) => {
       type: DOCTOR_DELETE_SUCCESS,
     });
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(SuperAdminLogout());
     }
     dispatch({
@@ -184,43 +221,47 @@ export const deleteDoctor = (id) => async (dispatch, getState) => {
   }
 };
 
-export const UpdateDoctor = (id, field, value) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: DOCTOR_UPDATE_REQUEST,
-    });
-    const {
-      superAdminLogin: { superAdminInfo },
-    } = getState();
+export const UpdateDoctor =
+  (id, field, value) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: DOCTOR_UPDATE_REQUEST,
+      });
+      const {
+        superAdminLogin: { superAdminInfo },
+      } = getState();
 
-    const config = {
-      headers: {
-        API_KEY: `${superAdminInfo.toke}`,
-        'Content-Type': 'application/json',
-      },
-    };
-    const { data } = await axios.put(
-      `${url}/api/v1/doctor/update/${id}`,
-      {
-        field: `${field}`,
-        value: `${value}`,
-      },
-      config
-    );
+      const config = {
+        headers: {
+          API_KEY: `${superAdminInfo.toke}`,
+          "Content-Type": "application/json",
+        },
+      };
+      const { data } = await axios.put(
+        `${url}/api/v1/doctor/update/${id}`,
+        {
+          field: `${field}`,
+          value: `${value}`,
+        },
+        config
+      );
 
-    dispatch({ type: DOCTOR_UPDATE_SUCCESS, payload: data });
-    dispatch({ type: DOCTOR_UPDATE_RESET });
-  } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
-      dispatch(SuperAdminLogout());
+      dispatch({ type: DOCTOR_UPDATE_SUCCESS, payload: data });
+      dispatch({ type: DOCTOR_UPDATE_RESET });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.message;
+      if (message === "No valid api Key Used") {
+        dispatch(SuperAdminLogout());
+      }
+      dispatch({
+        type: DOCTOR_UPDATE_FAIL,
+        payload: message,
+      });
     }
-    dispatch({
-      type: DOCTOR_UPDATE_FAIL,
-      payload: message,
-    });
-  }
-};
+  };
 
 export const ViewDoctor = (id) => async (dispatch, getState) => {
   try {
@@ -234,7 +275,7 @@ export const ViewDoctor = (id) => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: `${superAdminInfo.toke}`,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
@@ -245,8 +286,11 @@ export const ViewDoctor = (id) => async (dispatch, getState) => {
       payload: data.data,
     });
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(SuperAdminLogout());
     }
     dispatch({
@@ -257,7 +301,18 @@ export const ViewDoctor = (id) => async (dispatch, getState) => {
 };
 
 export const AdminCreateDoctor =
-  (fullName, emailId, password, contactNumber, gender, address, dob, speciality, NMC_number, fee) =>
+  (
+    fullName,
+    emailId,
+    password,
+    contactNumber,
+    gender,
+    address,
+    dob,
+    speciality,
+    NMC_number,
+    fee
+  ) =>
   async (dispatch, getState) => {
     try {
       dispatch({
@@ -271,13 +326,24 @@ export const AdminCreateDoctor =
       const config = {
         headers: {
           API_KEY: adminInfo.token,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       };
 
       const { data } = await axios.post(
         `${url}/api/v1/doctor/create`,
-        { fullName, emailId, password, contactNumber, gender, address, dob, speciality, NMC_number, fee },
+        {
+          fullName,
+          emailId,
+          password,
+          contactNumber,
+          gender,
+          address,
+          dob,
+          speciality,
+          NMC_number,
+          fee,
+        },
         config
       );
       dispatch({
@@ -285,8 +351,11 @@ export const AdminCreateDoctor =
         payload: data,
       });
     } catch (error) {
-      const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-      if (message === 'No valid api Key Used') {
+      const message =
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.message;
+      if (message === "No valid api Key Used") {
         dispatch(AdminLogout());
       }
       dispatch({
@@ -306,7 +375,7 @@ export const AdminListDoctors = () => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: adminInfo.token,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
     const { data } = await axios.get(`${url}/api/v1/doctor/view/all`, config);
@@ -316,8 +385,11 @@ export const AdminListDoctors = () => async (dispatch, getState) => {
       payload: data.data,
     });
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(AdminLogout());
     }
     dispatch({
@@ -340,7 +412,7 @@ export const AdmindeleteDoctor = (id) => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: adminInfo.token,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
@@ -350,8 +422,11 @@ export const AdmindeleteDoctor = (id) => async (dispatch, getState) => {
       type: DOCTOR_DELETE_SUCCESS,
     });
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(AdminLogout());
     }
     dispatch({
@@ -361,44 +436,48 @@ export const AdmindeleteDoctor = (id) => async (dispatch, getState) => {
   }
 };
 
-export const AdminUpdateDoctor = (id, field, value) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: DOCTOR_UPDATE_REQUEST,
-    });
+export const AdminUpdateDoctor =
+  (id, field, value) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: DOCTOR_UPDATE_REQUEST,
+      });
 
-    const {
-      adminLogin: { adminInfo },
-    } = getState();
+      const {
+        adminLogin: { adminInfo },
+      } = getState();
 
-    const config = {
-      headers: {
-        API_KEY: adminInfo.token,
-        'Content-Type': 'application/json',
-      },
-    };
-    const { data } = await axios.put(
-      `${url}/api/v1/doctor/update/${id}`,
-      {
-        field: `${field}`,
-        value: `${value}`,
-      },
-      config
-    );
+      const config = {
+        headers: {
+          API_KEY: adminInfo.token,
+          "Content-Type": "application/json",
+        },
+      };
+      const { data } = await axios.put(
+        `${url}/api/v1/doctor/update/${id}`,
+        {
+          field: `${field}`,
+          value: `${value}`,
+        },
+        config
+      );
 
-    dispatch({ type: DOCTOR_UPDATE_SUCCESS, payload: data });
-    dispatch({ type: DOCTOR_UPDATE_RESET });
-  } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
-      dispatch(AdminLogout());
+      dispatch({ type: DOCTOR_UPDATE_SUCCESS, payload: data });
+      dispatch({ type: DOCTOR_UPDATE_RESET });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.message;
+      if (message === "No valid api Key Used") {
+        dispatch(AdminLogout());
+      }
+      dispatch({
+        type: DOCTOR_UPDATE_FAIL,
+        payload: message,
+      });
     }
-    dispatch({
-      type: DOCTOR_UPDATE_FAIL,
-      payload: message,
-    });
-  }
-};
+  };
 
 export const AdminDoctorAddNo = (id, value) => async (dispatch, getState) => {
   try {
@@ -413,7 +492,7 @@ export const AdminDoctorAddNo = (id, value) => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: adminInfo.token,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
     const { data } = await axios.put(
@@ -426,8 +505,11 @@ export const AdminDoctorAddNo = (id, value) => async (dispatch, getState) => {
 
     dispatch({ type: DOCTOR_ADD_NUMBER_SUCCESS, payload: data });
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(DoctorLogout());
     }
     dispatch({
@@ -437,196 +519,226 @@ export const AdminDoctorAddNo = (id, value) => async (dispatch, getState) => {
   }
 };
 
-export const AdminDoctordeleteNo = (id, value) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: DOCTOR_DELETE_NUMBER_REQUEST,
-    });
+export const AdminDoctordeleteNo =
+  (id, value) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: DOCTOR_DELETE_NUMBER_REQUEST,
+      });
 
-    const {
-      adminLogin: { adminInfo },
-    } = getState();
+      const {
+        adminLogin: { adminInfo },
+      } = getState();
 
-    const config = {
-      headers: {
-        API_KEY: adminInfo.token,
-        'Content-Type': 'application/json',
-      },
-    };
-    const { newData } = await axios.delete(`${url}/api/v1/doctor/delete/number/${id}/${value}`, config, {});
+      const config = {
+        headers: {
+          API_KEY: adminInfo.token,
+          "Content-Type": "application/json",
+        },
+      };
+      const { newData } = await axios.delete(
+        `${url}/api/v1/doctor/delete/number/${id}/${value}`,
+        config,
+        {}
+      );
 
-    dispatch({
-      type: DOCTOR_DELETE_NUMBER_SUCCESS,
-    });
-  } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
-      dispatch(DoctorLogout());
+      dispatch({
+        type: DOCTOR_DELETE_NUMBER_SUCCESS,
+      });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.message;
+      if (message === "No valid api Key Used") {
+        dispatch(DoctorLogout());
+      }
+      dispatch({
+        type: DOCTOR_DELETE_NUMBER_FAIL,
+        payload: message,
+      });
     }
-    dispatch({
-      type: DOCTOR_DELETE_NUMBER_FAIL,
-      payload: message,
-    });
-  }
-};
+  };
 
-export const AdminDoctorAddVideo = (id, value) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: DOCTOR_ADD_VIDEO_REQUEST,
-    });
+export const AdminDoctorAddVideo =
+  (id, value) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: DOCTOR_ADD_VIDEO_REQUEST,
+      });
 
-    const {
-      adminLogin: { adminInfo },
-    } = getState();
+      const {
+        adminLogin: { adminInfo },
+      } = getState();
 
-    const config = {
-      headers: {
-        API_KEY: adminInfo.token,
-        'Content-Type': 'application/json',
-      },
-    };
-    const { data } = await axios.put(
-      `${url}/api/v1/doctor/add/video/${id}`,
-      {
+      const config = {
+        headers: {
+          API_KEY: adminInfo.token,
+          "Content-Type": "application/json",
+        },
+      };
+      const { data } = await axios.put(
+        `${url}/api/v1/doctor/add/video/${id}`,
+        {
+          value: `${value}`,
+        },
+        config
+      );
+
+      dispatch({ type: DOCTOR_ADD_VIDEO_SUCCESS, payload: data });
+      dispatch({ type: DOCTOR_ADD_VIDEO_RESET });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.message;
+      if (message === "No valid api Key Used") {
+        dispatch(DoctorLogout());
+      }
+      dispatch({
+        type: DOCTOR_ADD_VIDEO_FAIL,
+        payload: message,
+      });
+    }
+  };
+
+export const AdminDoctordeleteVideo =
+  (id, value) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: DOCTOR_DELETE_VIDEO_REQUEST,
+      });
+
+      const {
+        adminLogin: { adminInfo },
+      } = getState();
+
+      const data = {
         value: `${value}`,
-      },
-      config
-    );
+      };
 
-    dispatch({ type: DOCTOR_ADD_VIDEO_SUCCESS, payload: data });
-    dispatch({ type: DOCTOR_ADD_VIDEO_RESET });
-  } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
-      dispatch(DoctorLogout());
+      const { newData } = await axios.delete(
+        `${url}/api/v1/doctor/delete/video/${id}`,
+        {
+          headers: {
+            API_KEY: adminInfo.token,
+            "Content-Type": "application/json",
+          },
+          data,
+        }
+      );
+
+      dispatch({
+        type: DOCTOR_DELETE_VIDEO_SUCCESS,
+      });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.message;
+      if (message === "No valid api Key Used") {
+        dispatch(DoctorLogout());
+      }
+      dispatch({
+        type: DOCTOR_DELETE_VIDEO_FAIL,
+        payload: message,
+      });
     }
-    dispatch({
-      type: DOCTOR_ADD_VIDEO_FAIL,
-      payload: message,
-    });
-  }
-};
+  };
 
-export const AdminDoctordeleteVideo = (id, value) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: DOCTOR_DELETE_VIDEO_REQUEST,
-    });
+export const AdminDoctorAddEducation =
+  (id, value) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: DOCTOR_ADD_EDUCATION_REQUEST,
+      });
 
-    const {
-      adminLogin: { adminInfo },
-    } = getState();
+      const {
+        adminLogin: { adminInfo },
+      } = getState();
 
-    const data = {
-      value: `${value}`,
-    };
+      const config = {
+        headers: {
+          API_KEY: adminInfo.token,
+          "Content-Type": "application/json",
+        },
+      };
+      const { data } = await axios.put(
+        `${url}/api/v1/doctor/add/education/${id}`,
+        {
+          value: `${value}`,
+        },
+        config
+      );
 
-    const { newData } = await axios.delete(`${url}/api/v1/doctor/delete/video/${id}`, {
-      headers: {
-        API_KEY: adminInfo.token,
-        'Content-Type': 'application/json',
-      },
-      data,
-    });
+      dispatch({ type: DOCTOR_ADD_EDUCATION_SUCCESS, payload: data });
 
-    dispatch({
-      type: DOCTOR_DELETE_VIDEO_SUCCESS,
-    });
-  } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
-      dispatch(DoctorLogout());
+      dispatch({ type: DOCTOR_ADD_EDUCATION_RESET });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.message;
+      if (message === "No valid api Key Used") {
+        dispatch(DoctorLogout());
+      }
+      dispatch({
+        type: DOCTOR_ADD_EDUCATION_FAIL,
+        payload: message,
+      });
     }
-    dispatch({
-      type: DOCTOR_DELETE_VIDEO_FAIL,
-      payload: message,
-    });
-  }
-};
+  };
 
-export const AdminDoctorAddEducation = (id, value) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: DOCTOR_ADD_EDUCATION_REQUEST,
-    });
+export const AdminDoctordeleteEducation =
+  (id, value) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: DOCTOR_DELETE_EDUCATION_REQUEST,
+      });
 
-    const {
-      adminLogin: { adminInfo },
-    } = getState();
+      const {
+        adminLogin: { adminInfo },
+      } = getState();
 
-    const config = {
-      headers: {
-        API_KEY: adminInfo.token,
-        'Content-Type': 'application/json',
-      },
-    };
-    const { data } = await axios.put(
-      `${url}/api/v1/doctor/add/education/${id}`,
-      {
+      const config = {
+        headers: {
+          API_KEY: adminInfo.token,
+          "Content-Type": "application/json",
+        },
+      };
+
+      const data = {
         value: `${value}`,
-      },
-      config
-    );
+      };
 
-    dispatch({ type: DOCTOR_ADD_EDUCATION_SUCCESS, payload: data });
+      const { newData } = await axios.delete(
+        `${url}/api/v1/doctor/delete/education/${id}`,
+        {
+          headers: {
+            API_KEY: doctorInfo.token,
+            "Content-Type": "application/json",
+          },
+          data,
+        }
+      );
 
-    dispatch({ type: DOCTOR_ADD_EDUCATION_RESET });
-  } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
-      dispatch(DoctorLogout());
+      dispatch({
+        type: DOCTOR_DELETE_EDUCATION_SUCCESS,
+      });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.message;
+      if (message === "No valid api Key Used") {
+        dispatch(DoctorLogout());
+      }
+      dispatch({
+        type: DOCTOR_DELETE_EDUCATION_FAIL,
+        payload: message,
+      });
     }
-    dispatch({
-      type: DOCTOR_ADD_EDUCATION_FAIL,
-      payload: message,
-    });
-  }
-};
-
-export const AdminDoctordeleteEducation = (id, value) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: DOCTOR_DELETE_EDUCATION_REQUEST,
-    });
-
-    const {
-      adminLogin: { adminInfo },
-    } = getState();
-
-    const config = {
-      headers: {
-        API_KEY: adminInfo.token,
-        'Content-Type': 'application/json',
-      },
-    };
-
-    const data = {
-      value: `${value}`,
-    };
-
-    const { newData } = await axios.delete(`${url}/api/v1/doctor/delete/education/${id}`, {
-      headers: {
-        API_KEY: doctorInfo.token,
-        'Content-Type': 'application/json',
-      },
-      data,
-    });
-
-    dispatch({
-      type: DOCTOR_DELETE_EDUCATION_SUCCESS,
-    });
-  } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
-      dispatch(DoctorLogout());
-    }
-    dispatch({
-      type: DOCTOR_DELETE_EDUCATION_FAIL,
-      payload: message,
-    });
-  }
-};
+  };
 
 export const AdminDoctorAddTag = (id, value) => async (dispatch, getState) => {
   try {
@@ -641,7 +753,7 @@ export const AdminDoctorAddTag = (id, value) => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: adminInfo.token,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
     const { data } = await axios.put(
@@ -656,8 +768,11 @@ export const AdminDoctorAddTag = (id, value) => async (dispatch, getState) => {
 
     dispatch({ type: DOCTOR_ADD_TAG_RESET });
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(DoctorLogout());
     }
     dispatch({
@@ -667,41 +782,48 @@ export const AdminDoctorAddTag = (id, value) => async (dispatch, getState) => {
   }
 };
 
-export const AdminDoctordeleteTag = (id, value) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: DOCTOR_DELETE_TAG_REQUEST,
-    });
+export const AdminDoctordeleteTag =
+  (id, value) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: DOCTOR_DELETE_TAG_REQUEST,
+      });
 
-    const {
-      adminLogin: { adminInfo },
-    } = getState();
+      const {
+        adminLogin: { adminInfo },
+      } = getState();
 
-    const data = {
-      value: `${value}`,
-    };
-    const { newData } = await axios.delete(`${url}/api/v1/doctor/delete/tag/${id}`, {
-      headers: {
-        API_KEY: adminInfo.token,
-        'Content-Type': 'application/json',
-      },
-      data,
-    });
+      const data = {
+        value: `${value}`,
+      };
+      const { newData } = await axios.delete(
+        `${url}/api/v1/doctor/delete/tag/${id}`,
+        {
+          headers: {
+            API_KEY: adminInfo.token,
+            "Content-Type": "application/json",
+          },
+          data,
+        }
+      );
 
-    dispatch({
-      type: DOCTOR_DELETE_TAG_SUCCESS,
-    });
-  } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
-      dispatch(DoctorLogout());
+      dispatch({
+        type: DOCTOR_DELETE_TAG_SUCCESS,
+      });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.message;
+      if (message === "No valid api Key Used") {
+        dispatch(DoctorLogout());
+      }
+      dispatch({
+        type: DOCTOR_DELETE_TAG_FAIL,
+        payload: message,
+      });
     }
-    dispatch({
-      type: DOCTOR_DELETE_TAG_FAIL,
-      payload: message,
-    });
-  }
-};
+  };
 
 export const AdminDoctorAddTime = (id, date) => async (dispatch, getState) => {
   try {
@@ -716,18 +838,25 @@ export const AdminDoctorAddTime = (id, date) => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: adminInfo.token,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.put(`${url}/api/v1/doctor/add/dates/${id}?date=${date}&time=8`, {}, config);
+    const { data } = await axios.put(
+      `${url}/api/v1/doctor/add/dates/${id}?date=${date}&time=8`,
+      {},
+      config
+    );
 
     dispatch({
       type: DOCTOR_ADD_TIME_SUCCESS,
       playload: data.data,
     });
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(DoctorLogout());
     }
     dispatch({
@@ -737,38 +866,46 @@ export const AdminDoctorAddTime = (id, date) => async (dispatch, getState) => {
   }
 };
 
-export const AdminDoctorPasswordChange = (id, password) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: DOCTOR_PASSWORD_CHANGE_REQUEST,
-    });
-    const {
-      adminLogin: { adminInfo },
-    } = getState();
+export const AdminDoctorPasswordChange =
+  (id, password) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: DOCTOR_PASSWORD_CHANGE_REQUEST,
+      });
+      const {
+        adminLogin: { adminInfo },
+      } = getState();
 
-    const config = {
-      headers: {
-        API_KEY: adminInfo.token,
-        'Content-Type': 'application/json',
-      },
-    };
+      const config = {
+        headers: {
+          API_KEY: adminInfo.token,
+          "Content-Type": "application/json",
+        },
+      };
 
-    const { data } = await axios.put(`${url}/api/v1/doctor/update/password/${id}?password=${password}`, {}, config);
-    dispatch({
-      type: DOCTOR_PASSWORD_CHANGE_SUCCESS,
-      payload: data,
-    });
-  } catch (err) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
-      dispatch(DoctorLogout());
+      const { data } = await axios.put(
+        `${url}/api/v1/doctor/update/password/${id}?password=${password}`,
+        {},
+        config
+      );
+      dispatch({
+        type: DOCTOR_PASSWORD_CHANGE_SUCCESS,
+        payload: data,
+      });
+    } catch (err) {
+      const message =
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.message;
+      if (message === "No valid api Key Used") {
+        dispatch(DoctorLogout());
+      }
+      dispatch({
+        type: DOCTOR_PASSWORD_CHANGE_FAIL,
+        payload: message,
+      });
     }
-    dispatch({
-      type: DOCTOR_PASSWORD_CHANGE_FAIL,
-      payload: message,
-    });
-  }
-};
+  };
 
 // admin doctor update
 export const AdminViewDoctor = (id) => async (dispatch, getState) => {
@@ -784,7 +921,7 @@ export const AdminViewDoctor = (id) => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: adminInfo.token,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
     const { data } = await axios.get(`${url}/api/v1/doctor/view/${id}`, config);
@@ -794,8 +931,11 @@ export const AdminViewDoctor = (id) => async (dispatch, getState) => {
       payload: data.data,
     });
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(AdminLogout());
     }
     dispatch({
@@ -820,58 +960,65 @@ export const DoctorLogin = (email, password) => async (dispatch) => {
       playload: data.data,
     });
     // to save doctorInfo info into local storage
-    localStorage.setItem('doctorInfo', JSON.stringify(data.data));
+    localStorage.setItem("doctorInfo", JSON.stringify(data.data));
   } catch (error) {
     dispatch({
       type: DOCTOR_LOGIN_FAIL,
-      payload: error.response && error.response.data.msg ? error.response.data.msg : error.message,
+      payload:
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.message,
     });
   }
 };
 
 export const DoctorLogout = () => (dispatch) => {
-  localStorage.removeItem('doctorInfo');
+  localStorage.removeItem("doctorInfo");
   dispatch({ type: DOCTOR_LOGOUT });
-  document.location.href = '/doctor/login';
+  document.location.href = "/doctor/login";
 };
-export const DoctorUpdate = (id, field, value) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: DOCTOR_UPDATE_REQUEST,
-    });
-    const {
-      doctorLogin: { doctorInfo },
-    } = getState();
+export const DoctorUpdate =
+  (id, field, value) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: DOCTOR_UPDATE_REQUEST,
+      });
+      const {
+        doctorLogin: { doctorInfo },
+      } = getState();
 
-    const config = {
-      headers: {
-        API_KEY: doctorInfo.token,
-        'Content-Type': 'application/json',
-      },
-    };
-    const { data } = await axios.put(
-      `${url}/api/v1/doctor/update/${id}`,
-      {
-        field: `${field}`,
-        value: `${value}`,
-      },
-      config
-    );
+      const config = {
+        headers: {
+          API_KEY: doctorInfo.token,
+          "Content-Type": "application/json",
+        },
+      };
+      const { data } = await axios.put(
+        `${url}/api/v1/doctor/update/${id}`,
+        {
+          field: `${field}`,
+          value: `${value}`,
+        },
+        config
+      );
 
-    dispatch({ type: DOCTOR_UPDATE_SUCCESS, payload: data });
-    localStorage.setItem('doctorInfo', JSON.stringify(data.data));
-    dispatch({ type: DOCTOR_UPDATE_RESET });
-  } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
-      dispatch(DoctorLogout());
+      dispatch({ type: DOCTOR_UPDATE_SUCCESS, payload: data });
+      localStorage.setItem("doctorInfo", JSON.stringify(data.data));
+      dispatch({ type: DOCTOR_UPDATE_RESET });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.message;
+      if (message === "No valid api Key Used") {
+        dispatch(DoctorLogout());
+      }
+      dispatch({
+        type: DOCTOR_UPDATE_FAIL,
+        payload: message,
+      });
     }
-    dispatch({
-      type: DOCTOR_UPDATE_FAIL,
-      payload: message,
-    });
-  }
-};
+  };
 
 export const DoctorView = (id) => async (dispatch, getState) => {
   try {
@@ -886,7 +1033,7 @@ export const DoctorView = (id) => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: doctorInfo.token,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
@@ -896,8 +1043,11 @@ export const DoctorView = (id) => async (dispatch, getState) => {
       payload: data.data,
     });
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(DoctorLogout());
     }
     dispatch({
@@ -920,7 +1070,7 @@ export const DoctorAddNo = (id, value) => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: doctorInfo.token,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
     const { data } = await axios.put(
@@ -932,10 +1082,13 @@ export const DoctorAddNo = (id, value) => async (dispatch, getState) => {
     );
 
     dispatch({ type: DOCTOR_ADD_NUMBER_SUCCESS, payload: data });
-    localStorage.setItem('doctorInfo', JSON.stringify(data.data));
+    localStorage.setItem("doctorInfo", JSON.stringify(data.data));
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(DoctorLogout());
     }
     dispatch({
@@ -958,10 +1111,14 @@ export const DoctordeleteNo = (id, value) => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: doctorInfo.token,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
-    const { newData } = await axios.delete(`${url}/api/v1/doctor/delete/number/${id}/${value}`, config, {});
+    const { newData } = await axios.delete(
+      `${url}/api/v1/doctor/delete/number/${id}/${value}`,
+      config,
+      {}
+    );
 
     dispatch({
       type: DOCTOR_DELETE_NUMBER_SUCCESS,
@@ -969,8 +1126,11 @@ export const DoctordeleteNo = (id, value) => async (dispatch, getState) => {
     });
     // localStorage.setItem('doctorInfo', JSON.stringify(newData.data));
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(DoctorLogout());
     }
     dispatch({
@@ -993,7 +1153,7 @@ export const DoctorAddVideo = (id, value) => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: doctorInfo.token,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
     const { data } = await axios.put(
@@ -1005,12 +1165,15 @@ export const DoctorAddVideo = (id, value) => async (dispatch, getState) => {
     );
 
     dispatch({ type: DOCTOR_ADD_VIDEO_SUCCESS, payload: data });
-    localStorage.setItem('doctorInfo', JSON.stringify(data.data));
+    localStorage.setItem("doctorInfo", JSON.stringify(data.data));
 
     dispatch({ type: DOCTOR_ADD_VIDEO_RESET });
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(DoctorLogout());
     }
     dispatch({
@@ -1033,7 +1196,7 @@ export const DoctordeleteVideo = (id, value) => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: doctorInfo.token,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
@@ -1041,13 +1204,16 @@ export const DoctordeleteVideo = (id, value) => async (dispatch, getState) => {
       value: `${value}`,
     };
 
-    const { newData } = await axios.delete(`${url}/api/v1/doctor/delete/video/${id}`, {
-      headers: {
-        API_KEY: doctorInfo.token,
-        'Content-Type': 'application/json',
-      },
-      data,
-    });
+    const { newData } = await axios.delete(
+      `${url}/api/v1/doctor/delete/video/${id}`,
+      {
+        headers: {
+          API_KEY: doctorInfo.token,
+          "Content-Type": "application/json",
+        },
+        data,
+      }
+    );
 
     dispatch({
       type: DOCTOR_DELETE_VIDEO_SUCCESS,
@@ -1055,8 +1221,11 @@ export const DoctordeleteVideo = (id, value) => async (dispatch, getState) => {
     });
     // localStorage.setItem('doctorInfo', JSON.stringify(newData.data));
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(DoctorLogout());
     }
     dispatch({
@@ -1079,7 +1248,7 @@ export const DoctorAddEducation = (id, value) => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: doctorInfo.token,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
     const { data } = await axios.put(
@@ -1091,12 +1260,15 @@ export const DoctorAddEducation = (id, value) => async (dispatch, getState) => {
     );
 
     dispatch({ type: DOCTOR_ADD_EDUCATION_SUCCESS, payload: data });
-    localStorage.setItem('doctorInfo', JSON.stringify(data.data));
+    localStorage.setItem("doctorInfo", JSON.stringify(data.data));
 
     dispatch({ type: DOCTOR_ADD_EDUCATION_RESET });
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(DoctorLogout());
     }
     dispatch({
@@ -1106,51 +1278,58 @@ export const DoctorAddEducation = (id, value) => async (dispatch, getState) => {
   }
 };
 
-export const DoctordeleteEducation = (id, value) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: DOCTOR_DELETE_EDUCATION_REQUEST,
-    });
+export const DoctordeleteEducation =
+  (id, value) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: DOCTOR_DELETE_EDUCATION_REQUEST,
+      });
 
-    const {
-      doctorLogin: { doctorInfo },
-    } = getState();
+      const {
+        doctorLogin: { doctorInfo },
+      } = getState();
 
-    const config = {
-      headers: {
-        API_KEY: doctorInfo.token,
-        'Content-Type': 'application/json',
-      },
-    };
+      const config = {
+        headers: {
+          API_KEY: doctorInfo.token,
+          "Content-Type": "application/json",
+        },
+      };
 
-    const data = {
-      value: `${value}`,
-    };
+      const data = {
+        value: `${value}`,
+      };
 
-    const { newData } = await axios.delete(`${url}/api/v1/doctor/delete/education/${id}`, {
-      headers: {
-        API_KEY: doctorInfo.token,
-        'Content-Type': 'application/json',
-      },
-      data,
-    });
+      const { newData } = await axios.delete(
+        `${url}/api/v1/doctor/delete/education/${id}`,
+        {
+          headers: {
+            API_KEY: doctorInfo.token,
+            "Content-Type": "application/json",
+          },
+          data,
+        }
+      );
 
-    dispatch({
-      type: DOCTOR_DELETE_EDUCATION_SUCCESS,
-      // playload: newData.data,
-    });
-    // localStorage.setItem('doctorInfo', JSON.stringify(newData.data));
-  } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
-      dispatch(DoctorLogout());
+      dispatch({
+        type: DOCTOR_DELETE_EDUCATION_SUCCESS,
+        // playload: newData.data,
+      });
+      // localStorage.setItem('doctorInfo', JSON.stringify(newData.data));
+    } catch (error) {
+      const message =
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.message;
+      if (message === "No valid api Key Used") {
+        dispatch(DoctorLogout());
+      }
+      dispatch({
+        type: DOCTOR_DELETE_EDUCATION_FAIL,
+        payload: message,
+      });
     }
-    dispatch({
-      type: DOCTOR_DELETE_EDUCATION_FAIL,
-      payload: message,
-    });
-  }
-};
+  };
 
 export const DoctorAddTag = (id, value) => async (dispatch, getState) => {
   try {
@@ -1165,7 +1344,7 @@ export const DoctorAddTag = (id, value) => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: doctorInfo.token,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
     const { data } = await axios.put(
@@ -1177,12 +1356,15 @@ export const DoctorAddTag = (id, value) => async (dispatch, getState) => {
     );
 
     dispatch({ type: DOCTOR_ADD_TAG_SUCCESS, payload: data });
-    localStorage.setItem('doctorInfo', JSON.stringify(data.data));
+    localStorage.setItem("doctorInfo", JSON.stringify(data.data));
 
     dispatch({ type: DOCTOR_ADD_TAG_RESET });
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(DoctorLogout());
     }
     dispatch({
@@ -1205,19 +1387,22 @@ export const DoctordeleteTag = (id, value) => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: doctorInfo.token,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
     const data = {
       value: `${value}`,
     };
-    const { newData } = await axios.delete(`${url}/api/v1/doctor/delete/tag/${id}`, {
-      headers: {
-        API_KEY: doctorInfo.token,
-        'Content-Type': 'application/json',
-      },
-      data,
-    });
+    const { newData } = await axios.delete(
+      `${url}/api/v1/doctor/delete/tag/${id}`,
+      {
+        headers: {
+          API_KEY: doctorInfo.token,
+          "Content-Type": "application/json",
+        },
+        data,
+      }
+    );
 
     dispatch({
       type: DOCTOR_DELETE_TAG_SUCCESS,
@@ -1225,8 +1410,11 @@ export const DoctordeleteTag = (id, value) => async (dispatch, getState) => {
     });
     // localStorage.setItem('doctorInfo', JSON.stringify(newData.data));
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(DoctorLogout());
     }
     dispatch({
@@ -1249,19 +1437,26 @@ export const DoctorAddTime = (id, date) => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: doctorInfo.token,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.put(`${url}/api/v1/doctor/add/dates/${id}?date=${date}&time=8`, {}, config);
+    const { data } = await axios.put(
+      `${url}/api/v1/doctor/add/dates/${id}?date=${date}&time=8`,
+      {},
+      config
+    );
 
     dispatch({
       type: DOCTOR_ADD_TIME_SUCCESS,
       playload: data.data,
     });
-    localStorage.setItem('doctorInfo', JSON.stringify(data.data));
+    localStorage.setItem("doctorInfo", JSON.stringify(data.data));
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(DoctorLogout());
     }
     dispatch({
@@ -1271,60 +1466,72 @@ export const DoctorAddTime = (id, date) => async (dispatch, getState) => {
   }
 };
 
-export const DoctorForgotPasswordChange = (email, newpassword) => async (dispatch) => {
-  try {
-    dispatch({
-      type: DOCTOR_FORGOT_PASSWORD_REQUEST,
-    });
+export const DoctorForgotPasswordChange =
+  (email, newpassword) => async (dispatch) => {
+    try {
+      dispatch({
+        type: DOCTOR_FORGOT_PASSWORD_REQUEST,
+      });
 
-    const { data } = await axios.post(
-      `${url}/api/v1/auth/doctor/forgot/password?email=${email}&newpassword=${newpassword}`,
-      {}
-    );
-    dispatch({
-      type: DOCTOR_FORGOT_PASSWORD_SUCCESS,
-      payload: data,
-    });
-  } catch (err) {
-    dispatch({
-      type: DOCTOR_FORGOT_PASSWORD_FAIL,
-      payload: err.response && err.response.data.msg ? err.response.data.msg : err.message,
-    });
-  }
-};
-
-export const DoctorPasswordChange = (id, password) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: DOCTOR_PASSWORD_CHANGE_REQUEST,
-    });
-    const {
-      doctorLogin: { doctorInfo },
-    } = getState();
-
-    const config = {
-      headers: {
-        API_KEY: doctorInfo.token,
-        'Content-Type': 'application/json',
-      },
-    };
-
-    const { data } = await axios.put(`${url}/api/v1/doctor/update/password/${id}?password=${password}`, {}, config);
-    dispatch({
-      type: DOCTOR_PASSWORD_CHANGE_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
-      dispatch(DoctorLogout());
+      const { data } = await axios.post(
+        `${url}/api/v1/auth/doctor/forgot/password?email=${email}&newpassword=${newpassword}`,
+        {}
+      );
+      dispatch({
+        type: DOCTOR_FORGOT_PASSWORD_SUCCESS,
+        payload: data,
+      });
+    } catch (err) {
+      dispatch({
+        type: DOCTOR_FORGOT_PASSWORD_FAIL,
+        payload:
+          err.response && err.response.data.msg
+            ? err.response.data.msg
+            : err.message,
+      });
     }
-    dispatch({
-      type: DOCTOR_PASSWORD_CHANGE_FAIL,
-      payload: message,
-    });
-  }
-};
+  };
+
+export const DoctorPasswordChange =
+  (id, password) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: DOCTOR_PASSWORD_CHANGE_REQUEST,
+      });
+      const {
+        doctorLogin: { doctorInfo },
+      } = getState();
+
+      const config = {
+        headers: {
+          API_KEY: doctorInfo.token,
+          "Content-Type": "application/json",
+        },
+      };
+
+      const { data } = await axios.put(
+        `${url}/api/v1/doctor/update/password/${id}?password=${password}`,
+        {},
+        config
+      );
+      dispatch({
+        type: DOCTOR_PASSWORD_CHANGE_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.message;
+      if (message === "No valid api Key Used") {
+        dispatch(DoctorLogout());
+      }
+      dispatch({
+        type: DOCTOR_PASSWORD_CHANGE_FAIL,
+        payload: message,
+      });
+    }
+  };
 
 // export const DoctorAddProfile = async (id, data) => {
 //   try {
@@ -1359,3 +1566,154 @@ export const DoctorPasswordChange = (id, password) => async (dispatch, getState)
 //     });
 //   }
 // };
+
+export const SignupDoctor = (formData) => async (dispatch) => {
+  try {
+    dispatch({
+      type: DOCTOR_SIGNUP_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        // API_KEY: superAdminInfo.toke,
+        "Content-Type": "multipart/form-data",
+        // "Content-Type": "application/json",
+      },
+    };
+
+    const { data } = await axios.post(
+      `http://localhost:5050/api/v1/public/doctor/signup`,
+      formData
+    );
+    dispatch({
+      type: DOCTOR_SIGNUP_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: DOCTOR_SIGNUP_FAIL,
+      payload:
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.message,
+    });
+  }
+};
+
+export const AdminListDoctorSignup = () => async (dispatch, getState) => {
+  try {
+    dispatch({ type: DOCTOR_SIGNUP_LIST_REQUEST });
+    const {
+      adminLogin: { adminInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        API_KEY: adminInfo.token,
+        "Content-Type": "application/json",
+      },
+    };
+    const { data } = await axios.get(
+      `http://localhost:5050/api/v1/public/doctor/view/signupdoc/all`,
+      config
+    );
+
+    dispatch({
+      type: DOCTOR_SIGNUP_LIST_SUCCESS,
+      payload: data.data,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
+      dispatch(SuperAdminLogout());
+    }
+    dispatch({
+      type: DOCTOR_SIGNUP_LIST_FAIL,
+      payload: message,
+    });
+  }
+};
+
+export const AdmindeleteDoctorSignup = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: DOCTOR_DELETE_REQUEST,
+    });
+
+    const {
+      adminLogin: { adminInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        API_KEY: adminInfo.token,
+        "Content-Type": "application/json",
+      },
+    };
+
+    await axios.delete(
+      `http://localhost:5050/api/v1/doctor/delete/signupdoc/${id}`,
+      config
+    );
+
+    dispatch({
+      type: DOCTOR_DELETE_SUCCESS,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
+      dispatch(AdminLogout());
+    }
+    dispatch({
+      type: DOCTOR_DELETE_FAIL,
+      payload: message,
+    });
+  }
+};
+
+export const AdminViewDoctorSignup = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: DOCTOR_DETAILS_REQUEST,
+    });
+
+    const {
+      adminLogin: { adminInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        API_KEY: adminInfo.token,
+        "Content-Type": "application/json",
+      },
+      credentials: "same-origin",
+    };
+    const { data } = await axios.get(
+      `http://localhost:5050/api/v1/doctor/view/signupdoc/${id}`,
+      config
+    );
+
+    dispatch({
+      type: DOCTOR_DETAILS_SUCCESS,
+      payload: data.data,
+    });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
+      dispatch(AdminLogout());
+    }
+    dispatch({
+      type: DOCTOR_DETAILS_FAIL,
+      payload: message,
+    });
+  }
+};

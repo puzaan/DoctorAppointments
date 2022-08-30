@@ -1,51 +1,55 @@
-import { Navigate, useRoutes } from 'react-router-dom';
+import { Navigate, useRoutes } from "react-router-dom";
 // layouts
 // import DashboardLayout from './layouts/dashboard';
-import AdminDashboardLayout from './layouts/adminDashboard';
-import LogoOnlyLayout from './layouts/LogoOnlyLayout';
-import SuperAdminDashboardLayout from './layouts/superAdminDashboard';
-import DoctorDashboardLayout from './layouts/doctorDashboard';
+import AdminDashboardLayout from "./layouts/adminDashboard";
+import LogoOnlyLayout from "./layouts/LogoOnlyLayout";
+import SuperAdminDashboardLayout from "./layouts/superAdminDashboard";
+import DoctorDashboardLayout from "./layouts/doctorDashboard";
 //
-import NotFound from './pages/Page404';
-import SuperAdminNotFound from './pages/SuperAdmin404';
-import AdminPageNotFound from './pages/AdminPage404';
-import DoctorPage from './pages/Doctor404';
-import DashboardApp from './pages/DashboardApp';
-import AdminDashboard from './pages/AdminDasnboard';
-import SuperAdminLogin from './pages/SuperAdminLogin';
-import DoctorList from './pages/DoctorLis';
-import AdminCreate from './pages/AdminCreate';
-import { SuperAdminProtection } from './auth/superAdmin';
-import { AdminProtection } from './auth/admin';
-import { DoctorProtection } from './auth/doctor';
-import DoctorCreate from './pages/DoctorCreate';
-import AdminDoctorCreate from './pages/AdminDoctorCreate';
-import AdminList from './pages/AdminList';
-import BookingList from './pages/BookingList';
-import AdminUpdate from './pages/AdminUpdate';
-import DoctorUpdate from './pages/DoctorUpdate';
-import AdminLogin from './pages/AdminLogin';
-import AdminForgotPassword from './pages/AdminForgotPassword';
-import DoctorForgotPassword from './pages/DoctorForgotPassword';
-import AdminDoctorList from './pages/AdminDoctorList';
-import AdminBookingList from './pages/AdminBookingList';
-import AdminDoctorUpdate from './pages/AdminDoctorUpdate';
-import DoctorLogin from './pages/DoctorLogin';
-import BookingView from './pages/BookingView';
-import SuperAdminBookingView from './pages/SuperAdminBookingView';
-import DoctorBookingList from './pages/DoctorBookingList';
-import { HomePage } from './pages/HomePage';
-import DoctorUpdateProfile from './pages/DoctorUpdateProfile';
-import MeetingCreate from './pages/MeetingCreate';
-import MeetingDetail from './pages/MeetingDetail';
-import AdminUpdateProfile from './pages/AdminUpdateProfile';
+import NotFound from "./pages/Page404";
+import SuperAdminNotFound from "./pages/SuperAdmin404";
+import AdminPageNotFound from "./pages/AdminPage404";
+import DoctorPage from "./pages/Doctor404";
+import DashboardApp from "./pages/DashboardApp";
+import AdminDashboard from "./pages/AdminDasnboard";
+import SuperAdminLogin from "./pages/SuperAdminLogin";
+import DoctorList from "./pages/DoctorLis";
+import AdminCreate from "./pages/AdminCreate";
+import { SuperAdminProtection } from "./auth/superAdmin";
+import { AdminProtection } from "./auth/admin";
+import { DoctorProtection } from "./auth/doctor";
+import DoctorCreate from "./pages/DoctorCreate";
+import AdminDoctorCreate from "./pages/AdminDoctorCreate";
+import AdminList from "./pages/AdminList";
+import BookingList from "./pages/BookingList";
+import AdminUpdate from "./pages/AdminUpdate";
+import DoctorUpdate from "./pages/DoctorUpdate";
+import AdminLogin from "./pages/AdminLogin";
+import AdminForgotPassword from "./pages/AdminForgotPassword";
+import DoctorForgotPassword from "./pages/DoctorForgotPassword";
+import AdminDoctorList from "./pages/AdminDoctorList";
+import AdminBookingList from "./pages/AdminBookingList";
+import AdminDoctorUpdate from "./pages/AdminDoctorUpdate";
+import DoctorLogin from "./pages/DoctorLogin";
+import BookingView from "./pages/BookingView";
+import SuperAdminBookingView from "./pages/SuperAdminBookingView";
+import DoctorBookingList from "./pages/DoctorBookingList";
+import { HomePage } from "./pages/HomePage";
+import DoctorUpdateProfile from "./pages/DoctorUpdateProfile";
+import MeetingCreate from "./pages/MeetingCreate";
+import MeetingDetail from "./pages/MeetingDetail";
+import AdminUpdateProfile from "./pages/AdminUpdateProfile";
+import DoctorSignup from "./pages/DoctorSignup";
+import AdminDoctorSignupList from "./pages/AdminDoctorSignupList";
+import SignupDoctorView from "./pages/SignupDoctorView";
+
 // ----------------------------------------------------------------------
 
 export default function Router() {
   return useRoutes([
     // superAdmin  route
     {
-      path: '/superadmin',
+      path: "/superadmin",
       element: (
         // <SuperAdminProtection>
 
@@ -54,7 +58,7 @@ export default function Router() {
       ),
       children: [
         {
-          path: 'app',
+          path: "app",
           element: (
             <SuperAdminProtection>
               <DashboardApp />
@@ -62,7 +66,7 @@ export default function Router() {
           ),
         },
         {
-          path: 'doctor',
+          path: "doctor",
           element: (
             <SuperAdminProtection>
               <DoctorList />
@@ -70,7 +74,7 @@ export default function Router() {
           ),
         },
         {
-          path: 'doctor/create',
+          path: "doctor/create",
           element: (
             <SuperAdminProtection>
               <DoctorCreate />
@@ -78,7 +82,7 @@ export default function Router() {
           ),
         },
         {
-          path: 'admin/list',
+          path: "admin/list",
           element: (
             <SuperAdminProtection>
               <AdminList />
@@ -86,7 +90,7 @@ export default function Router() {
           ),
         },
         {
-          path: 'admin/create',
+          path: "admin/create",
           element: (
             <SuperAdminProtection>
               <AdminCreate />
@@ -94,7 +98,7 @@ export default function Router() {
           ),
         },
         {
-          path: 'admin/update/:id',
+          path: "admin/update/:id",
           element: (
             <SuperAdminProtection>
               <AdminUpdate />
@@ -102,7 +106,7 @@ export default function Router() {
           ),
         },
         {
-          path: 'doctor/update/:id',
+          path: "doctor/update/:id",
           element: (
             <SuperAdminProtection>
               <DoctorUpdate />
@@ -110,7 +114,7 @@ export default function Router() {
           ),
         },
         {
-          path: 'booking/list',
+          path: "booking/list",
           element: (
             <SuperAdminProtection>
               <BookingList />
@@ -118,7 +122,7 @@ export default function Router() {
           ),
         },
         {
-          path: 'booking/view/:id',
+          path: "booking/view/:id",
           element: (
             <SuperAdminProtection>
               <SuperAdminBookingView />
@@ -129,18 +133,18 @@ export default function Router() {
     },
     // Super admin logout route
     {
-      path: '/superadmin',
+      path: "/superadmin",
       element: <LogoOnlyLayout />,
       children: [
-        { path: '/superadmin', element: <Navigate to="/superadmin/app" /> },
-        { path: 'login', element: <SuperAdminLogin /> },
-        { path: '404', element: <SuperAdminNotFound /> },
-        { path: '*', element: <Navigate to="/superadmin/404" /> },
+        { path: "/superadmin", element: <Navigate to="/superadmin/app" /> },
+        { path: "login", element: <SuperAdminLogin /> },
+        { path: "404", element: <SuperAdminNotFound /> },
+        { path: "*", element: <Navigate to="/superadmin/404" /> },
       ],
     },
     // admin route
     {
-      path: '/admin',
+      path: "/admin",
       element: (
         <AdminProtection>
           <AdminDashboardLayout />
@@ -148,7 +152,7 @@ export default function Router() {
       ),
       children: [
         {
-          path: 'app',
+          path: "app",
           element: (
             <AdminProtection>
               <AdminDashboard />
@@ -156,7 +160,7 @@ export default function Router() {
           ),
         },
         {
-          path: 'profile/:id',
+          path: "profile/:id",
           element: (
             <AdminProtection>
               <AdminUpdateProfile />
@@ -164,7 +168,7 @@ export default function Router() {
           ),
         },
         {
-          path: 'doctor',
+          path: "doctor",
           element: (
             <AdminProtection>
               <AdminDoctorList />
@@ -172,7 +176,7 @@ export default function Router() {
           ),
         },
         {
-          path: 'doctor/create',
+          path: "doctor/create",
           element: (
             <AdminProtection>
               <AdminDoctorCreate />
@@ -180,7 +184,23 @@ export default function Router() {
           ),
         },
         {
-          path: 'booking',
+          path: "signup/doctor/list",
+          element: (
+            <AdminProtection>
+              <AdminDoctorSignupList />
+            </AdminProtection>
+          ),
+        },
+        {
+          path: "signup/doctor/:id",
+          element: (
+            <AdminProtection>
+              <SignupDoctorView />
+            </AdminProtection>
+          ),
+        },
+        {
+          path: "booking",
           element: (
             <AdminProtection>
               <AdminBookingList />
@@ -188,7 +208,7 @@ export default function Router() {
           ),
         },
         {
-          path: 'booking/view/:id',
+          path: "booking/view/:id",
           element: (
             <AdminProtection>
               <BookingView />
@@ -196,7 +216,7 @@ export default function Router() {
           ),
         },
         {
-          path: 'meeting/create/:id',
+          path: "meeting/create/:id",
           element: (
             <AdminProtection>
               <MeetingCreate />
@@ -204,7 +224,7 @@ export default function Router() {
           ),
         },
         {
-          path: 'doctor/update/:id',
+          path: "doctor/update/:id",
           element: (
             <AdminProtection>
               <AdminDoctorUpdate />
@@ -215,23 +235,23 @@ export default function Router() {
     },
     // admin logout route
     {
-      path: '/admin',
+      path: "/admin",
       element: <LogoOnlyLayout />,
       children: [
-        { path: '/admin', element: <Navigate to="/admin/app" /> },
-        { path: 'login', element: <AdminLogin /> },
-        { path: 'forgot', element: <AdminForgotPassword /> },
-        { path: '404', element: <AdminPageNotFound /> },
-        { path: '*', element: <Navigate to="/admin/404" /> },
+        { path: "/admin", element: <Navigate to="/admin/app" /> },
+        { path: "login", element: <AdminLogin /> },
+        { path: "forgot", element: <AdminForgotPassword /> },
+        { path: "404", element: <AdminPageNotFound /> },
+        { path: "*", element: <Navigate to="/admin/404" /> },
       ],
     },
     // doctor route
     {
-      path: '/doctor',
+      path: "/doctor",
       element: <DoctorDashboardLayout />,
       children: [
         {
-          path: 'booking',
+          path: "booking",
           element: (
             <DoctorProtection>
               <DoctorBookingList />
@@ -239,7 +259,7 @@ export default function Router() {
           ),
         },
         {
-          path: 'profile/:id',
+          path: "profile/:id",
           element: (
             <DoctorProtection>
               <DoctorUpdateProfile />
@@ -247,7 +267,7 @@ export default function Router() {
           ),
         },
         {
-          path: 'meeting/:id',
+          path: "meeting/:id",
           element: (
             <DoctorProtection>
               <MeetingDetail />
@@ -258,34 +278,36 @@ export default function Router() {
     },
     // doctor logout route
     {
-      path: '/doctor',
+      path: "/doctor",
       element: <LogoOnlyLayout />,
       children: [
-        { path: '/doctor', element: <Navigate to="/doctor/booking" /> },
-        { path: 'login', element: <DoctorLogin /> },
-        { path: 'forgot', element: <DoctorForgotPassword /> },
-        { path: '404', element: <DoctorPage /> },
-        { path: '*', element: <Navigate to="/doctor/404" /> },
+        { path: "/doctor", element: <Navigate to="/doctor/booking" /> },
+        { path: "login", element: <DoctorLogin /> },
+        { path: "forgot", element: <DoctorForgotPassword /> },
+        { path: "404", element: <DoctorPage /> },
+        { path: "*", element: <Navigate to="/doctor/404" /> },
       ],
     },
     // simple logout route
-    { path: '/', element: <Navigate to="/form" /> },
+    { path: "/", element: <Navigate to="/form" /> },
+    { path: "/doctor/signup", element: <DoctorSignup /> },
+
     {
-      path: '/',
+      path: "/",
       element: <LogoOnlyLayout />,
       children: [
         // { path: '/', element: <Navigate to="/dashboard/app" /> },
         // { path: 'login', element: <Login /> },
-        { path: 'superAdminlogin', element: <SuperAdminLogin /> },
+        { path: "superAdminlogin", element: <SuperAdminLogin /> },
         // { path: 'form', element: <HomePage /> },
 
         // { path: 'register', element: <Register /> },
-        { path: '404', element: <NotFound /> },
-        { path: '*', element: <Navigate to="/404" /> },
+        { path: "404", element: <NotFound /> },
+        { path: "*", element: <Navigate to="/404" /> },
       ],
     },
-    { path: '/form', element: <HomePage /> },
+    { path: "/form", element: <HomePage /> },
 
-    { path: '*', element: <Navigate to="/404" replace /> },
+    { path: "*", element: <Navigate to="/404" replace /> },
   ]);
 }

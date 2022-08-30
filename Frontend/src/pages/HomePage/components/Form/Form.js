@@ -167,7 +167,7 @@ const Form = (props) => {
                 Full Name
               </Typography>
               <TextField
-                label="First name"
+                label="Full name"
                 variant="outlined"
                 name={'fullName'}
                 fullWidth

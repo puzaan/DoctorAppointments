@@ -1,7 +1,7 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { superAdminLoginReducer } from './apigetway/reducers/SuperAdminReducer';
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+import { composeWithDevTools } from "redux-devtools-extension";
+import { superAdminLoginReducer } from "./apigetway/reducers/SuperAdminReducer";
 import {
   AdminCreateReducer,
   AdminDeleteReducer,
@@ -10,7 +10,7 @@ import {
   AdminLoginReducer,
   AdminPasswordChangeReducer,
   AdminUpdateReducer,
-} from './apigetway/reducers/AdminReduicer';
+} from "./apigetway/reducers/AdminReduicer";
 import {
   DoctorListReducer,
   DoctorDeleteReducer,
@@ -30,15 +30,25 @@ import {
   DoctorAddProfileReducer,
   DoctorForgotPasswordReducer,
   DoctorPasswordChangeReducer,
-} from './apigetway/reducers/DoctorReduicer';
+  DoctorSignUpReducer,
+  DoctorSignupListReducer,
+  DoctorSignupDetailsReducer,
+} from "./apigetway/reducers/DoctorReduicer";
 import {
   BookingApprovedReducer,
   BookingCancelReducer,
   BookingDetailsReducer,
   BookingListReducer,
-} from './apigetway/reducers/BookingReducer';
-import { MeetingCreateReducer, MeetingDetailsReducer, MeetingListReducer } from './apigetway/reducers/MeetingReducer';
-import { PrescriptionCreateReducer, SendPrescriptionReducer } from './apigetway/reducers/PrescriptionReducer';
+} from "./apigetway/reducers/BookingReducer";
+import {
+  MeetingCreateReducer,
+  MeetingDetailsReducer,
+  MeetingListReducer,
+} from "./apigetway/reducers/MeetingReducer";
+import {
+  PrescriptionCreateReducer,
+  SendPrescriptionReducer,
+} from "./apigetway/reducers/PrescriptionReducer";
 
 const reducer = combineReducers({
   superAdminLogin: superAdminLoginReducer,
@@ -69,6 +79,9 @@ const reducer = combineReducers({
   doctorAddProfile: DoctorAddProfileReducer,
   doctorForgotPassword: DoctorForgotPasswordReducer,
   doctorPasswordChange: DoctorPasswordChangeReducer,
+  doctorSignup: DoctorSignUpReducer,
+  DoctorSignupList: DoctorSignupListReducer,
+  DoctorSignupView: DoctorSignupDetailsReducer,
 
   bookingList: BookingListReducer,
   bookingCancel: BookingCancelReducer,
@@ -83,12 +96,16 @@ const reducer = combineReducers({
   meetingList: MeetingListReducer,
 });
 
-const superAdminInfoFromStore = localStorage.getItem('superAdminInfo')
-  ? JSON.parse(localStorage.getItem('superAdminInfo'))
+const superAdminInfoFromStore = localStorage.getItem("superAdminInfo")
+  ? JSON.parse(localStorage.getItem("superAdminInfo"))
   : null;
 
-const adminInfoFromStore = localStorage.getItem('adminInfo') ? JSON.parse(localStorage.getItem('adminInfo')) : null;
-const doctorInfoFromStore = localStorage.getItem('doctorInfo') ? JSON.parse(localStorage.getItem('doctorInfo')) : null;
+const adminInfoFromStore = localStorage.getItem("adminInfo")
+  ? JSON.parse(localStorage.getItem("adminInfo"))
+  : null;
+const doctorInfoFromStore = localStorage.getItem("doctorInfo")
+  ? JSON.parse(localStorage.getItem("doctorInfo"))
+  : null;
 
 const initialState = {
   superAdminLogin: {
@@ -103,6 +120,10 @@ const initialState = {
 };
 const middleware = [thunk];
 
-const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware)));
+const store = createStore(
+  reducer,
+  initialState,
+  composeWithDevTools(applyMiddleware(...middleware))
+);
 
 export default store;

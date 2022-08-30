@@ -1,17 +1,25 @@
-import * as Yup from 'yup';
-import { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { useFormik, Form, FormikProvider } from 'formik';
+import * as Yup from "yup";
+import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { useFormik, Form, FormikProvider } from "formik";
 // material
-import { Link, Stack, Checkbox, TextField, IconButton, InputAdornment, FormControlLabel } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
+import {
+  Link,
+  Stack,
+  Checkbox,
+  TextField,
+  IconButton,
+  InputAdornment,
+  FormControlLabel,
+} from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { useSelector, useDispatch } from 'react-redux';
-import { DoctorLogin } from '../../../apigetway/actions/DoctorAction';
-import Error from '../../../pages/Error';
-import Loder from '../../../pages/Loading';
+import { useSelector, useDispatch } from "react-redux";
+import { DoctorLogin } from "../../../apigetway/actions/DoctorAction";
+import Error from "../../../pages/Error";
+import Loder from "../../../pages/Loading";
 // component
 
 DoctorLoginForm.propTypes = {
@@ -32,15 +40,14 @@ export default function DoctorLoginForm({ paths }) {
     }
   });
   const LoginSchema = Yup.object().shape({
-    email: Yup.string().required('email is required'),
-    password: Yup.string().required('Password is required'),
+    email: Yup.string().required("email is required"),
+    password: Yup.string().required("Password is required"),
   });
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
-      remember: true,
+      email: "",
+      password: "",
     },
     validationSchema: LoginSchema,
     onSubmit: () => {
@@ -98,7 +105,7 @@ export default function DoctorLoginForm({ paths }) {
           justifyContent="space-between"
           sx={{ my: 2 }}
         >
-          <FormControlLabel
+          {/* <FormControlLabel
             control={
               <Checkbox
                 {...getFieldProps("remember")}
@@ -106,7 +113,7 @@ export default function DoctorLoginForm({ paths }) {
               />
             }
             label="Remember me"
-          />
+          /> */}
 
           <Link
             component={RouterLink}
@@ -115,6 +122,14 @@ export default function DoctorLoginForm({ paths }) {
             underline="hover"
           >
             Forgot password?
+          </Link>
+          <Link
+            component={RouterLink}
+            variant="subtitle2"
+            to="/doctor/signup"
+            underline="hover"
+          >
+            Sign Up
           </Link>
         </Stack>
         {loading && <Loder />}
