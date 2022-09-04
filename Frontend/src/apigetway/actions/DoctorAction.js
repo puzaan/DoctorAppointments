@@ -1798,39 +1798,89 @@ export const NotApprovedListDoctor = () => async (dispatch, getState) => {
   }
 };
 
-export const AdminApprovedDoctorSignup = (id) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: DOCTOR_SIGNUP_APPROVED_REQUEST,
-    });
+export const AdminApprovedDoctor =
+  (id) => async (dispatch, getState) => {
+    try {
+      dispatch({
+        type: DOCTOR_SIGNUP_APPROVED_REQUEST,
+      });
+      const {
+        adminLogin: { adminInfo },
+      } = getState();
 
-    const {
-      adminLogin: { adminInfo },
-    } = getState();
+      const config = {
+        headers: {
+          API_KEY: adminInfo.token,
+          "Content-Type": "application/json",
+        },
+      };
 
-    const config = {
-      headers: {
-        API_KEY: adminInfo.token,
-        "Content-Type": "application/json",
-      },
-    };
-
-    await axios.put(`${url}/api/v1/doctor/approve/doctor/${id}`, config);
-
-    dispatch({
-      type: DOCTOR_SIGNUP_APPROVED_SUCCESS,
-    });
-  } catch (error) {
-    const message =
-      error.response && error.response.data.msg
-        ? error.response.data.msg
-        : error.message;
-    if (message === "No valid api Key Used") {
-      dispatch(AdminLogout());
+      const { data } = await axios.put(
+        `${url}/api/v1/doctor/approve/doctor/${id}`,
+        {},
+        config
+      );
+      dispatch({
+        type: DOCTOR_SIGNUP_APPROVED_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.msg
+          ? error.response.data.msg
+          : error.message;
+      if (message === "No valid api Key Used") {
+        dispatch(AdminLogout());
+      }
+      dispatch({
+        type: DOCTOR_SIGNUP_APPROVED_FAIL,
+        payload: message,
+      });
     }
-    dispatch({
-      type: DOCTOR_SIGNUP_APPROVED_FAIL,
-      payload: message,
-    });
-  }
-};
+  };
+
+
+
+// export const AdminApprovedDoctorSignup = (id) => async (dispatch, getState) => {
+//   try {
+//     dispatch({
+//       type: DOCTOR_SIGNUP_APPROVED_REQUEST,
+//     });
+
+//     const {
+//       adminLogin: { adminInfo },
+//     } = getState();
+
+//     const config = {
+//       header: {
+//         api_key:
+//           "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmdWxsTmFtZSI6IkFETUlOIiwiZW1haWxJZCI6InB1amFuLnN0aGEyMkBnbWFpbC5jb20iLCJpYXQiOjE2NjEwNjU5Njl9.9iZyqOWrOqPONtaS1nDbS1TupjyJHLZCybWcuH4r7zg",
+//         "Content-Type": "application/json",
+//       },
+//     };
+
+//     console.log(config);
+
+//     const { data } = await axios.put(
+//       `${url}/api/v1/doctor/approve/doctor/${id}`,
+//       {},
+//       config
+//     );
+
+//     dispatch({
+//       type: DOCTOR_SIGNUP_APPROVED_SUCCESS,
+//     });
+//   } catch (error) {
+//     const message =
+//       error.response && error.response.data.msg
+//         ? error.response.data.msg
+//         : error.message;
+//     // if (message === "No valid api Key Used") {
+//     //   dispatch(AdminLogout());
+//     // }
+//     dispatch({
+//       type: DOCTOR_SIGNUP_APPROVED_FAIL,
+//       payload: message,
+//     });
+//   }
+// };

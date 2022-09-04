@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import {
   Avatar,
   Box,
@@ -18,7 +19,6 @@ const DocSignupFileView = ({ files, name, feildName }) => {
   const [open, setOpen] = useState(false);
   const [imageOpen, setImageOpen] = useState(false);
 
-  const [scroll, setScroll] = useState("body");
   const descriptionElementRef = useRef(null);
 
   const handleClose = () => {
@@ -82,7 +82,7 @@ const DocSignupFileView = ({ files, name, feildName }) => {
       <Dialog
         open={open}
         onClose={handleClose}
-        scroll={scroll}
+        scroll={"body"}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         // fullScreen
@@ -114,7 +114,7 @@ const DocSignupFileView = ({ files, name, feildName }) => {
       <Dialog
         open={imageOpen}
         onClose={handleImageClose}
-        scroll={scroll}
+        scroll={"body"}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
         // fullScreen
@@ -134,6 +134,12 @@ const DocSignupFileView = ({ files, name, feildName }) => {
       </Dialog>
     </>
   );
+};
+
+DocSignupFileView.propTypes = {
+  files: PropTypes.any,
+  name: PropTypes.string,
+  feildName: PropTypes.any,
 };
 
 export default DocSignupFileView;

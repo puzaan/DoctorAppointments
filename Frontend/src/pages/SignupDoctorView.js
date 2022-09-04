@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import {
-  AdminApprovedDoctorSignup,
+  AdminApprovedDoctor,
   AdminViewDoctorSignup,
 } from "../apigetway/actions/DoctorAction";
 import Page from "../components/Page";
@@ -16,6 +16,7 @@ import Loder from "./Loading";
 const SignupDoctorView = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const approvedispatch = useDispatch();
   const navigate = useNavigate();
   const [fileType, setFileType] = useState("");
 
@@ -35,10 +36,11 @@ const SignupDoctorView = () => {
     if (approvedSuccess) {
       navigate("/admin/signup/doctor/list");
     }
+    console.log(approvedError);
   }, [dispatch, id, doctorSignup.MBBSFile, approvedSuccess]);
 
   const approved = () => {
-    dispatch(AdminApprovedDoctorSignup(id));
+    approvedispatch(AdminApprovedDoctor(id));
   };
   return (
     <Page title="Approve Doctor">
@@ -133,8 +135,9 @@ const SignupDoctorView = () => {
                     <Typography variant={"h5"} sx={{ fontWeight: "bold" }}>
                       Specialization:
                     </Typography>
-                    {doctorSignup.specializationKey.map((key) => (
+                    {doctorSignup.specializationKey.map((key, i) => (
                       <Typography
+                      key={i}
                         variant={"h5"}
                         sx={{ fontWeight: "light", marginLeft: 1 }}
                       >
@@ -146,8 +149,9 @@ const SignupDoctorView = () => {
                     <Typography variant={"h5"} sx={{ fontWeight: "bold" }}>
                       Institution:
                     </Typography>
-                    {doctorSignup.institution.map((key) => (
+                    {doctorSignup.institution.map((key, i) => (
                       <Typography
+                      key={i}
                         variant={"h5"}
                         sx={{ fontWeight: "light", marginLeft: 1 }}
                       >
