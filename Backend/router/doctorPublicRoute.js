@@ -1,6 +1,6 @@
 const express = require("express");
 const doctorPublicRoute = express.Router();
-const { viewAllDoctor, viewAllSignupDoctor } = require("../controller/doctor/viewAll");
+const { viewAllDoctor, viewAllSignupDoctor, viewApprovedDoctorRequest } = require("../controller/doctor/viewAll");
 const {
   viewDoctorByNameAndTag,
   addTagById,
@@ -52,6 +52,7 @@ doctorPublicRoute.post(
 doctorPublicRoute.get("/view/signupdoc/all", viewAllSignupDoctor);
 doctorPublicRoute.delete("/signupdoc/delete/:id", deleteSignupDoctorById);
 doctorPublicRoute.put("/firstchange/password", ChangePassword);
+doctorPublicRoute.get("/view/approved/doctor", viewApprovedDoctorRequest);
 
 
 module.exports = { doctorPublicRoute };

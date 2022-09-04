@@ -5,17 +5,17 @@ import Container from "../components/Container";
 import FrontPageLayout from "../layouts/frontPage";
 import Page from "../components/Page";
 import DoctorCard from "../components/DoctorCard";
-import { ApprovedListDoctor } from "../apigetway/actions/DoctorAction";
+import { publicApprovedListDoctor } from "../apigetway/actions/DoctorAction";
 import Loder from "./Loading";
 import Error from "./Error";
 
-export default function Specialists () {
+export default function Specialists() {
   const dispatch = useDispatch();
   const DoctorApprovedList = useSelector((state) => state.DoctorApprovedList);
   const { loading, error, doctorApproved } = DoctorApprovedList;
 
   useEffect(() => {
-    dispatch(ApprovedListDoctor());
+    dispatch(publicApprovedListDoctor());
   }, [dispatch]);
   return (
     <Page title="Form">
