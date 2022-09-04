@@ -1,5 +1,11 @@
 const mongoose = require("mongoose");
-
+const avialbaleDates = new mongoose.Schema(
+  {
+    "date": String,
+    "timeslot": String,
+  },
+  { _id: false }
+);
 const doctorSignupScheema = new mongoose.Schema({
   "doctorSinId": {
     type: String,
@@ -33,8 +39,18 @@ const doctorSignupScheema = new mongoose.Schema({
     default: false,
   },
   "password": String,
-  "AppropedBy": String,
-});
+  "token": String,
+  "fee":String,
+  "AppropedBy": {
+        type:String,
+        default:""
+    },
+  "passwordChanged":{
+    type: Boolean,
+    default:false,
+  },
+  "available_dates":[avialbaleDates]
+},{timestamps:true});
 const doctorSignupSchema = mongoose.model(
   "doctorSignupSchema",
   doctorSignupScheema

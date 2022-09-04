@@ -1,40 +1,46 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import { Box, Typography, Grid } from '@mui/material';
-import PhoneSkeletonIllustration from '../../PhoneSkeleton';
+import React from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import { Box, Typography, Grid } from "@mui/material";
+import PhoneSkeletonIllustration from "../../PhoneSkeleton";
 
 const Download = () => (
   <Grid container spacing={4}>
-    <Grid item xs={12} md={6} sx={{ display: { xs: 'none', md: 'block' } }}>
+    <Grid item xs={12} md={6} sx={{ display: { xs: "none", md: "block" } }}>
       <Box
         sx={{
           maxWidth: 450,
-          position: 'relative',
-          marginX: 'auto',
+          position: "relative",
+          marginX: "auto",
         }}
       >
         <Box
           sx={{
-            position: 'relative',
-            borderRadius: '2.75rem',
+            position: "relative",
+            borderRadius: "2.75rem",
             boxShadow: 1,
-            width: '75% !important',
-            marginX: 'auto',
+            width: "75% !important",
+            marginX: "auto",
           }}
         >
           <Box>
-            <Box position={'relative'} zIndex={2} maxWidth={1} height={'auto'} sx={{ verticalAlign: 'middle' }}>
+            <Box
+              position={"relative"}
+              zIndex={2}
+              maxWidth={1}
+              height={"auto"}
+              sx={{ verticalAlign: "middle" }}
+            >
               <PhoneSkeletonIllustration />
             </Box>
             <Box
-              position={'absolute'}
-              top={'2.4%'}
-              left={'4%'}
-              width={'92.4%'}
-              height={'96%'}
+              position={"absolute"}
+              top={"2.4%"}
+              left={"4%"}
+              width={"92.4%"}
+              height={"96%"}
               sx={{
-                '& .lazy-load-image-loaded': {
+                "& .lazy-load-image-loaded": {
                   height: 1,
                   width: 1,
                 },
@@ -45,14 +51,14 @@ const Download = () => (
                 effect="blur"
                 src={
                   // 'https://assets.maccarianagency.com/screenshots/crypto-mobile.png'
-                  'assets/mobileapp.jpg'
+                  "assets/mobileapp.jpg"
                 }
                 alt="Image Description"
                 width={1}
                 height={1}
                 sx={{
-                  objectFit: 'cover',
-                  borderRadius: '2.5rem',
+                  objectFit: "cover",
+                  borderRadius: "2.5rem",
                 }}
               />
             </Box>
@@ -60,7 +66,7 @@ const Download = () => (
         </Box>
       </Box>
     </Grid>
-    <Grid item container alignItems={'center'} xs={12} md={6}>
+    <Grid item container alignItems={"center"} xs={12} md={6}>
       <Box>
         <Box marginBottom={2}>
           <Typography
@@ -79,8 +85,14 @@ const Download = () => (
           </Typography>
         </Box>
         <Box display="flex" marginTop={1}>
-          <Box component={'img'} src={'assets/play.png'} alt={'Play store'} />
-          <Box component={'img'} src={'assets/apple.png'} alt={'app store'} />
+          <a
+            href="https://play.google.com/store/apps/details?id=health.xyba.docTalk&hl=en&gl=US"
+            rel="noreferrer"
+            target="_blank"
+          >
+            <Box component={"img"} src={"assets/play.png"} alt={"Play store"} />
+          </a>
+          <Box component={"img"} src={"assets/apple.png"} alt={"app store"} />
         </Box>
       </Box>
     </Grid>

@@ -1,295 +1,489 @@
-const {doctorSchema}=require("../../database/doctor_schema");
-const bcrypt=require("bcryptjs");
+const { doctorSchema } = require("../../database/doctor_schema");
+const bcrypt = require("bcryptjs");
+const { doctorSignupSchema } = require("../../database/doctor_signup_schema");
+const {
+  doctorCreateEmailSender,
+  doctorApprovedEmailSender,
+  doctorFirstPasswordChangeEmailSender,
+} = require("../../middleware/emailSender");
 //change gender address emailId role fullName NMC_number
-const updateDoctorById=(req,res)=>{
-    const doctorId=req.params.id;
-    const {field,value}=req.body;
-    
-    doctorSchema.findOne({doctorId:doctorId}).exec((error,adminData)=>{
-        if(error){res.status(500).json({"msg":"Server Error"})};
-        console.log(doctorId,adminData);
-        if(adminData){
-            //gender value update
-            if(field=="gender"){
-                doctorSchema.findOneAndUpdate({doctorId:doctorId},{gender:value},function(error,done){
-                    if(error){res.status(500).json({"msg":"Server Error"})};
-                    if(done){
-                       res.status(200).json({"msg":"Gender Updated","data":done}); 
-                    }else{
-                        res.status(400).json({"msg":"Error in Gender update"});
-                    }
-                });
-            }else if(field=="address"){
-                //address update
-                doctorSchema.findOneAndUpdate({doctorId:doctorId},{address:value},function(error,done){
-                    if(error){res.status(500).json({"msg":"Server Error"})};
-                    if(done){
-                       res.status(200).json({"msg":"Address Updated","data":done}); 
-                    }else{
-                        res.status(400).json({"msg":"Error in Address update"});
-                    }
-                });
-            }else if(field=="fee"){
-                //address update
-                doctorSchema.findOneAndUpdate({doctorId:doctorId},{fee:value},function(error,done){
-                    if(error){res.status(500).json({"msg":"Server Error"})};
-                    if(done){
-                       res.status(200).json({"msg":"Fee Updated","data":done}); 
-                    }else{
-                        res.status(400).json({"msg":"Error in Fee update"});
-                    }
-                });
-            }else if(field=="emailId"){
-                //Email Id Update
-                doctorSchema.findOneAndUpdate({doctorId:doctorId},{emailId:value},function(error,done){
-                    if(error){res.status(500).json({"msg":"Server Error"})};
-                    if(done){
-                       res.status(200).json({"msg":"Email Id Updated","data":done}); 
-                    }else{
-                        res.status(400).json({"msg":"Error in Email Id update"});
-                    }
-                });
-            }else if(field=="role"){
-                //Role Update
-                doctorSchema.findOneAndUpdate({doctorId:doctorId},{role:value},function(error,done){
-                    if(error){res.status(500).json({"msg":"Server Error"})};
-                    if(done){
-                       res.status(200).json({"msg":"Role Updated","data":done}); 
-                    }else{
-                        res.status(400).json({"msg":"Error in Email Id update"});
-                    }
-                });
-            }else if(field=="fullName"){
-                //Full Name update
-                doctorSchema.findOneAndUpdate({doctorId:doctorId},{fullName:value},function(error,done){
-                    if(error){res.status(500).json({"msg":"Server Error"})};
-                    if(done){
-                       res.status(200).json({"msg":"Full Name Updated","data":done}); 
-                    }else{
-                        res.status(400).json({"msg":"Error in Full Name Update"});
-                    }
-                }); 
-            }else if(field=="NMC_number"){
-                //Full Name update
-                doctorSchema.findOneAndUpdate({doctorId:doctorId},{NMC_number:value},function(error,done){
-                    if(error){res.status(500).json({"msg":"Server Error"})};
-                    if(done){
-                       res.status(200).json({"msg":"NMC number Updated","data":done}); 
-                    }else{
-                        res.status(400).json({"msg":"Error in NMC number Update"});
-                    }
-                }); 
+const updateDoctorById = (req, res) => {
+  const doctorId = req.params.id;
+  const { field, value } = req.body;
+
+  doctorSchema.findOne({ doctorId: doctorId }).exec((error, adminData) => {
+    if (error) {
+      res.status(500).json({ msg: "Server Error" });
+    }
+    console.log(doctorId, adminData);
+    if (adminData) {
+      //gender value update
+      if (field == "gender") {
+        doctorSchema.findOneAndUpdate(
+          { doctorId: doctorId },
+          { gender: value },
+          function (error, done) {
+            if (error) {
+              res.status(500).json({ msg: "Server Error" });
             }
-            else{
-                res.status(400).json({"msg":"No field Found"});
+            if (done) {
+              res.status(200).json({ msg: "Gender Updated", data: done });
+            } else {
+              res.status(400).json({ msg: "Error in Gender update" });
             }
-           
-        }else{
-            res.status(400).json({"msg":"No data found for given Id"});
-        }
-    })
-       
-        
-    
-   
+          }
+        );
+      } else if (field == "address") {
+        //address update
+        doctorSchema.findOneAndUpdate(
+          { doctorId: doctorId },
+          { address: value },
+          function (error, done) {
+            if (error) {
+              res.status(500).json({ msg: "Server Error" });
+            }
+            if (done) {
+              res.status(200).json({ msg: "Address Updated", data: done });
+            } else {
+              res.status(400).json({ msg: "Error in Address update" });
+            }
+          }
+        );
+      } else if (field == "fee") {
+        //address update
+        doctorSchema.findOneAndUpdate(
+          { doctorId: doctorId },
+          { fee: value },
+          function (error, done) {
+            if (error) {
+              res.status(500).json({ msg: "Server Error" });
+            }
+            if (done) {
+              res.status(200).json({ msg: "Fee Updated", data: done });
+            } else {
+              res.status(400).json({ msg: "Error in Fee update" });
+            }
+          }
+        );
+      } else if (field == "emailId") {
+        //Email Id Update
+        doctorSchema.findOneAndUpdate(
+          { doctorId: doctorId },
+          { emailId: value },
+          function (error, done) {
+            if (error) {
+              res.status(500).json({ msg: "Server Error" });
+            }
+            if (done) {
+              res.status(200).json({ msg: "Email Id Updated", data: done });
+            } else {
+              res.status(400).json({ msg: "Error in Email Id update" });
+            }
+          }
+        );
+      } else if (field == "role") {
+        //Role Update
+        doctorSchema.findOneAndUpdate(
+          { doctorId: doctorId },
+          { role: value },
+          function (error, done) {
+            if (error) {
+              res.status(500).json({ msg: "Server Error" });
+            }
+            if (done) {
+              res.status(200).json({ msg: "Role Updated", data: done });
+            } else {
+              res.status(400).json({ msg: "Error in Email Id update" });
+            }
+          }
+        );
+      } else if (field == "fullName") {
+        //Full Name update
+        doctorSchema.findOneAndUpdate(
+          { doctorId: doctorId },
+          { fullName: value },
+          function (error, done) {
+            if (error) {
+              res.status(500).json({ msg: "Server Error" });
+            }
+            if (done) {
+              res.status(200).json({ msg: "Full Name Updated", data: done });
+            } else {
+              res.status(400).json({ msg: "Error in Full Name Update" });
+            }
+          }
+        );
+      } else if (field == "NMC_number") {
+        //Full Name update
+        doctorSchema.findOneAndUpdate(
+          { doctorId: doctorId },
+          { NMC_number: value },
+          function (error, done) {
+            if (error) {
+              res.status(500).json({ msg: "Server Error" });
+            }
+            if (done) {
+              res.status(200).json({ msg: "NMC number Updated", data: done });
+            } else {
+              res.status(400).json({ msg: "Error in NMC number Update" });
+            }
+          }
+        );
+      } else {
+        res.status(400).json({ msg: "No field Found" });
+      }
+    } else {
+      res.status(400).json({ msg: "No data found for given Id" });
+    }
+  });
 };
 
+const addContactNumber = (req, res) => {
+  const doctorId = req.params.id;
+  const number = req.body.value;
 
+  doctorSchema.findOne({ doctorId: doctorId }).exec(async (error, done) => {
+    if (error) {
+      res.status(500).json({ msg: "Server Error" });
+      return;
+    }
+    if (done) {
+      await doctorSchema.findOneAndUpdate(
+        { doctorId: done.doctorId },
+        { $push: { contactNumber: number } }
+      );
+      const tempData = await doctorSchema.findOne({ doctorId: done.doctorId });
+      res.status(200).json({ msg: "Number added", data: tempData });
+    } else {
+      res.status(400).json({ msg: "No data found for given Id" });
+      return;
+    }
+  });
+};
+const removeContactNumber = (req, res) => {
+  const doctorId = req.params.id;
+  const number = req.params.number;
 
-const addContactNumber=(req,res)=>{
-    const doctorId=req.params.id;
-    const number=req.body.value;
+  doctorSchema.findOne({ doctorId: doctorId }).exec(async (error, done) => {
+    if (error) {
+      res.status(500).json({ msg: "Server Error" });
+      return;
+    }
 
-    doctorSchema.findOne({doctorId:doctorId}).exec(async(error,done)=>{
-        if(error){res.status(500).json({"msg":"Server Error"});return;};
-        if(done){
-           
-           await doctorSchema.findOneAndUpdate({"doctorId":done.doctorId},{$push:{contactNumber:number}});
-           const tempData=await doctorSchema.findOne({"doctorId":done.doctorId});
-            res.status(200).json({"msg":"Number added","data":tempData});
-        }else{
-            res.status(400).json({"msg":"No data found for given Id"});
-            return;
-        }
-    })
-}
-const removeContactNumber=(req,res)=>{
-    const doctorId=req.params.id;
-    const number=req.params.number;
+    if (done) {
+      console.log("doctorId" + doctorId, "number" + number);
+      await doctorSchema.findOneAndUpdate(
+        { doctorId: done.doctorId },
+        { $pull: { contactNumber: number } }
+      );
+      const tempData = await doctorSchema.findOne({ doctorId: done.doctorId });
+      res.status(200).json({ msg: "Number removed", data: tempData });
+    } else {
+      res.status(400).json({ msg: "No data found for given Id" });
+      return;
+    }
+  });
+};
 
-    doctorSchema.findOne({doctorId:doctorId}).exec(async(error,done)=>{
-        if(error){res.status(500).json({"msg":"Server Error"});return;};
-        
-        if(done){
-           console.log("doctorId"+doctorId,"number"+number);
-           await doctorSchema.findOneAndUpdate({"doctorId":done.doctorId},{$pull:{contactNumber:number}});
-           const tempData=await doctorSchema.findOne({"doctorId":done.doctorId});
-            res.status(200).json({"msg":"Number removed","data":tempData});
-        }else{
-            res.status(400).json({"msg":"No data found for given Id"});
-            return;
-        }
-    })
-}
+const addEducation = (req, res) => {
+  const doctorId = req.params.id;
+  const institue = req.body.value;
+  doctorSchema.findOne({ doctorId: doctorId }).exec(async (error, done) => {
+    if (error) {
+      res.status(500).json({ msg: "Server Error" });
+      return;
+    }
+    if (done) {
+      await doctorSchema.findOneAndUpdate(
+        { doctorId: done.doctorId },
+        { $push: { educationBackground: institue } }
+      );
+      const tempData = await doctorSchema.findOne({ doctorId: done.doctorId });
+      res.status(200).json({ msg: "University/College added", data: tempData });
+    } else {
+      res.status(400).json({ msg: "No data found for given Id" });
+      return;
+    }
+  });
+};
+const removeEducation = (req, res) => {
+  const doctorId = req.params.id;
+  const institue = req.body.value;
+  doctorSchema.findOne({ doctorId: doctorId }).exec(async (error, done) => {
+    if (error) {
+      res.status(500).json({ msg: "Server Error" });
+      return;
+    }
+    if (done) {
+      await doctorSchema.findOneAndUpdate(
+        { doctorId: done.doctorId },
+        { $pull: { educationBackground: institue } }
+      );
+      const tempData = await doctorSchema.findOne({ doctorId: done.doctorId });
+      res
+        .status(200)
+        .json({ msg: "University/College Removed", data: tempData });
+    } else {
+      res.status(400).json({ msg: "No data found for given Id" });
+      return;
+    }
+  });
+};
+const addHospital = (req, res) => {
+  const doctorId = req.params.id;
+  const hospital = req.query.value;
+  doctorSchema.findOne({ doctorId: doctorId }).exec(async (error, done) => {
+    if (error) {
+      res.status(500).json({ msg: "Server Error" });
+      return;
+    }
+    if (done) {
+      await doctorSchema.findOneAndUpdate(
+        { doctorId: done.doctorId },
+        { $push: { affiliated_hospital: hospital } }
+      );
+      const tempData = await doctorSchema.findOne({ doctorId: done.doctorId });
+      res.status(200).json({ msg: "New Hospital Added", data: tempData });
+    } else {
+      res.status(400).json({ msg: "No data found for given Id" });
+      return;
+    }
+  });
+};
+const deleteHospital = (req, res) => {
+  const doctorId = req.params.id;
+  const hospital = req.query.value;
+  doctorSchema.findOne({ doctorId: doctorId }).exec(async (error, done) => {
+    if (error) {
+      res.status(500).json({ msg: "Server Error" });
+      return;
+    }
+    if (done) {
+      await doctorSchema.findOneAndUpdate(
+        { doctorId: done.doctorId },
+        { $pull: { affiliated_hospital: hospital } }
+      );
+      const tempData = await doctorSchema.findOne({ doctorId: done.doctorId });
+      res.status(200).json({ msg: "Hospital Removed", data: tempData });
+    } else {
+      res.status(400).json({ msg: "No data found for given Id" });
+      return;
+    }
+  });
+};
 
-const addEducation=(req,res)=>{
-    const doctorId=req.params.id;
-    const institue=req.body.value;
-    doctorSchema.findOne({doctorId:doctorId}).exec(async(error,done)=>{
-        if(error){res.status(500).json({"msg":"Server Error"});return;};
-        if(done){
-           
-           await doctorSchema.findOneAndUpdate({"doctorId":done.doctorId},{$push:{educationBackground:institue}});
-           const tempData=await doctorSchema.findOne({"doctorId":done.doctorId});
-            res.status(200).json({"msg":"University/College added","data":tempData});
-        }else{
-            res.status(400).json({"msg":"No data found for given Id"});
-            return;
-        }
-    })
-}
-const removeEducation=(req,res)=>{
-    const doctorId=req.params.id;
-    const institue=req.body.value;
-    doctorSchema.findOne({doctorId:doctorId}).exec(async(error,done)=>{
-        if(error){res.status(500).json({"msg":"Server Error"});return;};
-        if(done){
-           
-           await doctorSchema.findOneAndUpdate({"doctorId":done.doctorId},{$pull:{educationBackground:institue}});
-           const tempData=await doctorSchema.findOne({"doctorId":done.doctorId});
-            res.status(200).json({"msg":"University/College Removed","data":tempData});
-        }else{
-            res.status(400).json({"msg":"No data found for given Id"});
-            return;
-        }
-    })
-}
-const addHospital=(req,res)=>{
-    const doctorId=req.params.id;
-    const hospital=req.query.value;
-    doctorSchema.findOne({doctorId:doctorId}).exec(async(error,done)=>{
-        if(error){res.status(500).json({"msg":"Server Error"});return;};
-        if(done){
-           
-           await doctorSchema.findOneAndUpdate({"doctorId":done.doctorId},{$push:{affiliated_hospital:hospital}});
-           const tempData=await doctorSchema.findOne({"doctorId":done.doctorId});
-            res.status(200).json({"msg":"New Hospital Added","data":tempData});
-        }else{
-            res.status(400).json({"msg":"No data found for given Id"});
-            return;
-        }
-    })
-}
-const deleteHospital=(req,res)=>{
-    const doctorId=req.params.id;
-    const hospital=req.query.value;
-    doctorSchema.findOne({doctorId:doctorId}).exec(async(error,done)=>{
-        if(error){res.status(500).json({"msg":"Server Error"});return;};
-        if(done){
-           
-           await doctorSchema.findOneAndUpdate({"doctorId":done.doctorId},{$pull:{affiliated_hospital:hospital}});
-           const tempData=await doctorSchema.findOne({"doctorId":done.doctorId});
-            res.status(200).json({"msg":"Hospital Removed","data":tempData});
-        }else{
-            res.status(400).json({"msg":"No data found for given Id"});
-            return;
-        }
-    })
-}
+const addVideo = (req, res) => {
+  const doctorId = req.params.id;
+  const video = req.body.value;
+  doctorSchema.findOne({ doctorId: doctorId }).exec(async (error, done) => {
+    if (error) {
+      res.status(500).json({ msg: "Server Error" });
+      return;
+    }
+    if (done) {
+      await doctorSchema.findOneAndUpdate(
+        { doctorId: done.doctorId },
+        { $push: { videoList: video } }
+      );
+      const tempData = await doctorSchema.findOne({ doctorId: done.doctorId });
+      res.status(200).json({ msg: "New Video Added", data: tempData });
+    } else {
+      res.status(400).json({ msg: "No data found for given Id" });
+      return;
+    }
+  });
+};
+const deleteVideo = (req, res) => {
+  const doctorId = req.params.id;
+  const video = req.body.value;
+  doctorSchema.findOne({ doctorId: doctorId }).exec(async (error, done) => {
+    if (error) {
+      res.status(500).json({ msg: "Server Error" });
+      return;
+    }
+    if (done) {
+      await doctorSchema.findOneAndUpdate(
+        { doctorId: done.doctorId },
+        { $pull: { videoList: video } }
+      );
+      const tempData = await doctorSchema.findOne({ doctorId: done.doctorId });
+      res.status(200).json({ msg: "Video Removed", data: tempData });
+    } else {
+      res.status(400).json({ msg: "No data found for given Id" });
+      return;
+    }
+  });
+};
 
-const addVideo=(req,res)=>{
-    const doctorId=req.params.id;
-    const video=req.body.value;
-    doctorSchema.findOne({doctorId:doctorId}).exec(async(error,done)=>{
-        if(error){res.status(500).json({"msg":"Server Error"});return;};
-        if(done){
-           
-           await doctorSchema.findOneAndUpdate({"doctorId":done.doctorId},{$push:{videoList:video}});
-           const tempData=await doctorSchema.findOne({"doctorId":done.doctorId});
-            res.status(200).json({"msg":"New Video Added","data":tempData});
-        }else{
-            res.status(400).json({"msg":"No data found for given Id"});
-            return;
-        }
-    })
-}
-const deleteVideo=(req,res)=>{
-    const doctorId=req.params.id;
-    const video=req.body.value;
-    doctorSchema.findOne({doctorId:doctorId}).exec(async(error,done)=>{
-        if(error){res.status(500).json({"msg":"Server Error"});return;};
-        if(done){
-           
-           await doctorSchema.findOneAndUpdate({"doctorId":done.doctorId},{$pull:{videoList:video}});
-           const tempData=await doctorSchema.findOne({"doctorId":done.doctorId});
-            res.status(200).json({"msg":"Video Removed","data":tempData});
-        }else{
-            res.status(400).json({"msg":"No data found for given Id"});
-            return;
-        }
-    })
-}
+const addDates = (req, res) => {
+  const doctorId = req.params.id;
+  const date = req.query.date;
+  const time = req.query.time;
 
-const addDates=(req,res)=>{
-    const doctorId=req.params.id;
-    const date=req.query.date;
-    const time=req.query.time;
+  doctorSchema.findOne({ doctorId: doctorId }).exec(async (error, done) => {
+    if (error) {
+      res.status(500).json({ msg: "Server Error" });
+      return;
+    }
+    if (done) {
+      await doctorSchema.findOneAndUpdate(
+        { doctorId: done.doctorId },
+        { $push: { available_dates: { date: date, timeslot: time } } }
+      );
+      const tempData = await doctorSchema.findOne({ doctorId: done.doctorId });
+      res.status(200).json({ msg: "New Date Added", data: tempData });
+    } else {
+      res.status(400).json({ msg: "No data found for given Id" });
+      return;
+    }
+  });
+};
+const deleteDates = (req, res) => {
+  const doctorId = req.params.id;
+  const date = req.query.date;
 
-    doctorSchema.findOne({doctorId:doctorId}).exec(async(error,done)=>{
-        if(error){res.status(500).json({"msg":"Server Error"});return;};
-        if(done){
-           
-           await doctorSchema.findOneAndUpdate({"doctorId":done.doctorId},{$push:{available_dates:{date:date,timeslot:time}}});
-           const tempData=await doctorSchema.findOne({"doctorId":done.doctorId});
-            res.status(200).json({"msg":"New Date Added","data":tempData});
-        }else{
-            res.status(400).json({"msg":"No data found for given Id"});
-            return;
-        }
-    })
-}
-const deleteDates=(req,res)=>{
-    const doctorId=req.params.id;
-    const date=req.query.date;
-   
-    doctorSchema.findOne({doctorId:doctorId}).exec(async(error,done)=>{
-        if(error){res.status(500).json({"msg":"Server Error"});return;};
-        if(done){
-           
-           await doctorSchema.findOneAndUpdate({"doctorId":done.doctorId},{$pull:{available_dates:{date:date}}});
-           const tempData=await doctorSchema.findOne({"doctorId":done.doctorId});
-            res.status(200).json({"msg":"Date Removed","data":tempData});
-        }else{
-            res.status(400).json({"msg":"No data found for given Id"});
-            return;
-        }
-    })
-}
-const updatePassword=async(req,res)=>{
-    const doctorId=req.params.id;
-    const password=req.query.password;
-    
-    doctorSchema.findOne({doctorId:doctorId}).exec(async(error,done)=>{
-        if(error){res.status(500).json({"msg":"Server Error"});return;};
-        if(done){
-           //Generate hashpassword
-        let salt=await bcrypt.genSalt(10);
-        
-        let hashPassword=bcrypt.hashSync(password,salt);
-           await doctorSchema.findOneAndUpdate({"doctorId":done.doctorId},{password:hashPassword});
-           const tempData=await doctorSchema.findOne({"doctorId":done.doctorId});
-            res.status(200).json({"msg":"Doctor Password Updated","data":tempData});
-        }else{
-            res.status(400).json({"msg":"No data found for given Id"});
-            return;
-        }
-    })
-}
+  doctorSchema.findOne({ doctorId: doctorId }).exec(async (error, done) => {
+    if (error) {
+      res.status(500).json({ msg: "Server Error" });
+      return;
+    }
+    if (done) {
+      await doctorSchema.findOneAndUpdate(
+        { doctorId: done.doctorId },
+        { $pull: { available_dates: { date: date } } }
+      );
+      const tempData = await doctorSchema.findOne({ doctorId: done.doctorId });
+      res.status(200).json({ msg: "Date Removed", data: tempData });
+    } else {
+      res.status(400).json({ msg: "No data found for given Id" });
+      return;
+    }
+  });
+};
+const updatePassword = async (req, res) => {
+  const doctorId = req.params.id;
+  const password = req.query.password;
 
+  doctorSchema.findOne({ doctorId: doctorId }).exec(async (error, done) => {
+    if (error) {
+      res.status(500).json({ msg: "Server Error" });
+      return;
+    }
+    if (done) {
+      //Generate hashpassword
+      let salt = await bcrypt.genSalt(10);
 
+      let hashPassword = bcrypt.hashSync(password, salt);
+      await doctorSchema.findOneAndUpdate(
+        { doctorId: done.doctorId },
+        { password: hashPassword }
+      );
+      const tempData = await doctorSchema.findOne({ doctorId: done.doctorId });
+      res.status(200).json({ msg: "Doctor Password Updated", data: tempData });
+    } else {
+      res.status(400).json({ msg: "No data found for given Id" });
+      return;
+    }
+  });
+};
 
+const approveDoctor = async (req, res) => {
+  const doctorSinId = req.params.id;
+  const password = "12345678";
+  doctorSignupSchema
+    .findOne({ doctorSinId: doctorSinId })
+    .exec(async (error, done) => {
+      if (error) {
+        res.status(500).json({ msg: "Server Error" });
+        return;
+      }
+      if (done) {
+        await doctorSignupSchema.findOneAndUpdate(
+          { doctorSinId: doctorSinId },
+          { Approped: true, AppropedBy: req.doctorData.fullName }
+        );
+        doctorApprovedEmailSender(req, done.email, password);
+        console.log(done);
+        res.status(200).json({ msg: "Doctor Approved Successful!!" });
+      } else {
+        res.status(400).json({ msg: "No data found for given doctor id" });
+      }
+    });
+};
 
+const ChangePassword = async (req, res) => {
+  const { email, code, password } = req.body;
+  const staticCode = "12345678";
+  let salt = await bcrypt.genSalt(10);
+  let hashPassword = bcrypt.hashSync(password, salt);
 
+  if (staticCode === code) {
+    doctorSignupSchema.findOne({ email: email }).exec(async (error, done) => {
+      if (error) {
+        res.status(500).json({ msg: "Server Error" });
+        return;
+      }
+      if (done) {
+        const newData = await doctorSignupSchema.findOneAndUpdate(
+          { email: email },
+          { passwordChanged: true, password: hashPassword }
+        );
+        doctorFirstPasswordChangeEmailSender(req, email, password);
+        res.status(200).json({ msg: "Your password changed Successful!!" });
+      } else {
+        res.status(400).json({ msg: "Emain id not found in our database" });
+      }
+    });
+  } else {
+    res.status(400).json({ msg: "Code didn't matched" });
+  }
+};
 
+// const ChangePassword = async (req, res) => {
+//   const { email, password , newPassword} = req.body;
+//   console.log(req.body);
+//   console.log("checking for login");
+//   var data = await doctorSignupSchema.findOne({ emailId: email });
+//   try {
+//     if (data) {
+//       const dbdata = data["password"];
 
-module.exports={updatePassword,updateDoctorById,addContactNumber,removeContactNumber,addEducation,removeEducation,addHospital,deleteHospital,addVideo,deleteVideo,addDates,deleteDates}
+//       const compdata = bcrypt.compareSync(password, dbdata);
+//       //let token=jwt.sign({username:data["fullName"],email:data["emailId"]},secretKey);
+
+//       // await doctorSchema.findOneAndUpdate({"emailId":data["emailId"]},{"token":token});
+//       const tempdata = await doctorSignupSchema.findOne({
+//         email: data["email"],
+//       });
+//       if (compdata) {
+//         res.status(200).json({ status: "Success", data: tempdata });
+//       } else {
+//         res
+//           .status(400)
+//           .json({ status: "Fail", msg: "Valid Email but invalid password" });
+//       }
+//     } else {
+//       res.status(400).json({ status: "Fail", msg: "No user with given Email" });
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     res.status(400).json({ status: "Fail", msg: "Error in Login" });
+//   }
+// };
+
+module.exports = {
+  updatePassword,
+  updateDoctorById,
+  addContactNumber,
+  removeContactNumber,
+  addEducation,
+  removeEducation,
+  addHospital,
+  deleteHospital,
+  addVideo,
+  deleteVideo,
+  addDates,
+  deleteDates,
+  approveDoctor,
+  ChangePassword,
+};

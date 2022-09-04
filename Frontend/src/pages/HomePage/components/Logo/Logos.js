@@ -16,10 +16,11 @@ const SocialMedia = () => (
       flexDirection={{ xs: "column", lg: "row" }}
     >
       <Box
-        display={"flex"}
+        // display={"flex"}
         justifyContent={"center"}
         alignContent={"center"}
         flexDirection={{ xm: "row", lg: "column" }}
+        sx={{display:{xs: "none", lg:"flex"}}}
       >
         <Box height={1} width={1}>
           <a

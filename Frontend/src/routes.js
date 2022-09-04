@@ -42,7 +42,7 @@ import AdminUpdateProfile from "./pages/AdminUpdateProfile";
 import DoctorSignup from "./pages/DoctorSignup";
 import AdminDoctorSignupList from "./pages/AdminDoctorSignupList";
 import SignupDoctorView from "./pages/SignupDoctorView";
-
+import Specialists from "./pages/Specialists";
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -307,6 +307,7 @@ export default function Router() {
       ],
     },
     { path: "/form", element: <HomePage /> },
+    { path: "/speccialist", element: <Specialists /> },
 
     { path: "*", element: <Navigate to="/404" replace /> },
   ]);

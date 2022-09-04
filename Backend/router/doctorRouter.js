@@ -25,6 +25,7 @@ const {
   deleteDates,
   addContactNumberByAdmin,
   removeContactNumberByAdmin,
+  approveDoctor,
 } = require("../controller/doctor/update");
 const {
   profileImageChange,
@@ -113,8 +114,9 @@ doctorRoute.delete("/delete/signupdoc/:id", deleteSignupDoctorById);
 doctorRoute.get("/view/signupdoc/all", viewAllSignupDoctor);
 doctorRoute.get("/view/signupdoc/:id", viewSignupDoctorById);
 
-// // view approved Sign up doctor api with token
+// // view approved Sign up doctor api with admin or superadmin token
 doctorRoute.get("/view/approved/doctor", viewApprovedDoctorRequest);
 doctorRoute.get("/view/not/approved/doctor", viewNotApprovedDoctorRequest);
+doctorRoute.put("/approve/doctor/:id", approveDoctor);
 
 module.exports = { doctorRoute };

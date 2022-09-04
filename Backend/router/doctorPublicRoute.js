@@ -13,6 +13,7 @@ const multer = require("multer");
 const { multerSettings, mbbs } = require("../middleware/multerSettings");
 const path = require("path");
 const { deleteSignupDoctorById } = require("../controller/doctor/delete");
+const { ChangePassword } = require("../controller/doctor/update");
 
 var upload = multer({
   storage: multerSettings.userProfile.myStorage,
@@ -50,6 +51,7 @@ doctorPublicRoute.post(
 );
 doctorPublicRoute.get("/view/signupdoc/all", viewAllSignupDoctor);
 doctorPublicRoute.delete("/signupdoc/delete/:id", deleteSignupDoctorById);
+doctorPublicRoute.put("/firstchange/password", ChangePassword);
 
 
 module.exports = { doctorPublicRoute };

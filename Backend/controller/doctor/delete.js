@@ -60,29 +60,12 @@ const deleteSignupDoctorById = async (req, res) => {
 
     await doctorSinId.remove();
     res.json({
-      msg: "delete",
+      msg: "Doctor delete",
     });
   } else {
     res.status(404);
     throw new Error("id not found");
   }
-  // try {
-  //   const userdata = await doctorSignupSchema.findOne(doctorSinId);
-  //   if (userdata) {
-  //     console.log(userdata);
-  //     res
-  //       .status(200)
-  //       .json({ status: "Success", msg: "Doctor Deleted Sucessfully" });
-  //   } else {
-  //     res.status(400).json({
-  //       status: "Fail",
-  //       msg: `No user Found for Given Id ${doctorSinId}`,
-  //     });
-  //   }
-  // } catch (error) {
-  //   console.log(error);
-  //   res.status(400).json({ status: "Fail", msg: "Error in Deleting User" });
-  // }
 };
 
 module.exports = { deleteDoctorById, deleteSignupDoctorById };

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 // material
 import {
@@ -7,7 +7,6 @@ import {
   Card,
   Stack,
   Avatar,
-  Button,
   Container,
   Typography,
   IconButton,
@@ -15,13 +14,12 @@ import {
   Chip,
 } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 // components
 import {
   AdmindeleteDoctorSignup,
-  AdminListDoctorSignup,
+  NotApprovedListDoctor,
 } from "../apigetway/actions/DoctorAction";
 import Page from "../components/Page";
 import Error from "./Error";
@@ -168,15 +166,15 @@ const columns = [
     disableColumnMenu: true,
   },
   {
-    field: "approved",
-    headerName: "Approved",
+    field: "Approped",
+    headerName: "Approped",
     type: "boolean",
     width: 110,
     editable: false,
     sortable: false,
     disableColumnMenu: true,
     renderCell: (params) =>
-      params.row.approved ? (
+      params.row.Approped ? (
         <Stack direction="row" spacing={1}>
           <Chip label="Approved" size="small" color="success" />
         </Stack>
@@ -231,11 +229,11 @@ const columns = [
 
 export default function AdminDoctorSignupList() {
   const dispatch = useDispatch();
-  const DoctorSignupList = useSelector((state) => state.DoctorSignupList);
-  const { loading, error, doctorsignup } = DoctorSignupList;
+  const DoctorNotApproved = useSelector((state) => state.DoctorNotApproved);
+  const { loading, error, doctorNotApproved } = DoctorNotApproved;
 
   useEffect(() => {
-    dispatch(AdminListDoctorSignup());
+    dispatch(NotApprovedListDoctor());
   }, [dispatch]);
 
   const doctorDelete = useSelector((state) => state.doctorDelete);
@@ -279,7 +277,7 @@ export default function AdminDoctorSignupList() {
               loading={loading}
               error={error}
               getRowId={(row) => row.doctorSinId}
-              rows={doctorsignup}
+              rows={doctorNotApproved}
               columns={columns}
               pageSize={5}
               rowsPerPageOptions={[5]}

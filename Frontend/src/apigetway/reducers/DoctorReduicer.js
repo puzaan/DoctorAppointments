@@ -58,11 +58,22 @@ import {
   DOCTOR_PASSWORD_CHANGE_REQUEST,
   DOCTOR_PASSWORD_CHANGE_RESET,
   DOCTOR_PASSWORD_CHANGE_SUCCESS,
+  DOCTOR_SIGNUP_APPROVED_FAIL,
+  DOCTOR_SIGNUP_APPROVED_LIST_FAIL,
+  DOCTOR_SIGNUP_APPROVED_LIST_REQUEST,
+  DOCTOR_SIGNUP_APPROVED_LIST_RESET,
+  DOCTOR_SIGNUP_APPROVED_LIST_SUCCESS,
+  DOCTOR_SIGNUP_APPROVED_REQUEST,
+  DOCTOR_SIGNUP_APPROVED_SUCCESS,
   DOCTOR_SIGNUP_FAIL,
   DOCTOR_SIGNUP_LIST_FAIL,
   DOCTOR_SIGNUP_LIST_REQUEST,
   DOCTOR_SIGNUP_LIST_RESET,
   DOCTOR_SIGNUP_LIST_SUCCESS,
+  DOCTOR_SIGNUP_NOT_APPROVED_LIST_FAIL,
+  DOCTOR_SIGNUP_NOT_APPROVED_LIST_REQUEST,
+  DOCTOR_SIGNUP_NOT_APPROVED_LIST_RESET,
+  DOCTOR_SIGNUP_NOT_APPROVED_LIST_SUCCESS,
   DOCTOR_SIGNUP_REQUEST,
   DOCTOR_SIGNUP_RESET,
   DOCTOR_SIGNUP_SUCCESS,
@@ -436,6 +447,63 @@ export const DoctorSignupDetailsReducer = (
     case DOCTOR_DETAILS_SUCCESS:
       return { loading: false, success: true, doctorSignup: action.payload };
     case DOCTOR_DETAILS_FAIL:
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const DoctorApprovedListReducer = (
+  state = { doctorApproved: [] },
+  action
+) => {
+  switch (action.type) {
+    case DOCTOR_SIGNUP_APPROVED_LIST_REQUEST:
+      return { loading: true, doctorApproved: [] };
+    case DOCTOR_SIGNUP_APPROVED_LIST_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        doctorApproved: action.payload,
+      };
+    case DOCTOR_SIGNUP_APPROVED_LIST_FAIL:
+      return { success: false, loading: false, error: action.payload };
+    case DOCTOR_SIGNUP_APPROVED_LIST_RESET:
+      return { doctorApproved: [] };
+    default:
+      return state;
+  }
+};
+
+export const DoctorNotApprovedListReducer = (
+  state = { doctorNotApproved: [] },
+  action
+) => {
+  switch (action.type) {
+    case DOCTOR_SIGNUP_NOT_APPROVED_LIST_REQUEST:
+      return { loading: true, doctorNotApproved: [] };
+    case DOCTOR_SIGNUP_NOT_APPROVED_LIST_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+        doctorNotApproved: action.payload,
+      };
+    case DOCTOR_SIGNUP_NOT_APPROVED_LIST_FAIL:
+      return { success: false, loading: false, error: action.payload };
+    case DOCTOR_SIGNUP_NOT_APPROVED_LIST_RESET:
+      return { doctorNotApproved: [] };
+    default:
+      return state;
+  }
+};
+
+export const DoctorApprovedReducer = (state = {}, action) => {
+  switch (action.type) {
+    case DOCTOR_SIGNUP_APPROVED_REQUEST:
+      return { loading: true };
+    case DOCTOR_SIGNUP_APPROVED_SUCCESS:
+      return { loading: false, success: true };
+    case DOCTOR_SIGNUP_APPROVED_FAIL:
       return { loading: false, error: action.payload };
     default:
       return state;

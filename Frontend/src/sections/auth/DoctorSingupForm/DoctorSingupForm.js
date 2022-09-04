@@ -138,8 +138,8 @@ export default function DoctorSingupForm() {
     aff1: Yup.mixed().required("required"),
     Photo: Yup.mixed().required("Photo is required"),
   });
-  const [MD_MS, setMdMs] = useState();
-  const [DM_MCH, setDmMch] = useState();
+  const [MD_MS, setMdMs] = useState("None");
+  const [DM_MCH, setDmMch] = useState("None");
   const [specializationKey, setSpecializationKey] = useState();
   const doctorSignup = useSelector((state) => state.doctorSignup);
   const { error, success, loading } = doctorSignup;
@@ -437,7 +437,7 @@ export default function DoctorSingupForm() {
                   <Stack
                     direction={{ xs: "column", sm: "row" }}
                     spacing={2}
-                    style={{ alignItems: "center" }}
+                    // style={{ alignItems: "center" }}
                     marginTop={2}
                   >
                     <TextField
@@ -495,18 +495,17 @@ export default function DoctorSingupForm() {
                           label="MS"
                         />
                         <FormControlLabel
-                          value={null}
+                          value="None"
                           control={<Radio />}
                           label="None"
                         />
                       </RadioGroup>
                     </FormControl>
                   </Stack>
-                  {MD_MS ? (
+                  {MD_MS !== "None" ? (
                     <Stack
                       direction={{ xs: "column", sm: "row" }}
                       spacing={2}
-                      style={{ alignItems: "center" }}
                       marginTop={2}
                     >
                       <TextField
@@ -548,7 +547,7 @@ export default function DoctorSingupForm() {
                     </Stack>
                   ) : null}
 
-                  <Stack spacing={2}>
+                  <Stack>
                     <FormControl>
                       <RadioGroup
                         row
@@ -568,30 +567,29 @@ export default function DoctorSingupForm() {
                           label="MCh"
                         />
                         <FormControlLabel
-                          value={null}
+                          value="None"
                           control={<Radio />}
                           label="None"
                         />
                       </RadioGroup>
                     </FormControl>
-                    {DM_MCH ? (
-                      <Box
-                        display={"flex"}
-                        justifyContent={"space-around"}
-                        alignItems={"center"}
-                        spacing={2}
-                      >
-                        <TextField
-                          fullWidth
-                          label="DM/MCH College Name"
-                          {...getFieldProps("DmMchCollege")}
-                          error={Boolean(
-                            touched.DmMchCollege && errors.DmMchCollege
-                          )}
-                          helperText={
-                            touched.DmMchCollege && errors.DmMchCollege
-                          }
-                        />
+                  </Stack>
+                  {DM_MCH !== "None" ? (
+                    <Stack
+                      direction={{ xs: "column", sm: "row" }}
+                      spacing={2}
+                      marginTop={2}
+                    >
+                      <TextField
+                        fullWidth
+                        label="DM/MCH College Name"
+                        {...getFieldProps("DmMchCollege")}
+                        error={Boolean(
+                          touched.DmMchCollege && errors.DmMchCollege
+                        )}
+                        helperText={touched.DmMchCollege && errors.DmMchCollege}
+                      />
+                      <Box>
                         <IconButton
                           color="primary"
                           aria-label="upload picture"
@@ -617,8 +615,8 @@ export default function DoctorSingupForm() {
                           {(DmMchFile) => <div>{DmMchFile}</div>}
                         </ErrorMessage>
                       </Box>
-                    ) : null}
-                  </Stack>
+                    </Stack>
+                  ) : null}
                 </Stack>
               </Box>
 

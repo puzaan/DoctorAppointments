@@ -33,6 +33,9 @@ import {
   DoctorSignUpReducer,
   DoctorSignupListReducer,
   DoctorSignupDetailsReducer,
+  DoctorApprovedListReducer,
+  DoctorApprovedReducer,
+  DoctorNotApprovedListReducer,
 } from "./apigetway/reducers/DoctorReduicer";
 import {
   BookingApprovedReducer,
@@ -82,6 +85,9 @@ const reducer = combineReducers({
   doctorSignup: DoctorSignUpReducer,
   DoctorSignupList: DoctorSignupListReducer,
   DoctorSignupView: DoctorSignupDetailsReducer,
+  DoctorApprovedList: DoctorApprovedListReducer,
+  DoctorApproved: DoctorApprovedReducer,
+  DoctorNotApproved:DoctorNotApprovedListReducer,
 
   bookingList: BookingListReducer,
   bookingCancel: BookingCancelReducer,

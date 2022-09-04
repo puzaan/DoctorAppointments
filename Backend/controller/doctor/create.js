@@ -159,7 +159,10 @@ const signupDoctor = async (req, res) => {
       );
     }
   }
-
+  const password = "12345678";
+  const savetoken = jwt.sign({ fullName, email }, secretkey.secretKey);
+  let salt = await bcrypt.genSalt(10);
+  let hashPassword = bcrypt.hashSync(password, salt);
   doctorSignupSchema.findOne({ email }).exec((error, done) => {
     if (error) {
       // if (req.files.nmc) {
@@ -231,6 +234,8 @@ const signupDoctor = async (req, res) => {
           institution,
           fellowshipName,
           fellowShipFile,
+          password: hashPassword,
+          token: savetoken,
         },
         async function (error, done) {
           if (error) {

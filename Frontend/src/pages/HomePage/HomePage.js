@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-import { Box, Stack } from '@mui/material';
-import { Topbar } from './components/Topbar';
-import { SearchBar } from './components/SearchBar';
-import { TabBtn } from './components/TabBtn';
-import { Logo } from './components/Logo';
-import Page from '../../components/Page';
-import url from '../../apigetway/mainUrl';
+import { Box, Stack } from "@mui/material";
+import { SearchBar } from "./components/SearchBar";
+import { TabBtn } from "./components/TabBtn";
+import { Logo } from "./components/Logo";
+import Page from "../../components/Page";
+import url from "../../apigetway/mainUrl";
+import FrontPageLayout from "../../layouts/frontPage";
 
 const HomePage = () => {
   const [allDoctorList, setAllDoctorLis] = useState([]);
@@ -21,13 +21,19 @@ const HomePage = () => {
   }, []);
   return (
     <Page title="Form">
+      <FrontPageLayout />
       <Stack direction="column" spacing={1}>
-        <Topbar />
+        {/* <Topbar /> */}
         <Logo />
-        <Box display={'flex'} justifyContent={'center'} marginTop={4} marginBottom={4}>
+        <Box
+          display={"flex"}
+          justifyContent={"center"}
+          marginTop={4}
+          marginBottom={4}
+        >
           <SearchBar data={allDoctorList} />
         </Box>
-        <Box >
+        <Box>
           <TabBtn />
         </Box>
       </Stack>
