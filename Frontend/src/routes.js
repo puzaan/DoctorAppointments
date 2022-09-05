@@ -43,6 +43,7 @@ import DoctorSignup from "./pages/DoctorSignup";
 import AdminDoctorSignupList from "./pages/AdminDoctorSignupList";
 import SignupDoctorView from "./pages/SignupDoctorView";
 import Specialists from "./pages/Specialists";
+import DoctorFirstTimePasswordChange from "./pages/DoctorFirstTimePasswordChange";
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -284,6 +285,7 @@ export default function Router() {
         { path: "/doctor", element: <Navigate to="/doctor/booking" /> },
         { path: "login", element: <DoctorLogin /> },
         { path: "forgot", element: <DoctorForgotPassword /> },
+        { path: "change/password", element: <DoctorFirstTimePasswordChange />},
         { path: "404", element: <DoctorPage /> },
         { path: "*", element: <Navigate to="/doctor/404" /> },
       ],

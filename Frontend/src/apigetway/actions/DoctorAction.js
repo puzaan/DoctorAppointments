@@ -1860,3 +1860,33 @@ export const publicApprovedListDoctor = () => async (dispatch, getState) => {
     });
   }
 };
+
+export const DoctorFirstPasswordChange =
+  (email, code, password) => async (dispatch) => {
+    try {
+      dispatch({
+        type: DOCTOR_PASSWORD_CHANGE_REQUEST,
+      });
+
+      const { data } = await axios.put(
+        `${url}/api/v1/public/doctor/firstchange/password`,
+        {
+          email,
+          code,
+          password,
+        }
+      );
+      dispatch({
+        type: DOCTOR_PASSWORD_CHANGE_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: DOCTOR_PASSWORD_CHANGE_FAIL,
+        payload:
+          error.response && error.response.data.msg
+            ? error.response.data.msg
+            : error.message,
+      });
+    }
+  };

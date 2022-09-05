@@ -18,7 +18,7 @@ export default function Specialists() {
     dispatch(publicApprovedListDoctor());
   }, [dispatch]);
   return (
-    <Page title="Form">
+    <Page title="Specialists">
       <Box>
         <FrontPageLayout />
         <Container>

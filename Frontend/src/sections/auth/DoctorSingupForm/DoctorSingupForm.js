@@ -207,6 +207,7 @@ export default function DoctorSingupForm() {
       formData.append("email", formik.values.email);
       formData.append("contactNumber", formik.values.contactNumber);
       formData.append("gender", formik.values.gender);
+      formData.append("address", formik.values.address);
       formData.append("NMC_number", formik.values.NMC_number);
       formData.append("nmc", formik.values.NmcFile);
       formData.append("MBBS", formik.values.MBBS);

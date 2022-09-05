@@ -36,7 +36,6 @@ const SignupDoctorView = () => {
     if (approvedSuccess) {
       navigate("/admin/signup/doctor/list");
     }
-    console.log(approvedError);
   }, [dispatch, id, doctorSignup.MBBSFile, approvedSuccess]);
 
   const approved = () => {
@@ -137,7 +136,7 @@ const SignupDoctorView = () => {
                     </Typography>
                     {doctorSignup.specializationKey.map((key, i) => (
                       <Typography
-                      key={i}
+                        key={i}
                         variant={"h5"}
                         sx={{ fontWeight: "light", marginLeft: 1 }}
                       >
@@ -151,7 +150,7 @@ const SignupDoctorView = () => {
                     </Typography>
                     {doctorSignup.institution.map((key, i) => (
                       <Typography
-                      key={i}
+                        key={i}
                         variant={"h5"}
                         sx={{ fontWeight: "light", marginLeft: 1 }}
                       >
@@ -178,14 +177,14 @@ const SignupDoctorView = () => {
                   name={doctorSignup.NMC_number}
                   feildName={"NMC Number: "}
                 />
-                {doctorSignup.MD_MS ? (
+                {doctorSignup.MD_MS !== "None" ? (
                   <DocSignupFileView
                     files={doctorSignup.MdMsFile}
                     name={doctorSignup.MdMsCollege}
                     feildName={doctorSignup.MD_MS}
                   />
                 ) : null}
-                {doctorSignup.DM_MCH ? (
+                {doctorSignup.DM_MCH !== "None" ? (
                   <DocSignupFileView
                     files={doctorSignup.DmMchFile}
                     name={doctorSignup.DmMchCollege}

@@ -3,6 +3,8 @@ import { Link as RouterLink } from "react-router-dom";
 // material
 import { styled } from "@mui/material/styles";
 import { Box, Drawer, Button } from "@mui/material";
+import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
+import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 // mock
 // hooks
 import useResponsive from "../../hooks/useResponsive";
@@ -24,7 +26,6 @@ const RootStyle = styled("div")(({ theme }) => ({
     width: DRAWER_WIDTH,
   },
 }));
-
 
 // ----------------------------------------------------------------------
 
@@ -51,6 +52,17 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
     },
   ];
 
+  const healthTech = [
+    {
+      title: "DocTalk",
+      link: "/",
+    },
+    {
+      title: "Career Lising",
+      link: "/",
+    },
+  ];
+
   const renderContent = (
     <Scrollbar
       sx={{
@@ -66,7 +78,21 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
         <Logo />
       </Box>
       <NavSection navConfig={navConfig} />
-      <NavItem title={"Social Media"} items={SocialMedia} />
+      <NavItem
+        title={"Our Health Teach"}
+        items={healthTech}
+        icon={<HealthAndSafetyIcon color={"primary"} sx={{ marginRight: 2 }} />}
+      />
+      <NavItem
+        title={"Social Media"}
+        items={SocialMedia}
+        icon={
+          <ConnectWithoutContactIcon
+            color={"primary"}
+            sx={{ marginRight: 2 }}
+          />
+        }
+      />
       <Box sx={{ flexGrow: 1 }} />
       <Box marginBottom={5} padding={2}>
         <Button

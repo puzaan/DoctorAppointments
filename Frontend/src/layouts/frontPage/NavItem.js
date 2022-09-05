@@ -9,15 +9,14 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
 
 
-const NavItem = ({ title, items }) => {
+const NavItem = ({ title, items, icon }) => {
   const theme = useTheme();
-//   const [activeLink, setActiveLink] = useState("");
-//   useEffect(() => {
-//     setActiveLink(window && window.location ? window.location.pathname : "");
-//   }, []);
+  //   const [activeLink, setActiveLink] = useState("");
+  //   useEffect(() => {
+  //     setActiveLink(window && window.location ? window.location.pathname : "");
+  //   }, []);
 
   //   const hasActiveLink = () => items.find((i) => i.href === activeLink);
 
@@ -39,7 +38,8 @@ const NavItem = ({ title, items }) => {
           id="panel1a-header"
           sx={{ paddingLeft: 2 }}
         >
-          <ConnectWithoutContactIcon color={"primary"} sx={{marginRight: 2}} />
+          {icon}
+          
 
           <Typography fontWeight={400} color={"primary.main"}>
             {title}
@@ -80,6 +80,7 @@ const NavItem = ({ title, items }) => {
 NavItem.propTypes = {
   items: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
+  icon: PropTypes.any.isRequired,
 };
 
 export default NavItem;

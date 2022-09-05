@@ -1,21 +1,23 @@
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
+import InfoIcon from "@mui/icons-material/Info";
+import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 
 const navConfig = [
   {
     title: "About Us",
     path: "/",
-    icon: <LocalHospitalIcon />,
+    icon: <InfoIcon />,
   },
   {
     title: "Our Specialists",
     path: "/speccialist",
-    icon: <LocalHospitalIcon />,
+    icon: <AssignmentIndIcon />,
   },
-  {
-    title: "Our Health Tech",
-    path: "/",
-    icon: <LocalHospitalIcon />,
-  },
+  // {
+  //   title: "Our Health Tech",
+  //   path: "/",
+  //   icon: <LocalHospitalIcon />,
+  // },
   {
     title: "Our Partner Clinics",
     path: "/",

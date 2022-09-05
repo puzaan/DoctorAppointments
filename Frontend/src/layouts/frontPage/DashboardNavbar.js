@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
+import TopNavItem from "./TopNavItem";
 
 // components
 //
@@ -45,6 +46,16 @@ DashboardNavbar.propTypes = {
 };
 
 export default function DashboardNavbar({ onOpenSidebar }) {
+  const healthTech = [
+    {
+      title: "DocTalk",
+      href: "/",
+    },
+    {
+      title: "Career Lising",
+      href: "/",
+    },
+  ];
   return (
     <RootStyle>
       <ToolbarStyle>
@@ -102,7 +113,7 @@ export default function DashboardNavbar({ onOpenSidebar }) {
                   Our Specialists
                 </Typography>
               </Box>
-              <Box marginRight={2}>
+              {/* <Box marginRight={2}>
                 <Typography
                   // style={{ textDecoration: 'underline' }}
                   color={"text.primary"}
@@ -113,6 +124,14 @@ export default function DashboardNavbar({ onOpenSidebar }) {
                 >
                   Our Health Tech
                 </Typography>
+              </Box> */}
+              <Box marginRight={2}>
+                <TopNavItem
+                  title={"Our Health Tech"}
+                  id={"Health-Tech"}
+                  items={healthTech}
+                  colorInvert={false}
+                />
               </Box>
               <Box marginRight={2}>
                 <Typography
