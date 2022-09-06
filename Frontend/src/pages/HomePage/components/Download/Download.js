@@ -84,15 +84,20 @@ const Download = () => (
             AI Enabled
           </Typography>
         </Box>
-        <Box display="flex" marginTop={1}>
-          <a
+        <Box display="flex"  margin={1}>
+          <Box
+            width={150}
+            height={54}
+            component={"a"}
             href="https://play.google.com/store/apps/details?id=health.xyba.docTalk&hl=en&gl=US"
             rel="noreferrer"
             target="_blank"
           >
             <Box component={"img"} src={"assets/play.png"} alt={"Play store"} />
-          </a>
-          <Box component={"img"} src={"assets/apple.png"} alt={"app store"} />
+          </Box>
+          <Box width={150} height={54}>
+            <Box component={"img"} src={"assets/apple.png"} alt={"app store"} />
+          </Box>
         </Box>
       </Box>
     </Grid>

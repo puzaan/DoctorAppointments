@@ -6,7 +6,7 @@ import TabPanelUnstyled from '@mui/base/TabPanelUnstyled';
 import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
 import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
 import { LocalizationProvider } from '@mui/x-date-pickers';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { Box, Container } from '@mui/material';
 import { Form } from '../Form';
 import { Download } from '../Download';

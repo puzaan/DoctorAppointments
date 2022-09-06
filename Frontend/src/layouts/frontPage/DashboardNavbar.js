@@ -5,7 +5,6 @@ import {
   Box,
   AppBar,
   Toolbar,
-  IconButton,
   Typography,
   Button,
 } from "@mui/material";
@@ -49,22 +48,30 @@ export default function DashboardNavbar({ onOpenSidebar }) {
   const healthTech = [
     {
       title: "DocTalk",
-      href: "/",
+      href: "/aboutus",
     },
     {
-      title: "Career Lising",
+      title: "Buzzer",
       href: "/",
     },
   ];
   return (
     <RootStyle>
       <ToolbarStyle>
-        <IconButton
+        <Button
           onClick={onOpenSidebar}
-          sx={{ mr: 1, color: "text.primary", display: { lg: "none" } }}
+          aria-label="Menu"
+          variant={"outlined"}
+          sx={{
+            borderRadius: 2,
+            minWidth: "auto",
+            padding: 1,
+            borderColor: "text.primary",
+            display: { lg: "none" },
+          }}
         >
           <MenuIcon />
-        </IconButton>
+        </Button>
         <Box sx={{ display: { xs: "none", lg: "flex" } }}>
           <Box
             display={"flex"}

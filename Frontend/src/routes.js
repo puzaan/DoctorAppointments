@@ -41,6 +41,7 @@ import AdminDoctorSignupList from "./pages/AdminDoctorSignupList";
 import SignupDoctorView from "./pages/SignupDoctorView";
 import Specialists from "./pages/Specialists";
 import DoctorFirstTimePasswordChange from "./pages/DoctorFirstTimePasswordChange";
+import DocTalk from "./pages/DocTalk";
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -316,6 +317,8 @@ export default function Router() {
     },
     { path: "/form", element: <HomePage /> },
     { path: "/speccialist", element: <Specialists /> },
+
+    { path: "/aboutus", element: <DocTalk /> },
 
     { path: "*", element: <Navigate to="/404" replace /> },
   ]);

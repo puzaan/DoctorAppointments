@@ -55,10 +55,10 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const healthTech = [
     {
       title: "DocTalk",
-      link: "/",
+      link: "/aboutus",
     },
     {
-      title: "Career Lising",
+      title: "Buzzer",
       link: "/",
     },
   ];
