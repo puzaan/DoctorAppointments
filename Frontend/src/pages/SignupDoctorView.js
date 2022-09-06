@@ -1,7 +1,7 @@
 import { Avatar, Box, Card, Grid, Typography } from "@mui/material";
 import HowToRegIcon from "@mui/icons-material/HowToReg";
 import { LoadingButton } from "@mui/lab";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import {
@@ -18,7 +18,6 @@ const SignupDoctorView = () => {
   const dispatch = useDispatch();
   const approvedispatch = useDispatch();
   const navigate = useNavigate();
-  const [fileType, setFileType] = useState("");
 
   const DoctorSignupView = useSelector((state) => state.DoctorSignupView);
   const { error, loading, doctorSignup } = DoctorSignupView;
@@ -32,11 +31,10 @@ const SignupDoctorView = () => {
 
   useEffect(() => {
     dispatch(AdminViewDoctorSignup(id));
-    setFileType(doctorSignup.MBBSFile);
     if (approvedSuccess) {
       navigate("/admin/signup/doctor/list");
     }
-  }, [dispatch, id, doctorSignup.MBBSFile, approvedSuccess]);
+  }, [dispatch, id, doctorSignup.MBBSFile, approvedSuccess, navigate]);
 
   const approved = () => {
     approvedispatch(AdminApprovedDoctor(id));
@@ -140,7 +138,7 @@ const SignupDoctorView = () => {
                         variant={"h5"}
                         sx={{ fontWeight: "light", marginLeft: 1 }}
                       >
-                        #{key}
+                        {key}
                       </Typography>
                     ))}
                   </Box>

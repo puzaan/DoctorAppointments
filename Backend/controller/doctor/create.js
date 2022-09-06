@@ -116,33 +116,16 @@ const signupDoctor = async (req, res) => {
 
   if (req.files.nmc) {
     NmcFiles = process.env.HOST_ADDRESS + "/" + req.files.nmc[0].path;
-    // console.log(req.files.nmc[0].path);
-  } else {
-    return res.status(400).json({
-      isSuccess: false.valueOf,
-      msg: "NMC file required",
-    });
   }
   if (req.files.mbbs) {
     MBBSFile = process.env.HOST_ADDRESS + "/" + req.files.mbbs[0].path;
-    // for (let i = 0; i < req.files.mbbs.length; i++) {
-    //   MBBSFile.push(process.env.HOST_ADDRESS + "/" + req.files.mbbs[i].path);
-    // }
-    // MBBSFile = process.env.HOST_ADDRESS + "/" + req.files.mbbs[0].path;
-  } else {
-    return res.status(400).json({
-      isSuccess: false.valueOf,
-      msg: "MBBS certificate required",
-    });
   }
 
   if (req.files.photo) {
     Photo = process.env.HOST_ADDRESS + "/" + req.files.photo[0].path;
   } else {
-    return res.status(400).json({
-      isSuccess: false.valueOf,
-      msg: "Photo is required",
-    });
+    Photo =
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQACGFpr0iqURE_6EHYMm-AGXfhXC1Nzf4ucA&usqp=CAU";
   }
 
   if (req.files.md_ms) {

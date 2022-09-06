@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 import { useEffect, useRef, useState } from "react";
-import { useFormik, Form, FormikProvider, ErrorMessage } from "formik";
+import { useFormik, Form, FormikProvider } from "formik";
 // material
 import {
   Stack,
@@ -61,14 +61,14 @@ export default function DoctorSingupForm() {
       .required("Email is required"),
     gender: Yup.string().required("Please select your gender"),
     contactNumber: Yup.string()
-      .min(2, "NMC number is not valid")
-      .max(10, "NMC number is not valid")
+      .min(10, "Contact number is not valid")
+      .max(10, "Contact number is not valid")
       .required("Enter your contact Number"),
     NMC_number: Yup.string()
       .min(2, "NMC number is not valid")
       .max(9, "NMC number is not valid")
       .required("Enter your NMC Number"),
-    NmcFile: Yup.mixed().required("NMC Certificate required"),
+    // NmcFile: Yup.mixed().required("NMC Certificate required"),
     specialization: Yup.string().required("Enter your specialization"),
     spKey: Yup.string()
       .min(2, "Too Short!")
@@ -80,63 +80,63 @@ export default function DoctorSingupForm() {
       is: true,
       then: Yup.string().required("MD MS College Name is required"),
     }),
-    MdMsFile: Yup.mixed().when("MdMs", {
-      is: true,
-      then: Yup.mixed().required("Certificate required"),
-    }),
+    // MdMsFile: Yup.mixed().when("MdMs", {
+    //   is: true,
+    //   then: Yup.mixed().required("Certificate required"),
+    // }),
     DmMchCollege: Yup.string().when("DmMch", {
       is: true,
       then: Yup.string().required("DM MCH College Name is required"),
     }),
-    DmMchFile: Yup.mixed().when("DmMch", {
-      is: true,
-      then: Yup.mixed().required("DM or MCH Cetificate required"),
-    }),
+    // DmMchFile: Yup.mixed().when("DmMch", {
+    //   is: true,
+    //   then: Yup.mixed().required("DM or MCH Cetificate required"),
+    // }),
 
     MBBS: Yup.string().required("Enter your MBBS Name"),
-    MBBSFile: Yup.mixed().required("MBBS Certificate required"),
+    // MBBSFile: Yup.mixed().required("MBBS Certificate required"),
     institution1: Yup.string().when("fellow1", {
       is: true,
       then: Yup.string().required("Institution name required"),
     }),
-    fellowshipFile1: Yup.mixed().when("fellow1", {
-      is: true,
-      then: Yup.mixed().required("Institution file required"),
-    }),
+    // fellowshipFile1: Yup.mixed().when("fellow1", {
+    //   is: true,
+    //   then: Yup.mixed().required("Institution file required"),
+    // }),
     institution2: Yup.string().when("fellow2", {
       is: true,
       then: Yup.string().required("Institution name required"),
     }),
-    fellowshipFile2: Yup.mixed().when("fellow2", {
-      is: true,
-      then: Yup.mixed().required("Institution file required"),
-    }),
+    // fellowshipFile2: Yup.mixed().when("fellow2", {
+    //   is: true,
+    //   then: Yup.mixed().required("Institution file required"),
+    // }),
     institution3: Yup.string().when("fellow3", {
       is: true,
       then: Yup.string().required("Institution name required"),
     }),
-    fellowshipFile3: Yup.mixed().when("fellow3", {
-      is: true,
-      then: Yup.mixed().required("Institution file required"),
-    }),
+    // fellowshipFile3: Yup.mixed().when("fellow3", {
+    //   is: true,
+    //   then: Yup.mixed().required("Institution file required"),
+    // }),
     institution4: Yup.string().when("fellow4", {
       is: true,
       then: Yup.string().required("Institution name required"),
     }),
-    fellowshipFile4: Yup.mixed().when("fellow4", {
-      is: true,
-      then: Yup.mixed().required("Institution file required"),
-    }),
+    // fellowshipFile4: Yup.mixed().when("fellow4", {
+    //   is: true,
+    //   then: Yup.mixed().required("Institution file required"),
+    // }),
     institution5: Yup.string().when("fellow5", {
       is: true,
       then: Yup.string().required("Institution name required"),
     }),
-    fellowshipFile5: Yup.mixed().when("fellow5", {
-      is: true,
-      then: Yup.mixed().required("Institution file required"),
-    }),
+    // fellowshipFile5: Yup.mixed().when("fellow5", {
+    //   is: true,
+    //   then: Yup.mixed().required("Institution file required"),
+    // }),
     aff1: Yup.mixed().required("required"),
-    Photo: Yup.mixed().required("Photo is required"),
+    // Photo: Yup.mixed().required("Photo is required"),
   });
   const [MD_MS, setMdMs] = useState("None");
   const [DM_MCH, setDmMch] = useState("None");
@@ -429,9 +429,9 @@ export default function DoctorSingupForm() {
                         ? formik.values.NmcFile.name
                         : null}
 
-                      <ErrorMessage name="NmcFile">
+                      {/* <ErrorMessage name="NmcFile">
                         {(NmcNumber) => <div>{NmcNumber}</div>}
-                      </ErrorMessage>
+                      </ErrorMessage> */}
                     </Box>
                   </Stack>
 
@@ -471,9 +471,9 @@ export default function DoctorSingupForm() {
                         ? formik.values.MBBSFile.name
                         : null}
 
-                      <ErrorMessage name="MBBSFile">
+                      {/* <ErrorMessage name="MBBSFile">
                         {(MBBSFile) => <div>{MBBSFile}</div>}
-                      </ErrorMessage>
+                      </ErrorMessage> */}
                     </Box>
                   </Stack>
                   <Stack>
@@ -541,9 +541,9 @@ export default function DoctorSingupForm() {
                           ? formik.values.MdMsFile.name
                           : null}
 
-                        <ErrorMessage name="MdMsFile">
+                        {/* <ErrorMessage name="MdMsFile">
                           {(MdMsFile) => <div>{MdMsFile}</div>}
-                        </ErrorMessage>
+                        </ErrorMessage> */}
                       </Box>
                     </Stack>
                   ) : null}
@@ -612,9 +612,9 @@ export default function DoctorSingupForm() {
                         {formik.values.DmMchFile
                           ? formik.values.DmMchFile.name
                           : null}
-                        <ErrorMessage name="DmMchFile">
+                        {/* <ErrorMessage name="DmMchFile">
                           {(DmMchFile) => <div>{DmMchFile}</div>}
-                        </ErrorMessage>
+                        </ErrorMessage> */}
                       </Box>
                     </Stack>
                   ) : null}
@@ -687,9 +687,9 @@ export default function DoctorSingupForm() {
                       ? formik.values.fellowshipFile1.name
                       : null}
 
-                    <ErrorMessage name="fellowshipFile1">
+                    {/* <ErrorMessage name="fellowshipFile1">
                       {(fellowshipFile1) => <div>{fellowshipFile1}</div>}
-                    </ErrorMessage>
+                    </ErrorMessage> */}
                   </Box>
                 </Stack>
                 <TextField
@@ -742,9 +742,9 @@ export default function DoctorSingupForm() {
                       ? formik.values.fellowshipFile2.name
                       : null}
 
-                    <ErrorMessage name="fellowshipFile2">
+                    {/* <ErrorMessage name="fellowshipFile2">
                       {(fellowshipFile2) => <div>{fellowshipFile2}</div>}
-                    </ErrorMessage>
+                    </ErrorMessage> */}
                   </Box>
                 </Stack>
                 <TextField
@@ -797,9 +797,9 @@ export default function DoctorSingupForm() {
                       ? formik.values.fellowshipFile3.name
                       : null}
 
-                    <ErrorMessage name="fellowshipFile3">
+                    {/* <ErrorMessage name="fellowshipFile3">
                       {(fellowshipFile3) => <div>{fellowshipFile3}</div>}
-                    </ErrorMessage>
+                    </ErrorMessage> */}
                   </Box>
                 </Stack>
                 <TextField
@@ -852,9 +852,9 @@ export default function DoctorSingupForm() {
                       ? formik.values.fellowshipFile4.name
                       : null}
 
-                    <ErrorMessage name="fellowshipFile4">
+                    {/* <ErrorMessage name="fellowshipFile4">
                       {(fellowshipFile4) => <div>{fellowshipFile4}</div>}
-                    </ErrorMessage>
+                    </ErrorMessage> */}
                   </Box>
                 </Stack>
                 <TextField
@@ -907,9 +907,9 @@ export default function DoctorSingupForm() {
                       ? formik.values.fellowshipFile5.name
                       : null}
 
-                    <ErrorMessage name="fellowshipFile5">
+                    {/* <ErrorMessage name="fellowshipFile5">
                       {(fellowshipFile5) => <div>{fellowshipFile5}</div>}
-                    </ErrorMessage>
+                    </ErrorMessage> */}
                   </Box>
                 </Stack>
               </Box>
@@ -990,9 +990,9 @@ export default function DoctorSingupForm() {
                     />
                   </IconButton>
                   {formik.values.Photo ? formik.values.Photo.name : null}
-                  <ErrorMessage name="Photo">
+                  {/* <ErrorMessage name="Photo">
                     {(Photo) => <div>{Photo}</div>}
-                  </ErrorMessage>
+                  </ErrorMessage> */}
                 </Box>
               </Box>
 

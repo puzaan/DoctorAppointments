@@ -7,9 +7,6 @@ import SuperAdminDashboardLayout from "./layouts/superAdminDashboard";
 import DoctorDashboardLayout from "./layouts/doctorDashboard";
 //
 import NotFound from "./pages/Page404";
-import SuperAdminNotFound from "./pages/SuperAdmin404";
-import AdminPageNotFound from "./pages/AdminPage404";
-import DoctorPage from "./pages/Doctor404";
 import DashboardApp from "./pages/DashboardApp";
 import AdminDashboard from "./pages/AdminDasnboard";
 import SuperAdminLogin from "./pages/SuperAdminLogin";
@@ -139,7 +136,10 @@ export default function Router() {
       children: [
         { path: "/superadmin", element: <Navigate to="/superadmin/app" /> },
         { path: "login", element: <SuperAdminLogin /> },
-        { path: "404", element: <SuperAdminNotFound /> },
+        {
+          path: "404",
+          element: <NotFound route={"/superadmin/app"} title={"Super Admin"} />,
+        },
         { path: "*", element: <Navigate to="/superadmin/404" /> },
       ],
     },
@@ -242,7 +242,10 @@ export default function Router() {
         { path: "/admin", element: <Navigate to="/admin/app" /> },
         { path: "login", element: <AdminLogin /> },
         { path: "forgot", element: <AdminForgotPassword /> },
-        { path: "404", element: <AdminPageNotFound /> },
+        {
+          path: "404",
+          element: <NotFound route={"/admin/app"} title={"Admin"} />,
+        },
         { path: "*", element: <Navigate to="/admin/404" /> },
       ],
     },
@@ -285,8 +288,11 @@ export default function Router() {
         { path: "/doctor", element: <Navigate to="/doctor/booking" /> },
         { path: "login", element: <DoctorLogin /> },
         { path: "forgot", element: <DoctorForgotPassword /> },
-        { path: "change/password", element: <DoctorFirstTimePasswordChange />},
-        { path: "404", element: <DoctorPage /> },
+        { path: "change/password", element: <DoctorFirstTimePasswordChange /> },
+        {
+          path: "404",
+          element: <NotFound route={"/doctor/booking"} title={"Doctor"} />,
+        },
         { path: "*", element: <Navigate to="/doctor/404" /> },
       ],
     },
@@ -304,7 +310,7 @@ export default function Router() {
         // { path: 'form', element: <HomePage /> },
 
         // { path: 'register', element: <Register /> },
-        { path: "404", element: <NotFound /> },
+        { path: "404", element: <NotFound route={"/"} /> },
         { path: "*", element: <Navigate to="/404" /> },
       ],
     },

@@ -72,11 +72,13 @@ const DocSignupFileView = ({ files, name, feildName }) => {
       </Grid>
 
       <Grid item xs={12} sm={12} md={4} spacing={2}>
-        {fileType === "pdf" ? (
-          <Button onClick={openPdf}>View</Button>
-        ) : (
-          <Button onClick={openImage}>View</Button>
-        )}
+        {files ? (
+          fileType === "pdf" ? (
+            <Button onClick={openPdf}>View</Button>
+          ) : (
+            <Button onClick={openImage}>View</Button>
+          )
+        ) : null}
       </Grid>
 
       <Dialog
