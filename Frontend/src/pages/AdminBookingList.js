@@ -1,13 +1,22 @@
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 // material
-import { Box, Card, Stack, Container, Typography, IconButton, FormControlLabel, Chip } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
+import {
+  Box,
+  Card,
+  Stack,
+  Container,
+  Typography,
+  IconButton,
+  FormControlLabel,
+  Chip,
+} from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
 import EditIcon from "@mui/icons-material/Edit";
 // components
-import Page from '../components/Page';
-import { AdminListBookings } from '../apigetway/actions/BookingAction';
+import Page from "../components/Page";
+import { AdminListBookings } from "../apigetway/actions/BookingAction";
 
 // eslint-disable-next-line
 const MatEdit = ({ index }) => {
@@ -32,33 +41,34 @@ const MatEdit = ({ index }) => {
 };
 const columns = [
   {
-    field: 'fullName',
-    headerName: 'Full Name',
+    field: "fullName",
+    headerName: "Full Name",
     width: 140,
     editable: false,
-    alignItems: 'center',
+    alignItems: "center",
   },
 
   {
-    field: 'email',
-    headerName: 'Email',
+    field: "email",
+    headerName: "Email",
     width: 190,
     editable: false,
     sortable: false,
     disableColumnMenu: true,
   },
   {
-    field: 'bookingdate',
-    headerName: 'Date',
+    field: "bookingdate",
+    headerName: "Date",
     width: 105,
     editable: false,
     sortable: false,
     disableColumnMenu: true,
-    renderCell: (params) => new Date(params.row.bookingdate).toLocaleDateString(),
+    renderCell: (params) =>
+      new Date(params.row.bookingdate).toLocaleDateString(),
   },
   {
-    field: 'timeslot',
-    headerName: 'Time',
+    field: "timeslot",
+    headerName: "Time",
     width: 90,
     editable: false,
     sortable: false,
@@ -66,17 +76,17 @@ const columns = [
   },
 
   {
-    field: 'doctorId',
-    headerName: 'Doctori Id',
+    field: "doctorId",
+    headerName: "Doctori Id",
     width: 130,
     editable: false,
     sortable: false,
     disableColumnMenu: true,
   },
   {
-    field: 'approved',
-    headerName: 'Approved',
-    type: 'boolean',
+    field: "approved",
+    headerName: "Approved",
+    type: "boolean",
     width: 110,
     editable: false,
     sortable: false,
@@ -93,17 +103,17 @@ const columns = [
       ),
   },
   {
-    field: 'contact',
-    headerName: 'Contact No',
+    field: "contact",
+    headerName: "Contact No",
     width: 110,
     editable: false,
     sortable: false,
     disableColumnMenu: true,
   },
   {
-    field: 'address',
-    headerName: 'Address',
-    type: 'number',
+    field: "address",
+    headerName: "Address",
+    type: "number",
     width: 110,
     editable: false,
     sortable: false,
@@ -118,26 +128,27 @@ const columns = [
   //   disableColumnMenu: true,
   // },
   {
-    field: 'sex',
-    headerName: 'Sex',
+    field: "sex",
+    headerName: "Sex",
     width: 90,
     editable: false,
     sortable: false,
     disableColumnMenu: true,
   },
   {
-    field: 'age',
-    headerName: 'DOB',
+    field: "age",
+    headerName: "DOB",
     width: 100,
     editable: false,
     sortable: false,
     menubar: false,
     disableColumnMenu: true,
-    renderCell: (params) => new Date(params.row.age).toLocaleDateString('en-US'),
+    renderCell: (params) =>
+      new Date(params.row.age).toLocaleDateString("en-US"),
   },
   {
-    field: 'actions',
-    headerName: 'Actions',
+    field: "actions",
+    headerName: "Actions",
     editable: false,
     sortable: false,
     menubar: false,
@@ -145,7 +156,10 @@ const columns = [
     width: 90,
     disableClickEventBubbling: false,
     renderCell: (params) => (
-      <div className="d-flex justify-content-between align-items-center" style={{ cursor: 'pointer' }} padding={1}>
+      <div
+        className="d-flex justify-content-between align-items-center"
+        style={{ cursor: "pointer", padding: 1 }}
+      >
         <MatEdit index={params.row.requestId} />
       </div>
     ),
@@ -164,7 +178,12 @@ export default function AdminBookingList() {
   return (
     <Page title="Booking List">
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          mb={5}
+        >
           <Typography variant="h4" gutterBottom>
             Booking List
           </Typography>
@@ -173,9 +192,9 @@ export default function AdminBookingList() {
           <Box
             sx={{
               height: 400,
-              width: '100%',
-              '& .css-40a90u-MuiDataGrid-columnHeaders ': {
-                backgroundColor: 'rgb(211,227,251)',
+              width: "100%",
+              "& .css-40a90u-MuiDataGrid-columnHeaders ": {
+                backgroundColor: "rgb(211,227,251)",
               },
             }}
           >

@@ -7,11 +7,9 @@ import { useFormik, Form, FormikProvider } from "formik";
 import {
   Link,
   Stack,
-  Checkbox,
   TextField,
   IconButton,
   InputAdornment,
-  FormControlLabel,
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";

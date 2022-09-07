@@ -1,15 +1,25 @@
-import { useEffect } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect } from "react";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 // material
-import { Box, Card, Stack, Avatar, Button, Container, Typography, IconButton, FormControlLabel } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
+import {
+  Box,
+  Card,
+  Stack,
+  Avatar,
+  Button,
+  Container,
+  Typography,
+  IconButton,
+  FormControlLabel,
+} from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 // components
-import { deleteAdmin, ListAdmins } from '../apigetway/actions/AdminAction';
-import Page from '../components/Page';
+import { deleteAdmin, ListAdmins } from "../apigetway/actions/AdminAction";
+import Page from "../components/Page";
 
 // eslint-disable-next-line
 const MatEdit = ({ index }) => {
@@ -52,7 +62,7 @@ const MatDelete = ({ index }) => {
 
   const handleDeleteClick = (id) => {
     // eslint-disable-next-line
-    if (window.confirm('Are you sure')) {
+    if (window.confirm("Are you sure")) {
       dispatch(deleteAdmin(id));
     }
   };
@@ -74,11 +84,11 @@ const MatDelete = ({ index }) => {
 
 const columns = [
   {
-    field: 'fullName',
-    headerName: 'Full Name',
+    field: "fullName",
+    headerName: "Full Name",
     width: 160,
     editable: false,
-    alignItems: 'center',
+    alignItems: "center",
     renderCell: (params) => (
       <Stack direction="row" alignItems="center" spacing={2}>
         <Avatar alt={params.row.fullName} src={params.row.profilePhotoLink} />
@@ -89,54 +99,55 @@ const columns = [
     ),
   },
   {
-    field: 'emailId',
-    headerName: 'Email',
+    field: "emailId",
+    headerName: "Email",
     width: 190,
     editable: false,
     sortable: false,
     disableColumnMenu: true,
   },
   {
-    field: 'contactNumber',
-    headerName: 'Contact No',
-    type: 'number',
+    field: "contactNumber",
+    headerName: "Contact No",
+    type: "number",
     width: 110,
     editable: false,
     sortable: false,
     disableColumnMenu: true,
   },
   {
-    field: 'address',
-    headerName: 'Address',
-    type: 'number',
+    field: "address",
+    headerName: "Address",
+    type: "number",
     width: 110,
     editable: false,
     sortable: false,
     disableColumnMenu: true,
   },
   {
-    field: 'gender',
-    headerName: 'Gender',
-    type: 'number',
+    field: "gender",
+    headerName: "Gender",
+    type: "number",
     width: 100,
     editable: false,
     sortable: false,
     disableColumnMenu: true,
   },
   {
-    field: 'dob',
-    headerName: 'DOB',
-    type: 'number',
+    field: "dob",
+    headerName: "DOB",
+    type: "number",
     width: 120,
     editable: false,
     sortable: false,
     menubar: false,
     disableColumnMenu: true,
-    renderCell: (params) => new Date(params.row.dob).toLocaleDateString('en-US'),
+    renderCell: (params) =>
+      new Date(params.row.dob).toLocaleDateString("en-US"),
   },
   {
-    field: 'actions',
-    headerName: 'Actions',
+    field: "actions",
+    headerName: "Actions",
     editable: false,
     sortable: false,
     menubar: false,
@@ -144,7 +155,10 @@ const columns = [
     width: 90,
     disableClickEventBubbling: false,
     renderCell: (params) => (
-      <div className="d-flex justify-content-between align-items-center" style={{ cursor: 'pointer' }} padding={1}>
+      <div
+        className="d-flex justify-content-between align-items-center"
+        style={{ cursor: "pointer", padding: 1 }}
+      >
         <MatEdit index={params.row.adminId} />
         <MatDelete index={params.row.adminId} />
       </div>

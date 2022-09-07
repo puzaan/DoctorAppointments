@@ -1,17 +1,25 @@
-import PropTypes from 'prop-types';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import PropTypes from "prop-types";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 // material
 
-import { Box, Card, Stack, Container, Typography, IconButton, FormControlLabel, Chip } from '@mui/material';
-import { DataGrid } from '@mui/x-data-grid';
+import {
+  Box,
+  Card,
+  Stack,
+  Container,
+  Typography,
+  IconButton,
+  FormControlLabel,
+  Chip,
+} from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
 import EditIcon from "@mui/icons-material/Edit";
 
-
 // components
-import Page from '../components/Page';
-import { MeetingList } from '../apigetway/actions/MeetingAction';
+import Page from "../components/Page";
+import { MeetingList } from "../apigetway/actions/MeetingAction";
 
 const MatEdit = ({ index }) => {
   const navigate = useNavigate();
@@ -39,16 +47,16 @@ const MatEdit = ({ index }) => {
 };
 const columns = [
   {
-    field: 'patientName',
-    headerName: 'Full Name',
+    field: "patientName",
+    headerName: "Full Name",
     width: 160,
     editable: false,
-    alignItems: 'center',
+    alignItems: "center",
   },
   {
-    field: 'active',
-    headerName: 'Meeting',
-    type: 'boolean',
+    field: "active",
+    headerName: "Meeting",
+    type: "boolean",
     width: 110,
     editable: false,
     sortable: false,
@@ -66,25 +74,25 @@ const columns = [
   },
 
   {
-    field: 'address',
-    headerName: 'Address',
+    field: "address",
+    headerName: "Address",
     width: 140,
     editable: false,
     sortable: false,
     disableColumnMenu: true,
-    color: '#1a3e72',
+    color: "#1a3e72",
   },
   {
-    field: 'phoneNumber',
-    headerName: 'Contact No',
+    field: "phoneNumber",
+    headerName: "Contact No",
     width: 105,
     editable: false,
     sortable: false,
     disableColumnMenu: true,
   },
   {
-    field: 'age',
-    headerName: 'Date of birth',
+    field: "age",
+    headerName: "Date of birth",
     width: 130,
     editable: false,
     sortable: false,
@@ -92,34 +100,35 @@ const columns = [
   },
 
   {
-    field: 'gender',
-    headerName: 'Gender',
+    field: "gender",
+    headerName: "Gender",
     width: 80,
     editable: false,
     sortable: false,
     disableColumnMenu: true,
   },
   {
-    field: 'dataRequest',
-    headerName: 'Date',
+    field: "dataRequest",
+    headerName: "Date",
     width: 110,
     editable: false,
     sortable: false,
     disableColumnMenu: true,
     disableClickEventBubbling: false,
-    renderCell: (params) => new Date(params.row.dataRequest).toLocaleDateString('en-US'),
+    renderCell: (params) =>
+      new Date(params.row.dataRequest).toLocaleDateString("en-US"),
   },
   {
-    field: 'timeRequest',
-    headerName: 'Time',
+    field: "timeRequest",
+    headerName: "Time",
     width: 85,
     editable: false,
     sortable: false,
     disableColumnMenu: true,
   },
   {
-    field: 'actions',
-    headerName: 'View',
+    field: "actions",
+    headerName: "View",
     editable: false,
     sortable: false,
     menubar: false,
@@ -127,7 +136,10 @@ const columns = [
     width: 90,
     disableClickEventBubbling: false,
     renderCell: (params) => (
-      <div className="d-flex justify-content-between align-items-center" style={{ cursor: 'pointer' }} padding={1}>
+      <div
+        className="d-flex justify-content-between align-items-center"
+        style={{ cursor: "pointer", padding: 1 }}
+      >
         <MatEdit index={params.row.meetingId} />
       </div>
     ),
@@ -141,7 +153,7 @@ export default function DoctorBookingList() {
   const { doctorInfo } = doctorLogin;
   useEffect(() => {
     if (!doctorInfo) {
-      navigate('/doctor/login', { replace: true });
+      navigate("/doctor/login", { replace: true });
     } else {
       dispatch(MeetingList(doctorInfo.doctorId));
     }
@@ -153,7 +165,12 @@ export default function DoctorBookingList() {
   return (
     <Page title="Meeting List">
       <Container>
-        <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+          mb={5}
+        >
           <Typography variant="h4" gutterBottom>
             Meeting List
           </Typography>
@@ -163,9 +180,9 @@ export default function DoctorBookingList() {
           <Box
             sx={{
               height: 400,
-              width: '100%',
-              '& .css-40a90u-MuiDataGrid-columnHeaders ': {
-                backgroundColor: 'rgb(211,227,251)',
+              width: "100%",
+              "& .css-40a90u-MuiDataGrid-columnHeaders ": {
+                backgroundColor: "rgb(211,227,251)",
               },
             }}
           >

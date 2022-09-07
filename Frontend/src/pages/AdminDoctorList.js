@@ -217,8 +217,7 @@ const columns = [
     renderCell: (params) => (
       <div
         className="d-flex justify-content-between align-items-center"
-        style={{ cursor: "pointer" }}
-        padding={1}
+        style={{ cursor: "pointer", padding: 1 }}
       >
         <MatEdit index={params.row.doctorSinId} />
         <MatDelete index={params.row.doctorSinId} />
