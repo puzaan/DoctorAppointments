@@ -20,7 +20,7 @@ const HomePage = () => {
     getAllDoctorList();
   }, []);
   return (
-    <Page title="Form">
+    <Page title="Xyba.health">
       <FrontPageLayout />
       <Stack direction="column" spacing={1}>
         {/* <Topbar /> */}

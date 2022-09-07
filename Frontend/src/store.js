@@ -87,7 +87,7 @@ const reducer = combineReducers({
   DoctorSignupView: DoctorSignupDetailsReducer,
   DoctorApprovedList: DoctorApprovedListReducer,
   DoctorApproved: DoctorApprovedReducer,
-  DoctorNotApproved:DoctorNotApprovedListReducer,
+  DoctorNotApproved: DoctorNotApprovedListReducer,
 
   bookingList: BookingListReducer,
   bookingCancel: BookingCancelReducer,

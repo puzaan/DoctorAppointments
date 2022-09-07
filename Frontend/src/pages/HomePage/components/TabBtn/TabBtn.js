@@ -1,28 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { styled } from '@mui/system';
-import TabsUnstyled from '@mui/base/TabsUnstyled';
-import TabsListUnstyled from '@mui/base/TabsListUnstyled';
-import TabPanelUnstyled from '@mui/base/TabPanelUnstyled';
-import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
-import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
-import { LocalizationProvider } from '@mui/x-date-pickers';
-import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
-import { Box, Container } from '@mui/material';
-import { Form } from '../Form';
-import { Download } from '../Download';
-import url from '../../../../apigetway/mainUrl';
+import React from "react";
+import { styled } from "@mui/system";
+import TabsUnstyled from "@mui/base/TabsUnstyled";
+import TabsListUnstyled from "@mui/base/TabsListUnstyled";
+import TabPanelUnstyled from "@mui/base/TabPanelUnstyled";
+import { buttonUnstyledClasses } from "@mui/base/ButtonUnstyled";
+import TabUnstyled, { tabUnstyledClasses } from "@mui/base/TabUnstyled";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { Box, Container } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { Download } from "../Download";
 
 const blue = {
-  50: '#F0F7FF',
-  100: '#C2E0FF',
-  200: '#80BFFF',
-  300: '#66B2FF',
-  400: '#3399FF',
-  500: '#007FFF',
-  600: '#0072E5',
-  700: '#0059B2',
-  800: '#004C99',
-  900: '#003A75',
+  50: "#F0F7FF",
+  100: "#C2E0FF",
+  200: "#80BFFF",
+  300: "#66B2FF",
+  400: "#3399FF",
+  500: "#007FFF",
+  600: "#0072E5",
+  700: "#0059B2",
+  800: "#004C99",
+  900: "#003A75",
 };
 
 const Tab = styled(TabUnstyled)`
@@ -39,7 +38,7 @@ const Tab = styled(TabUnstyled)`
   //   border-radius: 5px;
   display: flex;
   justify-content: center;
-  background-color: ${'#5A227E'};
+  background-color: ${"#5A227E"};
 
   &:hover {
     border-color: black;
@@ -83,38 +82,27 @@ const TabsList = styled(TabsListUnstyled)`
 `;
 
 const TabBtn = () => {
-  const [allDoctorList, setAllDoctorLis] = useState([]);
-  useEffect(() => {
-    const getAllDoctorList = async () => {
-      await fetch(`${url}/api/v1/public/doctor/view/all`)
-        .then((Response) => Response.json())
-        .then((receivedData) => setAllDoctorLis(receivedData.data));
-    };
-    getAllDoctorList();
-  }, []);
+  const Navigate = useNavigate();
+
+  const onlineForm = () => {
+    Navigate("/onlineform");
+  };
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <TabsUnstyled>
         <TabsList>
-          <Tab>Online Clinic</Tab>
+          <Tab onClick={onlineForm}>Online Clinic</Tab>
           <Tab>Buzzer</Tab>
           <Tab>Doctalk</Tab>
         </TabsList>
-        <TabPanel value={0}>
-          <Box display={'flex'} justifyContent={'center'}>
-            <Container paddingBottom={'0 !important'}>
-              <Form data={allDoctorList} />
-            </Container>
-          </Box>
-        </TabPanel>
         <TabPanel value={1}>
-          <Box display={'flex'} justifyContent={'center'}>
-            <Container paddingBottom={'0 !important'}>Soon...</Container>
+          <Box display={"flex"} justifyContent={"center"}>
+            <Container paddingBottom={"0 !important"}>Soon...</Container>
           </Box>
         </TabPanel>
         <TabPanel value={2}>
-          <Box display={'flex'} justifyContent={'center'}>
-            <Container paddingBottom={'0 !important'}>
+          <Box display={"flex"} justifyContent={"center"}>
+            <Container paddingBottom={"0 !important"}>
               <Download />
             </Container>
           </Box>

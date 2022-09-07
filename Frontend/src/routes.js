@@ -42,6 +42,7 @@ import SignupDoctorView from "./pages/SignupDoctorView";
 import Specialists from "./pages/Specialists";
 import DoctorFirstTimePasswordChange from "./pages/DoctorFirstTimePasswordChange";
 import DocTalk from "./pages/DocTalk";
+import OnlineForm from "./pages/OnlineForm";
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -319,6 +320,7 @@ export default function Router() {
     { path: "/speccialist", element: <Specialists /> },
 
     { path: "/aboutus", element: <DocTalk /> },
+    { path: "/onlineform", element: <OnlineForm /> },
 
     { path: "*", element: <Navigate to="/404" replace /> },
   ]);
