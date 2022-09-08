@@ -26,6 +26,7 @@ const {
   addContactNumberByAdmin,
   removeContactNumberByAdmin,
   approveDoctor,
+  addDoctorDates,
 } = require("../controller/doctor/update");
 const {
   profileImageChange,
@@ -119,4 +120,5 @@ doctorRoute.get("/view/approved/doctor", viewApprovedDoctorRequest);
 doctorRoute.get("/view/not/approved/doctor", viewNotApprovedDoctorRequest);
 doctorRoute.put("/approve/doctor/:id", approveDoctor);
 
+doctorRoute.put("/add/date/:id", addDoctorDates);
 module.exports = { doctorRoute };

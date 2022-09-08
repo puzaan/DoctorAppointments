@@ -7,6 +7,7 @@ const {
   deleteTagById,
   viewAvailableDates,
   viewAvailableTime,
+  viewDoctorAvailableTime,
 } = require("../controller/doctor/doctorByNameAndTag");
 const { signupDoctor } = require("../controller/doctor/create");
 const multer = require("multer");
@@ -53,6 +54,7 @@ doctorPublicRoute.get("/view/signupdoc/all", viewAllSignupDoctor);
 doctorPublicRoute.delete("/signupdoc/delete/:id", deleteSignupDoctorById);
 doctorPublicRoute.put("/firstchange/password", ChangePassword);
 doctorPublicRoute.get("/view/approved/doctor", viewApprovedDoctorRequest);
+doctorPublicRoute.get("/view/time/:id", viewDoctorAvailableTime);
 
 
 module.exports = { doctorPublicRoute };

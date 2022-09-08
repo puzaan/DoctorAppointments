@@ -439,37 +439,33 @@ const ChangePassword = async (req, res) => {
   }
 };
 
-// const ChangePassword = async (req, res) => {
-//   const { email, password , newPassword} = req.body;
-//   console.log(req.body);
-//   console.log("checking for login");
-//   var data = await doctorSignupSchema.findOne({ emailId: email });
-//   try {
-//     if (data) {
-//       const dbdata = data["password"];
+const addDoctorDates = (req, res) => {
+  const doctorSinId = req.params.id;
+  const date = req.query.date;
+  const time = req.query.time;
 
-//       const compdata = bcrypt.compareSync(password, dbdata);
-//       //let token=jwt.sign({username:data["fullName"],email:data["emailId"]},secretKey);
-
-//       // await doctorSchema.findOneAndUpdate({"emailId":data["emailId"]},{"token":token});
-//       const tempdata = await doctorSignupSchema.findOne({
-//         email: data["email"],
-//       });
-//       if (compdata) {
-//         res.status(200).json({ status: "Success", data: tempdata });
-//       } else {
-//         res
-//           .status(400)
-//           .json({ status: "Fail", msg: "Valid Email but invalid password" });
-//       }
-//     } else {
-//       res.status(400).json({ status: "Fail", msg: "No user with given Email" });
-//     }
-//   } catch (error) {
-//     console.log(error);
-//     res.status(400).json({ status: "Fail", msg: "Error in Login" });
-//   }
-// };
+  doctorSignupSchema
+    .findOne({ doctorSinId: doctorSinId })
+    .exec(async (error, done) => {
+      if (error) {
+        res.status(500).json({ msg: "Server Error" });
+        return;
+      }
+      if (done) {
+        await doctorSignupSchema.findOneAndUpdate(
+          { doctorSinId: done.doctorSinId },
+          { $push: { available_dates: { date: date, timeslot: time } } }
+        );
+        const tempData = await doctorSignupSchema.findOne({
+          doctorSinId: done.doctorSinId,
+        });
+        res.status(200).json({ msg: "New Date Added", data: tempData });
+      } else {
+        res.status(400).json({ msg: "No data found for given Id" });
+        return;
+      }
+    });
+};
 
 module.exports = {
   updatePassword,
@@ -486,4 +482,5 @@ module.exports = {
   deleteDates,
   approveDoctor,
   ChangePassword,
+  addDoctorDates,
 };
