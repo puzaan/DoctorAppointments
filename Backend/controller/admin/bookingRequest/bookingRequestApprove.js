@@ -100,6 +100,7 @@ const deleteBookingRequest=(req,res)=>{
         if(done){
             res.status(200).json({"msg":"Booking Request Deleted!!","data":done})
         }else{
+            console.log(error)
             res.status(400).json({"msg":"Booking request Id Invalid"})
         }
     });

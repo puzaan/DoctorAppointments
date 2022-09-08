@@ -7,7 +7,7 @@ import { Stack, TextField, MenuItem, AlertTitle, Box } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import Alert from "@mui/material/Alert";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useSelector, useDispatch } from "react-redux";

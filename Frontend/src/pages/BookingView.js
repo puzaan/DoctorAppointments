@@ -92,16 +92,21 @@ export default function BookingView() {
           ) : (
             <>
               <SectionStyle>
-                <Typography variant="h4" gutterBottom align="center" marginTop={1}>
+                <Typography
+                  variant="h4"
+                  gutterBottom
+                  align="center"
+                  marginTop={1}
+                >
                   Booking Details
                 </Typography>
                 <Divider sx={{ my: 1 }}>
-                  <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                  <Typography variant="body2" sx={{ color: "text.secondary" }}>
                     ..
                   </Typography>
                 </Divider>
 
-                <Box display={'flex'} alignItems={'center'} paddingLeft={1}>
+                <Box display={"flex"} alignItems={"center"} paddingLeft={1}>
                   <Typography variant="h6" gutterBottom paddingRight={1}>
                     Full Name:
                   </Typography>
@@ -109,7 +114,7 @@ export default function BookingView() {
                     {booking.fullName}
                   </Typography>
                 </Box>
-                <Box display={'flex'} alignItems={'center'} paddingLeft={1}>
+                <Box display={"flex"} alignItems={"center"} paddingLeft={1}>
                   <Typography variant="h6" gutterBottom paddingRight={1}>
                     Contact Number:
                   </Typography>
@@ -118,7 +123,7 @@ export default function BookingView() {
                   </Typography>
                 </Box>
 
-                <Box display={'flex'} alignItems={'center'} paddingLeft={1}>
+                <Box display={"flex"} alignItems={"center"} paddingLeft={1}>
                   <Typography variant="h6" gutterBottom paddingRight={1}>
                     Email Id:
                   </Typography>
@@ -126,7 +131,7 @@ export default function BookingView() {
                     {booking.email}
                   </Typography>
                 </Box>
-                <Box display={'flex'} alignItems={'center'} paddingLeft={1}>
+                <Box display={"flex"} alignItems={"center"} paddingLeft={1}>
                   <Typography variant="h6" gutterBottom paddingRight={1}>
                     Address:
                   </Typography>
@@ -134,7 +139,7 @@ export default function BookingView() {
                     {booking.address}
                   </Typography>
                 </Box>
-                <Box display={'flex'} alignItems={'center'} paddingLeft={1}>
+                <Box display={"flex"} alignItems={"center"} paddingLeft={1}>
                   <Typography variant="h6" gutterBottom paddingRight={1}>
                     Message:
                   </Typography>
@@ -142,7 +147,7 @@ export default function BookingView() {
                     {booking.message}
                   </Typography>
                 </Box>
-                <Box display={'flex'} alignItems={'center'} paddingLeft={1}>
+                <Box display={"flex"} alignItems={"center"} paddingLeft={1}>
                   <Typography variant="h6" gutterBottom paddingRight={1}>
                     Occupation:
                   </Typography>
@@ -150,7 +155,7 @@ export default function BookingView() {
                     {booking.occupation}
                   </Typography>
                 </Box>
-                <Box display={'flex'} alignItems={'center'} paddingLeft={1}>
+                <Box display={"flex"} alignItems={"center"} paddingLeft={1}>
                   <Typography variant="h6" gutterBottom paddingRight={1}>
                     Booking Date:
                   </Typography>
@@ -158,7 +163,7 @@ export default function BookingView() {
                     {booking.bookingdate}
                   </Typography>
                 </Box>
-                <Box display={'flex'} alignItems={'center'} paddingLeft={1}>
+                <Box display={"flex"} alignItems={"center"} paddingLeft={1}>
                   <Typography variant="h6" gutterBottom paddingRight={1}>
                     Time:
                   </Typography>
@@ -166,7 +171,7 @@ export default function BookingView() {
                     {booking.timeslot}
                   </Typography>
                 </Box>
-                <Box display={'flex'} alignItems={'center'} paddingLeft={1}>
+                <Box display={"flex"} alignItems={"center"} paddingLeft={1}>
                   <Typography variant="h6" gutterBottom paddingRight={1}>
                     Sex:
                   </Typography>
@@ -174,7 +179,7 @@ export default function BookingView() {
                     {booking.sex}
                   </Typography>
                 </Box>
-                <Box display={'flex'} alignItems={'center'} paddingLeft={1}>
+                <Box display={"flex"} alignItems={"center"} paddingLeft={1}>
                   <Typography variant="h6" gutterBottom paddingRight={1}>
                     DOB:
                   </Typography>
@@ -182,22 +187,31 @@ export default function BookingView() {
                     {booking.age}
                   </Typography>
                 </Box>
-                <Box display={'flex'} alignItems={'center'} paddingLeft={1}>
+                <Box display={"flex"} alignItems={"center"} paddingLeft={1}>
                   <Typography variant="h6" gutterBottom paddingRight={1}>
                     Doctor Id:
                   </Typography>
                   <Typography variant="body1" gutterBottom>
-                    {booking.doctorId}
+                    {booking.doctorSinId}
                   </Typography>
                 </Box>
               </SectionStyle>
-              <Stack direction="row" spacing={2} justifyContent={'center'}>
+              <Stack direction="row" spacing={2} justifyContent={"center"}>
                 {booking.approved ? (
-                  <Button variant="contained" startIcon={<CancelIcon />} color="error" onClick={() => calcel()}>
+                  <Button
+                    variant="contained"
+                    startIcon={<CancelIcon />}
+                    color="error"
+                    onClick={() => calcel()}
+                  >
                     Cancel
                   </Button>
                 ) : (
-                  <Button variant="outlined" startIcon={<DoneIcon />} onClick={() => accept()}>
+                  <Button
+                    variant="outlined"
+                    startIcon={<DoneIcon />}
+                    onClick={() => accept()}
+                  >
                     Accept
                   </Button>
                 )}
@@ -205,8 +219,12 @@ export default function BookingView() {
             </>
           )}
           {bookingError && <Error>{bookingError}</Error>}
-          <Typography variant="body2" sx={{ mt: 3, textAlign: 'center' }}>
-            <Link variant="subtitle2" to="/admin/booking" component={RouterLink}>
+          <Typography variant="body2" sx={{ mt: 3, textAlign: "center" }}>
+            <Link
+              variant="subtitle2"
+              to="/admin/booking"
+              component={RouterLink}
+            >
               Go Back
             </Link>
           </Typography>

@@ -13,7 +13,7 @@ const bookingSchemaa=new mongoose.Schema({
     "contact":String,
     "email":String,
     "address":String,
-    "doctorId":String,
+    "doctorSinId":String,
     "bookingdate":Date,
     "timeslot":String,
     "approved":{

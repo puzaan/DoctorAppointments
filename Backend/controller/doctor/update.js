@@ -1,4 +1,6 @@
 const { doctorSchema } = require("../../database/doctor_schema");
+const jwt = require("jsonwebtoken");
+const { secretKey } = require("../../constants/jsonSecretKey");
 const bcrypt = require("bcryptjs");
 const { doctorSignupSchema } = require("../../database/doctor_signup_schema");
 const {
@@ -424,10 +426,21 @@ const ChangePassword = async (req, res) => {
         return;
       }
       if (done) {
+        console.log(done.fullName, done.email);
+
+        const savetoken = jwt.sign(
+          { fullName: done.fullName, email: done.email },
+          secretKey
+        );
         const newData = await doctorSignupSchema.findOneAndUpdate(
           { email: email },
-          { passwordChanged: true, password: hashPassword }
+          {
+            passwordChanged: true,
+            password: hashPassword,
+            token: savetoken,
+          }
         );
+        // console.log(newData);
         doctorFirstPasswordChangeEmailSender(req, email, password);
         res.status(200).json({ msg: "Your password changed Successful!!" });
       } else {

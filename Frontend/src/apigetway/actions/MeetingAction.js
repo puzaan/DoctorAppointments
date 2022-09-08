@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 import {
   MEETING_CREATE_FAIL,
   MEETING_CREATE_REQUEST,
@@ -9,9 +9,9 @@ import {
   MEETING_LIST_FAIL,
   MEETING_LIST_REQUEST,
   MEETING_LIST_SUCCESS,
-} from '../constants/MeetingConstants';
-import url from '../mainUrl';
-import { DoctorLogout } from './DoctorAction';
+} from "../constants/MeetingConstants";
+import url from "../mainUrl";
+import { DoctorLogout } from "./DoctorAction";
 
 export const CreateMeeting =
   (
@@ -40,7 +40,7 @@ export const CreateMeeting =
       const config = {
         headers: {
           API_KEY: `${adminInfo.token}`,
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       };
 
@@ -66,8 +66,11 @@ export const CreateMeeting =
         payload: data,
       });
     } catch (error) {
-      const message = error.response && error.response.msg ? error.response.msg : error.message;
-      if (message === 'No valid api Key Used') {
+      const message =
+        error.response && error.response.msg
+          ? error.response.msg
+          : error.message;
+      if (message === "No valid api Key Used") {
         dispatch(DoctorLogout());
       }
       dispatch({
@@ -90,7 +93,7 @@ export const MeetingView = (id) => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: doctorInfo.token,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
 
@@ -103,8 +106,11 @@ export const MeetingView = (id) => async (dispatch, getState) => {
       payload: data,
     });
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(DoctorLogout());
     }
     dispatch({
@@ -124,18 +130,24 @@ export const MeetingList = (id) => async (dispatch, getState) => {
     const config = {
       headers: {
         API_KEY: doctorInfo.token,
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     };
-    const { data } = await axios.get(`${url}/api/v1/meeting/view/${id}`, config);
+    const { data } = await axios.get(
+      `${url}/api/v1/meeting/view/${id}`,
+      config
+    );
 
     dispatch({
       type: MEETING_LIST_SUCCESS,
       payload: data.data,
     });
   } catch (error) {
-    const message = error.response && error.response.data.msg ? error.response.data.msg : error.message;
-    if (message === 'No valid api Key Used') {
+    const message =
+      error.response && error.response.data.msg
+        ? error.response.data.msg
+        : error.message;
+    if (message === "No valid api Key Used") {
       dispatch(DoctorLogout());
     }
     dispatch({

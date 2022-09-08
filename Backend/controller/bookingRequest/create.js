@@ -1,4 +1,4 @@
-// const { bookingSchema } = require("../../database/booking_schema");
+const { bookingSchema } = require("../../database/booking_schema");
 const { doctorSignupSchema } = require("../../database/doctor_signup_schema");
 
 const createBooking = (req, res) => {
@@ -23,8 +23,7 @@ const createBooking = (req, res) => {
         return;
       }
       if (done) {
-        console.log(occupation);
-        doctorSignupSchema.create(
+        bookingSchema.create(
           {
             fullName: fullName,
             occupation: occupation,

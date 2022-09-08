@@ -296,6 +296,25 @@ const viewPdfToClient = (req, res) => {
   });
 };
 
+const deleteMeeting = async (req, res) => {
+  const meetingId = req.params.id;
+  try {
+    const meetingData = await meetingSchema.findOneAndDelete({
+      meetingId: meetingId,
+    });
+    if (meetingData) {
+      res.status(200).json({ status: "Success", msg: "meeting Deleted" });
+    } else {
+      res
+        .status(400)
+        .json({ status: "Fail", msg: "No user Found for Given Id" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ status: "Fail", msg: "Error in Deleting meeting" });
+  }
+};
+
 module.exports = {
   createMeeting,
   updatePrescription,
@@ -305,4 +324,5 @@ module.exports = {
   viewForGivenMeetingId,
   sendPdfToClient,
   viewPdfToClient,
+  deleteMeeting,
 };

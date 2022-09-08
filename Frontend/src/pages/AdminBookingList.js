@@ -76,7 +76,7 @@ const columns = [
   },
 
   {
-    field: "doctorId",
+    field: "doctorSinId",
     headerName: "Doctori Id",
     width: 130,
     editable: false,

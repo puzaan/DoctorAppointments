@@ -1,7 +1,7 @@
 const express = require('express');
 const {adminVerification,adminDoctorVerification}=require("../middleware/adminVerification");
 const meetingRouter=express.Router();
-const {createMeeting,updatePrescription,viewAllMeeting,viewPdfToClient,viewForGivenDoctorId,viewActiveMeetingForGivenDoctorId,viewForGivenMeetingId,sendPdfToClient}=require("../controller/meeting/create");
+const {createMeeting,updatePrescription,viewAllMeeting,viewPdfToClient,viewForGivenDoctorId,viewActiveMeetingForGivenDoctorId,viewForGivenMeetingId,sendPdfToClient, deleteMeeting}=require("../controller/meeting/create");
 meetingRouter.post("/create",adminDoctorVerification,createMeeting);
 //prescription update using this link
 //after prescription is updated meeting is closed
@@ -22,6 +22,13 @@ meetingRouter.get("/view/active/:id",adminDoctorVerification,viewActiveMeetingFo
 meetingRouter.get("/view/:id",adminDoctorVerification,viewForGivenDoctorId);
 //view meeting detail by meeting Id
 meetingRouter.get("/view/meeting/:id",adminDoctorVerification,viewForGivenMeetingId);
+
+//delete meetinh
+meetingRouter.delete(
+  "/delete/meeting/:id",
+  adminDoctorVerification,
+  deleteMeeting
+);
 
 
 

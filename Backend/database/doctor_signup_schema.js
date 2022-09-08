@@ -63,8 +63,6 @@ const doctorSignupScheemaForMeeting = new mongoose.Schema(
   {
     doctorSinId: {
       type: String,
-      default: Date.now,
-      unique: true,
     },
     fullName: String,
     email: String,
