@@ -25,6 +25,9 @@ export default function DoctorFirstChangePassword() {
   const doctorPasswordChange = useSelector(
     (state) => state.doctorPasswordChange
   );
+
+  const doctorLogin = useSelector((state) => state.doctorLogin);
+  const { doctorInfo } = doctorLogin;
   const { error: errorData, success } = doctorPasswordChange;
 
   const ForgotSchema = Yup.object().shape({
@@ -72,6 +75,10 @@ export default function DoctorFirstChangePassword() {
     if (success) {
       dispatch({ type: DOCTOR_PASSWORD_CHANGE_RESET });
       navigate("/doctor/login", { replace: true });
+    }
+
+    if (doctorInfo.passwordChanged) {
+      navigate("/doctor/booking", { replace: true });
     }
   });
   return (
