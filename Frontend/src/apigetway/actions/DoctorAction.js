@@ -960,10 +960,13 @@ export const DoctorLogin = (email, password) => async (dispatch) => {
       type: DOCTOR_LOGIN_REQUEST,
     });
 
-    const { data } = await axios.post(`${url}/api/v1/auth/doctor/login`, {
-      email,
-      password,
-    });
+    const { data } = await axios.post(
+      `${url}/api/v1/auth/doctor/login/newDoctor`,
+      {
+        email,
+        password,
+      }
+    );
     dispatch({
       type: DOCTOR_LOGIN_SUCESS,
       playload: data.data,
