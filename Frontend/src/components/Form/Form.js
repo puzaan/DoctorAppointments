@@ -139,20 +139,16 @@ const Form = (props) => {
     );
   }, [formik.values.timeslot]);
 
-  // console.log(fulltime);
   useEffect(() => {
     const getTimelist = async () => {
       await fetch(
-        `${url}/api/v1/public/doctor/view/timestamp/${formik.values.doctorSinId}?date=${fulldate}`
+        `${url}/api/v1/public/doctor/view/time/${formik.values.doctorSinId}?date=${fulldate}`
       )
         .then((Response) => Response.json())
         .then((receivedData) => setTimeList(receivedData.data));
     };
     getTimelist();
-  }, [
-    // formik.values.doctorSinId,
-    fulldate,
-  ]);
+  }, [formik.values.doctorSinId, fulldate]);
   // const multipleFileChange = (e) => {
   //   setMultipleFile(e.target.files);
   // };
