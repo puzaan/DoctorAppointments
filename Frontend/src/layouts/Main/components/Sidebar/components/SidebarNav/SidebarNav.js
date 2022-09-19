@@ -28,7 +28,7 @@ const SidebarNav = () => {
   const healthTech = [
     {
       title: "DocTalk",
-      link: "/aboutus",
+      link: "/doctalk",
     },
     {
       title: "Buzzer",

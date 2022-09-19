@@ -48,7 +48,7 @@ export default function DashboardNavbar({ onOpenSidebar }) {
   const healthTech = [
     {
       title: "DocTalk",
-      href: "/aboutus",
+      href: "/doctalk",
     },
     {
       title: "Buzzer",

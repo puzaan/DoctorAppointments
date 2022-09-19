@@ -1,5 +1,6 @@
 const { doctorSchema } = require("../../database/doctor_schema");
 const { doctorSignupSchema } = require("../../database/doctor_signup_schema");
+const { testSmsSender } = require("../../middleware/smsSender");
 
 const viewAllDoctor = (req, res) => {
   doctorSchema.find({}).exec((error, done) => {
@@ -16,6 +17,7 @@ const viewAllSignupDoctor = (req, res) => {
     if (error) {
       res.status(500).json({ msg: "Server Error" });
     } else {
+      testSmsSender();
       res.status(200).json({ msg: "All Doctor data fetched", data: done });
     }
   });

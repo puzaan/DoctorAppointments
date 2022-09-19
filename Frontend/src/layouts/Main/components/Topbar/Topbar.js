@@ -13,7 +13,7 @@ import NavItem from "./NavItem";
 const healthTech = [
   {
     title: "DocTalk",
-    href: "/aboutus",
+    href: "/doctalk",
   },
   {
     title: "Buzzer",

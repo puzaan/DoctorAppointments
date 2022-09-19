@@ -31,6 +31,7 @@
     "pdfkit": "^0.13.0",
     "pdfreader": "^2.0.0",
     "socket.io": "^4.5.1",
+    "twilio": "^3.82.0",
     "xss-clean": "^0.1.1"
   }
 }

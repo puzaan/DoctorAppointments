@@ -319,7 +319,7 @@ export default function Router() {
     { path: "/form", element: <HomePage /> },
     { path: "/speccialist", element: <Specialists /> },
 
-    { path: "/aboutus", element: <DocTalk /> },
+    { path: "/doctalk", element: <DocTalk /> },
     { path: "/onlineform", element: <OnlineForm /> },
 
     { path: "*", element: <Navigate to="/404" replace /> },

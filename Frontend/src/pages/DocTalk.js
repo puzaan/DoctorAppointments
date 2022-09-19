@@ -147,7 +147,7 @@ const DocTalk = () => {
                     align="center"
                     sx={{ fontWeight: 700 }}
                   >
-                    About Us
+                    About DocTalk
                   </Typography>
                   <Typography component={"p"} align="justify">
                     We address Medical Data loss in Nepal and South Asia.
