@@ -44,7 +44,8 @@ const TopNavItem = ({ title, id, items, colorInvert = false }) => {
       >
         <Typography
           //   fontWeight={openedPopoverId === id || hasActiveLink() ? 700 : 400}
-          variant="h6"
+          variant="body1"
+          fontWeight={700}
           color={linkColor}
         >
           {title}

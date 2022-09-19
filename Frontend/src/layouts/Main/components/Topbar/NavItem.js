@@ -45,8 +45,9 @@ const NavItem = ({ title, id, items, colorInvert = false }) => {
         onClick={(e) => handleClick(e, id)}
       >
         <Typography
+          fontWeight={700}
           //   fontWeight={openedPopoverId === id || hasActiveLink() ? 700 : 400}
-          variant="h6"
+          variant="body1"
           color={linkColor}
         >
           {title}

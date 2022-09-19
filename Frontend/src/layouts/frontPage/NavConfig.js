@@ -1,6 +1,7 @@
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 import InfoIcon from "@mui/icons-material/Info";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
+import GavelIcon from "@mui/icons-material/Gavel";
 
 const navConfig = [
   {
@@ -22,6 +23,11 @@ const navConfig = [
     title: "Our Partner Clinics",
     path: "/",
     icon: <LocalHospitalIcon />,
+  },
+  {
+    title: "Privacy Policy",
+    path: "/",
+    icon: <GavelIcon />,
   },
 ];
 

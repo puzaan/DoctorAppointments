@@ -5,6 +5,7 @@ import { styled } from "@mui/material/styles";
 import { Box, Drawer, Button } from "@mui/material";
 import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
 import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
+import ContactSupportIcon from "@mui/icons-material/ContactSupport";
 // mock
 // hooks
 import useResponsive from "../../hooks/useResponsive";
@@ -15,7 +16,8 @@ import NavSection from "../../components/NavSection";
 //
 import navConfig from "./NavConfig";
 import NavItem from "./NavItem";
-
+import NavItem2 from "../Main/components/Sidebar/components/SidebarNav/NavItem2";
+import pages from "../pages";
 // ----------------------------------------------------------------------
 
 const DRAWER_WIDTH = 280;
@@ -37,32 +39,6 @@ DashboardSidebar.propTypes = {
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const isDesktop = useResponsive("up", "lg");
 
-  const SocialMedia = [
-    {
-      title: "Facebook",
-      link: "https://www.facebook.com/Xyba-Health-106379275529379",
-    },
-    {
-      title: "Youtube",
-      link: "https://www.youtube.com/channel/UCEZxPozsMFLcLhlmnhYGmSg/featured",
-    },
-    {
-      title: "Tiktork",
-      link: "https://www.tiktok.com/@xybahealth?is_from_webapp=1&sender_device=pc",
-    },
-  ];
-
-  const healthTech = [
-    {
-      title: "DocTalk",
-      link: "/doctalk",
-    },
-    {
-      title: "Buzzer",
-      link: "/",
-    },
-  ];
-
   const renderContent = (
     <Scrollbar
       sx={{
@@ -80,18 +56,23 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       <NavSection navConfig={navConfig} />
       <NavItem
         title={"Our Health Teach"}
-        items={healthTech}
+        items={pages.healthTech}
         icon={<HealthAndSafetyIcon color={"primary"} sx={{ marginRight: 2 }} />}
       />
-      <NavItem
+      <NavItem2
         title={"Social Media"}
-        items={SocialMedia}
+        items={pages.SocialMedia}
         icon={
           <ConnectWithoutContactIcon
             color={"primary"}
             sx={{ marginRight: 2 }}
           />
         }
+      />
+      <NavItem
+        title={"Contact Us"}
+        items={pages.contactUs}
+        icon={<ContactSupportIcon color={"primary"} sx={{ marginRight: 2 }} />}
       />
       <Box sx={{ flexGrow: 1 }} />
       <Box marginBottom={5} padding={2}>

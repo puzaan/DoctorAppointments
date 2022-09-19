@@ -9,17 +9,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Typography } from "@mui/material";
 
 import NavItem from "./NavItem";
-
-const healthTech = [
-  {
-    title: "DocTalk",
-    href: "/doctalk",
-  },
-  {
-    title: "Buzzer",
-    href: "/",
-  },
-];
+import NavItem2 from "./NavItem2";
+import pages from "../../../pages";
 
 const Topbar = ({ onSidebarOpen }) => {
   const theme = useTheme();
@@ -62,11 +53,12 @@ const Topbar = ({ onSidebarOpen }) => {
         <Box marginRight={2}>
           <Typography
             // style={{ textDecoration: 'underline' }}
+            fontWeight={700}
             color={"text.primary"}
             component={Link}
             to="/"
             align="center"
-            variant="h6"
+            variant="body1"
           >
             About Us
           </Typography>
@@ -74,11 +66,12 @@ const Topbar = ({ onSidebarOpen }) => {
         <Box marginRight={2}>
           <Typography
             // style={{ textDecoration: 'underline' }}
+            fontWeight={700}
             color={"text.primary"}
             component={Link}
             to="/speccialist"
             align="center"
-            variant="h6"
+            variant="body1"
           >
             Our Specialists
           </Typography>
@@ -87,23 +80,54 @@ const Topbar = ({ onSidebarOpen }) => {
           <NavItem
             title={"Our Health Tech"}
             id={"Health-Tech"}
-            items={healthTech}
+            items={pages.healthTech}
+            colorInvert={false}
+          />
+        </Box>
+
+        <Box marginRight={2}>
+          <Typography
+            // style={{ textDecoration: 'underline' }}
+            fontWeight={700}
+            color={"text.primary"}
+            component={Link}
+            to="/"
+            align="center"
+            variant="body1"
+          >
+            Our Partner Clinics
+          </Typography>
+        </Box>
+        <Box marginRight={2}>
+          <NavItem
+            title={"Contact Us"}
+            id={"contact-us"}
+            items={pages.contactUs}
+            colorInvert={false}
+          />
+        </Box>
+        <Box marginRight={2}>
+          <NavItem2
+            title={"Social Media"}
+            id={"social-media"}
+            items={pages.SocialMedia}
             colorInvert={false}
           />
         </Box>
         <Box marginRight={2}>
           <Typography
             // style={{ textDecoration: 'underline' }}
+            fontWeight={700}
             color={"text.primary"}
             component={Link}
             to="/"
             align="center"
-            variant="h6"
+            variant="body1"
           >
-            Our Partner Clinics
+            Privacy Policy
           </Typography>
         </Box>
-        <Box marginRight={2}>
+        {/* <Box marginRight={2}>
           <Button
             variant="outlined"
             component={Link}
@@ -115,7 +139,7 @@ const Topbar = ({ onSidebarOpen }) => {
           >
             LogIn
           </Button>
-        </Box>
+        </Box> */}
       </Box>
       <Box sx={{ display: { xs: "block", md: "none" } }} alignItems={"center"}>
         <Button

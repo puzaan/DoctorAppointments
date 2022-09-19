@@ -1,16 +1,12 @@
 import PropTypes from "prop-types";
 // material
 import { alpha, styled } from "@mui/material/styles";
-import {
-  Box,
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-} from "@mui/material";
+import { Box, AppBar, Toolbar, Typography, Button } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link } from "react-router-dom";
 import TopNavItem from "./TopNavItem";
+import NavItem2 from "../Main/components/Topbar/NavItem2";
+import pages from "../pages";
 
 // components
 //
@@ -45,16 +41,6 @@ DashboardNavbar.propTypes = {
 };
 
 export default function DashboardNavbar({ onOpenSidebar }) {
-  const healthTech = [
-    {
-      title: "DocTalk",
-      href: "/doctalk",
-    },
-    {
-      title: "Buzzer",
-      href: "/",
-    },
-  ];
   return (
     <RootStyle>
       <ToolbarStyle>
@@ -103,7 +89,8 @@ export default function DashboardNavbar({ onOpenSidebar }) {
                   component={Link}
                   to="/"
                   align="center"
-                  variant="h6"
+                  variant="body1"
+                  fontWeight={700}
                 >
                   About Us
                 </Typography>
@@ -115,7 +102,8 @@ export default function DashboardNavbar({ onOpenSidebar }) {
                   component={Link}
                   to="/speccialist"
                   align="center"
-                  variant="h6"
+                  variant="body1"
+                  fontWeight={700}
                 >
                   Our Specialists
                 </Typography>
@@ -136,7 +124,37 @@ export default function DashboardNavbar({ onOpenSidebar }) {
                 <TopNavItem
                   title={"Our Health Tech"}
                   id={"Health-Tech"}
-                  items={healthTech}
+                  items={pages.healthTech}
+                  colorInvert={false}
+                />
+              </Box>
+
+              <Box marginRight={2}>
+                <Typography
+                  // style={{ textDecoration: 'underline' }}
+                  color={"text.primary"}
+                  component={Link}
+                  to="/"
+                  align="center"
+                  variant="body1"
+                  fontWeight={700}
+                >
+                  Our Partner Clinics
+                </Typography>
+              </Box>
+              <Box marginRight={2}>
+                <TopNavItem
+                  title={"Contact Us"}
+                  id={"Contact-Us"}
+                  items={pages.contactUs}
+                  colorInvert={false}
+                />
+              </Box>
+              <Box marginRight={2}>
+                <NavItem2
+                  title={"Social Media"}
+                  id={"Social-Media"}
+                  items={pages.SocialMedia}
                   colorInvert={false}
                 />
               </Box>
@@ -147,9 +165,10 @@ export default function DashboardNavbar({ onOpenSidebar }) {
                   component={Link}
                   to="/"
                   align="center"
-                  variant="h6"
+                  variant="body1"
+                  fontWeight={700}
                 >
-                  Our Partner Clinics
+                  Privacy Policy
                 </Typography>
               </Box>
             </Box>
