@@ -37,8 +37,11 @@ const HomePage = () => {
         <Box>
           <TabBtn />
         </Box>
+        <MessengerCustomerChat
+          pageId="106379275529379"
+          appId="766303111325817"
+        />
       </Stack>
-      <MessengerCustomerChat pageId="106379275529379" appId="766303111325817" />
     </Page>
   );
 };

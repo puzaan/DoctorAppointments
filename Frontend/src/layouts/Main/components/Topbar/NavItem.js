@@ -9,8 +9,6 @@ import Grid from "@mui/material/Grid";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Link } from "react-router-dom";
 
-
-
 const NavItem = ({ title, id, items, colorInvert = false }) => {
   const theme = useTheme();
 
@@ -93,6 +91,7 @@ const NavItem = ({ title, id, items, colorInvert = false }) => {
           {items.map((p, i) => (
             <Grid item key={i} xs={items.length > 12 ? 6 : 12}>
               <Button
+                startIcon={p.icon}
                 size={"large"}
                 component={Link}
                 to={p.href}

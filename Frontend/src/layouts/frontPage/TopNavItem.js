@@ -91,6 +91,7 @@ const TopNavItem = ({ title, id, items, colorInvert = false }) => {
           {items.map((p, i) => (
             <Grid item key={i} xs={items.length > 12 ? 6 : 12}>
               <Button
+                startIcon={p.icon}
                 size={"large"}
                 component={Link}
                 to={p.href}

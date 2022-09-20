@@ -89,7 +89,15 @@ const NavItem2 = ({ title, id, items, colorInvert = false }) => {
         <Grid container spacing={0.5}>
           {items.map((p, i) => (
             <Grid item key={i} xs={items.length > 12 ? 6 : 12}>
+              {/* <IconButton
+                aria-label="delete"
+                size={"large"}
+                sx={{ color: (theme) => theme.palette.primary.facebook }}
+              >
+                <FacebookIcon sx={{ fontSize: "20px" }} />
+              </IconButton> */}
               <Button
+                startIcon={p.icon}
                 size={"large"}
                 component={"a"}
                 href={p.href}

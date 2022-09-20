@@ -48,6 +48,7 @@ const NavItem2 = ({ title, items, icon }) => {
             {items.map((p, i) => (
               <Grid item key={i} xs={12}>
                 <Button
+                  startIcon={p.icon}
                   size={"large"}
                   component={"a"}
                   href={p.href}
