@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { Box, Stack } from "@mui/material";
+import MessengerCustomerChat from "react-messenger-customer-chat";
 import { SearchBar } from "./components/SearchBar";
 import { TabBtn } from "./components/TabBtn";
 import { Logo } from "./components/Logo";
@@ -37,6 +38,7 @@ const HomePage = () => {
           <TabBtn />
         </Box>
       </Stack>
+      <MessengerCustomerChat pageId="106379275529379" appId="766303111325817" />
     </Page>
   );
 };
