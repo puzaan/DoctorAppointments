@@ -6,10 +6,10 @@ import Button from "@mui/material/Button";
 import ConnectWithoutContactIcon from "@mui/icons-material/ConnectWithoutContact";
 import HealthAndSafetyIcon from "@mui/icons-material/HealthAndSafety";
 import NavSection from "../../../../../../components/NavSection";
-import navConfig from "../../NavConfig";
 import NavItem from "./NavItem";
 import NavItem2 from "./NavItem2";
 import pages from "../../../../../pages";
+import navConfig from "../../../../../NavConfig";
 
 const SidebarNav = () => (
   <Box>

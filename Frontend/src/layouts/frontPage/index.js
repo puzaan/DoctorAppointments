@@ -36,7 +36,8 @@ export default function FrontPageLayout() {
   const [open, setOpen] = useState(false);
 
   return (
-    <RootStyle>
+    // <RootStyle>
+    <>
       <DashboardNavbar onOpenSidebar={() => setOpen(true)} />
       <DashboardSidebar
         isOpenSidebar={open}
@@ -45,6 +46,7 @@ export default function FrontPageLayout() {
       <MainStyle>
         <Outlet />
       </MainStyle>
-    </RootStyle>
+    </>
+    // </RootStyle>
   );
 }

@@ -120,7 +120,7 @@ const Topbar = ({ onSidebarOpen }) => {
             fontWeight={700}
             color={"text.primary"}
             component={Link}
-            to="/"
+            to="/privacypolicy"
             align="center"
             variant="body1"
           >

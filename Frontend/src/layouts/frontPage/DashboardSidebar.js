@@ -14,10 +14,10 @@ import Logo from "../../components/Logo";
 import Scrollbar from "../../components/Scrollbar";
 import NavSection from "../../components/NavSection";
 //
-import navConfig from "./NavConfig";
 import NavItem from "./NavItem";
 import NavItem2 from "../Main/components/Sidebar/components/SidebarNav/NavItem2";
 import pages from "../pages";
+import navConfig from "../NavConfig";
 // ----------------------------------------------------------------------
 
 const DRAWER_WIDTH = 280;

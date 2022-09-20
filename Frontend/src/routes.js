@@ -43,6 +43,7 @@ import Specialists from "./pages/Specialists";
 import DoctorFirstTimePasswordChange from "./pages/DoctorFirstTimePasswordChange";
 import DocTalk from "./pages/DocTalk";
 import OnlineForm from "./pages/OnlineForm";
+import { PrivacyPolicy } from "./pages/PrivacyPolicy";
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -321,6 +322,7 @@ export default function Router() {
 
     { path: "/doctalk", element: <DocTalk /> },
     { path: "/onlineform", element: <OnlineForm /> },
+    { path: "/privacypolicy", element: <PrivacyPolicy /> },
 
     { path: "*", element: <Navigate to="/404" replace /> },
   ]);
