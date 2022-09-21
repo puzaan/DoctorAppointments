@@ -96,7 +96,6 @@ export const MeetingView = (id) => async (dispatch, getState) => {
         "Content-Type": "application/json",
       },
     };
-
     const { data } = await axios.get(
       `${url}/api/v1/meeting/view/meeting/${id}`,
       config
@@ -119,6 +118,8 @@ export const MeetingView = (id) => async (dispatch, getState) => {
     });
   }
 };
+
+// api/v1/meeting/view/
 
 export const MeetingList = (id) => async (dispatch, getState) => {
   try {

@@ -155,7 +155,7 @@ export default function DoctorBookingList() {
     if (!doctorInfo) {
       navigate("/doctor/login", { replace: true });
     } else {
-      dispatch(MeetingList(doctorInfo.doctorId));
+      dispatch(MeetingList(doctorInfo.doctorSinId));
     }
   }, [dispatch, navigate, doctorInfo]);
 
