@@ -99,7 +99,7 @@ const Topbar = ({ onSidebarOpen }) => {
           </Typography>
         </Box>
         <Box marginRight={2}>
-          <NavItem
+          <NavItem2
             title={"Contact Us"}
             id={"contact-us"}
             items={pages.contactUs}

@@ -43,7 +43,7 @@ const SidebarNav = () => (
         }
       />
 
-      <NavItem
+      <NavItem2
         title={"Contact Us"}
         items={pages.contactUs}
         icon={<HealthAndSafetyIcon color={"primary"} sx={{ marginRight: 2 }} />}

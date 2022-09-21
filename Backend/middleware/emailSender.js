@@ -67,7 +67,7 @@ const testEmailSenderAdmin = async (req, emailid, passwordused) => {
   });
 
   let info = await transporter.sendMail({
-    from: '"noReply" <ashishdhakal6@gmail.com>', // sender address
+    from: '"noReply" <Doctor appointment@example.com>', // sender address
     to: emailid, // list of receivers
     subject: "Admin Created !!!Admin Credential!!!", // Subject line
     text:
@@ -95,7 +95,7 @@ const sendPdfEmailSender = async (req, emailid, link) => {
   });
 
   let info = await transporter.sendMail({
-    from: '"noReply" <ashishdhakal6@gmail.com>', // sender address
+    from: '"noReply" <Doctor appointment@example.com>', // sender address
     to: emailid, // list of receivers
     subject: "Prescription pdf has been generated.", // Subject line
     text:
@@ -114,7 +114,9 @@ const sendMeetingLink = async (
   emailid,
   link,
   dateRequested,
-  timeRequested
+  timeRequested,
+  patientName,
+  docName
 ) => {
   //geting dateFrom dateRequested timestamp
   let dateTimestamp = new Date(dateRequested);
@@ -133,21 +135,30 @@ const sendMeetingLink = async (
   let info = await transporter.sendMail({
     from: '"noReply" <ashishdhakal6@gmail.com>', // sender address
     to: emailid, // list of receivers
-    subject: "Meeting Link has been generated.", // Subject line
+    subject: "Your Consultation with Xyba Doctor has been scheduled", // Subject line
     text:
-      "You are receiving this because your meeting has been fixed and stored in the database.\n\n" +
-      "Now you can view your Meeting detail by using below link\n\n" +
-      "Please click on the following link, or paste this into your browser to complete the process :\n\n" +
-      "Meeting Link:   " +
-      link +
+      "Dear: " +
+      patientName +
+      "\n\n" +
+      "As per your request, you consultation with Dr. " +
+      docName +
+      "has been scheduled" +
       "\n\n" +
       "Meeting Date:   " +
       dateofAppointment +
       "\n\n" +
-      "Time slot alloted:   " +
+      "Time:   " +
       timeRequested +
       "\n\n" +
-      "If you did not request this, please ignore this email.\n", // plain text body
+      "Please follow the link to go to your meeting:\n\n" +
+      "Meeting Link:   " +
+      link +
+      "\n\n" +
+      "If you did not request this meeting, please ignore this email.\n" +
+      "\n\n\n" +
+      "Thank you," +
+      "\n" +
+      "xyba Health Technologies", // plain text body
   });
 };
 

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import { alpha, useTheme } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import Popover from "@mui/material/Popover";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { IconButton } from "@mui/material";
 
 const NavItem2 = ({ title, id, items, colorInvert = false }) => {
   const theme = useTheme();
@@ -89,36 +89,23 @@ const NavItem2 = ({ title, id, items, colorInvert = false }) => {
         <Grid container spacing={0.5}>
           {items.map((p, i) => (
             <Grid item key={i} xs={items.length > 12 ? 6 : 12}>
-              {/* <IconButton
-                aria-label="delete"
-                size={"large"}
-                sx={{ color: (theme) => theme.palette.primary.facebook }}
-              >
-                <FacebookIcon sx={{ fontSize: "20px" }} />
-              </IconButton> */}
-              <Button
-                startIcon={p.icon}
-                size={"large"}
+              <Box
                 component={"a"}
                 href={p.href}
                 rel="noreferrer"
                 target="_blank"
-                fullWidth
-                sx={{
-                  justifyContent: "flex-start",
-                  color:
-                    activeLink === p.href
-                      ? theme.palette.primary.main
-                      : theme.palette.text.primary,
-                  backgroundColor:
-                    activeLink === p.href
-                      ? alpha(theme.palette.primary.main, 0.1)
-                      : "transparent",
-                  fontWeight: activeLink === p.href ? 600 : 400,
-                }}
+                display={"flex"}
+                alignItems={"center"}
               >
-                {p.title}
-              </Button>
+                <IconButton
+                  aria-label="delete"
+                  size={"large"}
+                  sx={{ color: p.color }}
+                >
+                  {p.icon}
+                </IconButton>
+                <Typography color={"text.primary"}>{p.title}</Typography>
+              </Box>
             </Grid>
           ))}
         </Grid>

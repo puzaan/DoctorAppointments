@@ -7,9 +7,8 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
+import { IconButton } from "@mui/material";
 
 const NavItem = ({ title, items, icon }) => {
   const theme = useTheme();
@@ -47,25 +46,45 @@ const NavItem = ({ title, items, icon }) => {
         <AccordionDetails sx={{ padding: 0 }}>
           <Grid container spacing={1}>
             {items.map((p, i) => (
-              <Grid item key={i} xs={12}>
-                <Button
-                  startIcon={p.icon}
-                  size={"large"}
-                  component={Link}
-                  to={p.href}
-                  fullWidth
-                  sx={{
-                    justifyContent: "flex-start",
-                    color: "primary.main",
-                    // backgroundColor:
-                    //   activeLink === p.href
-                    //     ? alpha(theme.palette.primary.main, 0.1)
-                    //     : "transparent",
-                    fontWeight: 400,
-                  }}
+              // <Grid item key={i} xs={12}>
+              //   <Button
+              //     startIcon={p.icon}
+              //     size={"large"}
+              //     component={Link}
+              //     to={p.href}
+              //     fullWidth
+              //     sx={{
+              //       justifyContent: "flex-start",
+              //       color: "primary.main",
+              //       // backgroundColor:
+              //       //   activeLink === p.href
+              //       //     ? alpha(theme.palette.primary.main, 0.1)
+              //       //     : "transparent",
+              //       fontWeight: 400,
+              //     }}
+              //   >
+              //     {p.title}
+              //   </Button>
+              // </Grid>
+
+              <Grid item key={i} xs={items.length > 12 ? 6 : 12}>
+                <Box
+                  component={"a"}
+                  href={p.href}
+                  rel="noreferrer"
+                  target="_blank"
+                  display={"flex"}
+                  alignItems={"center"}
                 >
-                  {p.title}
-                </Button>
+                  <IconButton
+                    aria-label="delete"
+                    size={"large"}
+                    sx={{ color: p.color }}
+                  >
+                    {p.icon}
+                  </IconButton>
+                  <Typography color={"text.primary"}>{p.title}</Typography>
+                </Box>
               </Grid>
             ))}
           </Grid>

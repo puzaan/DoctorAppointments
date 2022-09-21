@@ -69,7 +69,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
           />
         }
       />
-      <NavItem
+      <NavItem2
         title={"Contact Us"}
         items={pages.contactUs}
         icon={<ContactSupportIcon color={"primary"} sx={{ marginRight: 2 }} />}

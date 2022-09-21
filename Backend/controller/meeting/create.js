@@ -16,9 +16,7 @@ const {
   sendMeetingLink,
 } = require("../../middleware/emailSender");
 const fs = require("fs");
-const {
-  doctorSignupSchema,
-} = require("../../database/doctor_signup_schema");
+const { doctorSignupSchema } = require("../../database/doctor_signup_schema");
 const { doctorMeetingSchema } = require("../../database/doctor_meeting_schema");
 
 const createMeeting = (req, res) => {
@@ -64,13 +62,10 @@ const createMeeting = (req, res) => {
     if (done) {
       //creating meeting link
       var dateTimeForMeeting = Date.now();
+      var name = patientName.replace(/\s+/g, "");
+      const docName = done.fullName;
       const meetingLink =
-        jitsiVideoLink +
-        "/" +
-        doctorId +
-        "/" +
-        patientName +
-        dateTimeForMeeting;
+        jitsiVideoLink + "/" + doctorId + "/" + name + "/" + dateTimeForMeeting;
 
       //if doctor id is found
       doctorMeetingSchema.create(
@@ -93,7 +88,9 @@ const createMeeting = (req, res) => {
               patientEmail,
               meetingLink,
               dateRequested,
-              timeRequested
+              timeRequested,
+              patientName,
+              docName
             );
             res.status(200).json({ msg: "meeting created", data: done });
           }
@@ -227,77 +224,83 @@ const viewForGivenDoctorId = (req, res) => {
 
 const sendPdfToClient = (req, res) => {
   const meetingId = req.params.id;
-  doctorMeetingSchema.findOne({ meetingId: meetingId }).exec(async (error, done) => {
-    if (error) {
-      console.log(error);
-      res.status(500).json({ msg: "Internal Server Error" });
-      return;
-    }
-    if (done) {
-      //const tempDoctor=await doctorSchema.findOne({"doctorId":done.doctorDetail});
-      const fileAddress = generatePdfFunction(
-        req.params.id,
-        done["doctorDetail"],
-        done["patientDetail"],
-        done["prescription"]
-      );
-      //send sms code goes here with file address;
-      let fileAddressInHost =
-        process.env.HOST_ADDRESS + process.env.IMAGE_ADDRESS + meetingId;
-      sendPdfEmailSender(
-        req,
-        done["patientDetail"]["patientEmail"],
-        fileAddressInHost
-      );
-      await doctorMeetingSchema.findOneAndUpdate(
-        { meetingId: meetingId },
-        { pdfLink: fileAddressInHost }
-      );
-      console.log(fileAddress);
+  doctorMeetingSchema
+    .findOne({ meetingId: meetingId })
+    .exec(async (error, done) => {
+      if (error) {
+        console.log(error);
+        res.status(500).json({ msg: "Internal Server Error" });
+        return;
+      }
+      if (done) {
+        //const tempDoctor=await doctorSchema.findOne({"doctorId":done.doctorDetail});
+        const fileAddress = generatePdfFunction(
+          req.params.id,
+          done["doctorDetail"],
+          done["patientDetail"],
+          done["prescription"]
+        );
+        //send sms code goes here with file address;
+        let fileAddressInHost =
+          process.env.HOST_ADDRESS + process.env.IMAGE_ADDRESS + meetingId;
+        sendPdfEmailSender(
+          req,
+          done["patientDetail"]["patientEmail"],
+          fileAddressInHost
+        );
+        await doctorMeetingSchema.findOneAndUpdate(
+          { meetingId: meetingId },
+          { pdfLink: fileAddressInHost }
+        );
+        console.log(fileAddress);
 
-      res
-        .status(200)
-        .json({ msg: "Pdf link sms sent to the client", data: done });
-    } else {
-      res.status(400).json({ msg: "No data found for given meeting id" });
-    }
-  });
+        res
+          .status(200)
+          .json({ msg: "Pdf link sms sent to the client", data: done });
+      } else {
+        res.status(400).json({ msg: "No data found for given meeting id" });
+      }
+    });
 };
 const viewForGivenMeetingId = (req, res) => {
   const meetingId = req.params.id;
-  doctorMeetingSchema.findOne({ meetingId: meetingId }).exec(async (error, done) => {
-    if (error) {
-      console.log(error);
-      res.status(500).json({ msg: "Internal Server Error" });
-      return;
-    }
-    if (done) {
-      res.status(200).json(done);
-    } else {
-      res.status(400).json({ msg: "No data found for given meeting id" });
-    }
-  });
+  doctorMeetingSchema
+    .findOne({ meetingId: meetingId })
+    .exec(async (error, done) => {
+      if (error) {
+        console.log(error);
+        res.status(500).json({ msg: "Internal Server Error" });
+        return;
+      }
+      if (done) {
+        res.status(200).json(done);
+      } else {
+        res.status(400).json({ msg: "No data found for given meeting id" });
+      }
+    });
 };
 
 const viewPdfToClient = (req, res) => {
   const meetingId = req.params.id;
 
-  doctorMeetingSchema.findOne({ meetingId: meetingId }).exec(async (error, done) => {
-    if (error) {
-      console.log(error);
-      res.status(500).json({ msg: "Internal Server Error" });
-      return;
-    }
-    if (done) {
-      const pdfFile = fs.readFileSync(
-        "./middleware/pdfgenerator/prescriptionFile/" + meetingId + ".pdf"
-      );
-      res.contentType("application/pdf");
-      res.send(pdfFile);
-    } else {
-      res.status(400).json({ msg: "No data found for given meeting id" });
-    }
-  });
+  doctorMeetingSchema
+    .findOne({ meetingId: meetingId })
+    .exec(async (error, done) => {
+      if (error) {
+        console.log(error);
+        res.status(500).json({ msg: "Internal Server Error" });
+        return;
+      }
+      if (done) {
+        const pdfFile = fs.readFileSync(
+          "./middleware/pdfgenerator/prescriptionFile/" + meetingId + ".pdf"
+        );
+        res.contentType("application/pdf");
+        res.send(pdfFile);
+      } else {
+        res.status(400).json({ msg: "No data found for given meeting id" });
+      }
+    });
 };
 
 const deleteMeeting = async (req, res) => {
@@ -320,7 +323,6 @@ const deleteMeeting = async (req, res) => {
 };
 
 // const createMeeting = async (req)
-
 
 module.exports = {
   createMeeting,
