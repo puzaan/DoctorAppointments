@@ -67,7 +67,7 @@ const testEmailSenderAdmin = async (req, emailid, passwordused) => {
   });
 
   let info = await transporter.sendMail({
-    from: '"noReply" <Doctor appointment@example.com>', // sender address
+    from: '"noReply" <ashishdhakal6@gmail.com>', // sender address
     to: emailid, // list of receivers
     subject: "Admin Created !!!Admin Credential!!!", // Subject line
     text:
@@ -95,7 +95,7 @@ const sendPdfEmailSender = async (req, emailid, link) => {
   });
 
   let info = await transporter.sendMail({
-    from: '"noReply" <Doctor appointment@example.com>', // sender address
+    from: '"noReply" <ashishdhakal6@gmail.com>', // sender address
     to: emailid, // list of receivers
     subject: "Prescription pdf has been generated.", // Subject line
     text:
@@ -131,7 +131,7 @@ const sendMeetingLink = async (
   });
 
   let info = await transporter.sendMail({
-    from: '"noReply" <Doctor appointment@example.com>', // sender address
+    from: '"noReply" <ashishdhakal6@gmail.com>', // sender address
     to: emailid, // list of receivers
     subject: "Meeting Link has been generated.", // Subject line
     text:

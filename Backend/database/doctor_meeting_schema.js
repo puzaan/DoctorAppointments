@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
-const { prescriptionScheema } = require("./prescription");
 const { patientScheema } = require("./patient_schema");
-const meetingScheemas = new mongoose.Schema(
+const { prescriptionScheema } = require("./prescription");
+
+const doctorMeetingScheema = new mongoose.Schema(
   {
     meetingId: {
       type: String,
@@ -18,5 +19,8 @@ const meetingScheemas = new mongoose.Schema(
   { timestamps: true }
 );
 
-const meetingSchemas = mongoose.model("meetingSchemas", meetingScheemas);
-module.exports = { meetingSchemas };
+const doctorMeetingSchema = mongoose.model(
+  "doctorMeetingSchema",
+  doctorMeetingScheema
+);
+module.exports = { doctorMeetingSchema };

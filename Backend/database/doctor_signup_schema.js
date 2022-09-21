@@ -61,9 +61,7 @@ const doctorSignupSchema = mongoose.model(
 
 const doctorSignupScheemaForMeeting = new mongoose.Schema(
   {
-    doctorSinId: {
-      type: String,
-    },
+    doctorSinId: String,
     fullName: String,
     email: String,
     address: String,
@@ -88,7 +86,8 @@ const doctorSignupScheemaForMeeting = new mongoose.Schema(
     Affilation: [],
     fee: String,
   },
-  { timestamps: true }
+  { _id: false }
 );
 
 module.exports = { doctorSignupSchema, doctorSignupScheemaForMeeting };
+

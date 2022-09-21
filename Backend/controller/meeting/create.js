@@ -1,4 +1,4 @@
-const { meetingSchema } = require("../../database/meeting_schema");
+const { meetingSchemas } = require("../../database/meeting_schema");
 const {
   prescriptionSchema,
   prescriptionObject,
@@ -16,7 +16,10 @@ const {
   sendMeetingLink,
 } = require("../../middleware/emailSender");
 const fs = require("fs");
-const { doctorSignupSchema } = require("../../database/doctor_signup_schema");
+const {
+  doctorSignupSchema,
+} = require("../../database/doctor_signup_schema");
+const { doctorMeetingSchema } = require("../../database/doctor_meeting_schema");
 
 const createMeeting = (req, res) => {
   const {
@@ -70,17 +73,17 @@ const createMeeting = (req, res) => {
         dateTimeForMeeting;
 
       //if doctor id is found
-      meetingSchema.create(
+      doctorMeetingSchema.create(
         {
           meetingLink: meetingLink,
           prescription: prescript,
           patientDetail: patient,
-          doctorDetail: done,
+          doctorSinId: doctorId,
           createdBy: req.doctorData.fullName,
         },
         function (error, done) {
           if (error) {
-            console.log("2nderror" + error);
+            console.log("while creating meeting error: " + error);
             res.status(500).json({ msg: "Internal Server Error" });
             return;
           }
@@ -113,7 +116,7 @@ const updatePrescription = (req, res) => {
     advise,
     treatment
   );
-  meetingSchema
+  doctorMeetingSchema
     .findOneAndUpdate(
       { meetingId: meetingId },
       { prescription: prescript, active: false }
@@ -135,7 +138,7 @@ const updatePrescription = (req, res) => {
 };
 
 const viewAllMeeting = (req, res) => {
-  meetingSchema.find({}).exec((error, done) => {
+  doctorMeetingSchema.find({}).exec((error, done) => {
     if (error) {
       console.log(error);
       res.status(500).json({ msg: "Internal Server Error" });
@@ -146,8 +149,8 @@ const viewAllMeeting = (req, res) => {
 };
 const viewActiveMeetingForGivenDoctorId = (req, res) => {
   const doctorId = req.params.id;
-  meetingSchema
-    .find({ doctorDetail: doctorId, active: true })
+  doctorMeetingSchema
+    .find({ doctorSinId: doctorId, active: true })
     .exec((error, done) => {
       if (error) {
         console.log(error);
@@ -175,10 +178,11 @@ const viewActiveMeetingForGivenDoctorId = (req, res) => {
     });
 };
 
+//view meeting by doctor id
 const viewForGivenDoctorId = (req, res) => {
   const doctorId = req.params.id;
-  meetingSchema
-    .find({ "doctorDetail.doctorId": doctorId })
+  doctorMeetingSchema
+    .find({ doctorSinId: doctorId })
     .sort({ _id: -1 })
     .exec(async (error, done) => {
       if (error) {
@@ -223,7 +227,7 @@ const viewForGivenDoctorId = (req, res) => {
 
 const sendPdfToClient = (req, res) => {
   const meetingId = req.params.id;
-  meetingSchema.findOne({ meetingId: meetingId }).exec(async (error, done) => {
+  doctorMeetingSchema.findOne({ meetingId: meetingId }).exec(async (error, done) => {
     if (error) {
       console.log(error);
       res.status(500).json({ msg: "Internal Server Error" });
@@ -245,7 +249,7 @@ const sendPdfToClient = (req, res) => {
         done["patientDetail"]["patientEmail"],
         fileAddressInHost
       );
-      await meetingSchema.findOneAndUpdate(
+      await doctorMeetingSchema.findOneAndUpdate(
         { meetingId: meetingId },
         { pdfLink: fileAddressInHost }
       );
@@ -261,7 +265,7 @@ const sendPdfToClient = (req, res) => {
 };
 const viewForGivenMeetingId = (req, res) => {
   const meetingId = req.params.id;
-  meetingSchema.findOne({ meetingId: meetingId }).exec(async (error, done) => {
+  doctorMeetingSchema.findOne({ meetingId: meetingId }).exec(async (error, done) => {
     if (error) {
       console.log(error);
       res.status(500).json({ msg: "Internal Server Error" });
@@ -278,7 +282,7 @@ const viewForGivenMeetingId = (req, res) => {
 const viewPdfToClient = (req, res) => {
   const meetingId = req.params.id;
 
-  meetingSchema.findOne({ meetingId: meetingId }).exec(async (error, done) => {
+  doctorMeetingSchema.findOne({ meetingId: meetingId }).exec(async (error, done) => {
     if (error) {
       console.log(error);
       res.status(500).json({ msg: "Internal Server Error" });
@@ -299,7 +303,7 @@ const viewPdfToClient = (req, res) => {
 const deleteMeeting = async (req, res) => {
   const meetingId = req.params.id;
   try {
-    const meetingData = await meetingSchema.findOneAndDelete({
+    const meetingData = await doctorMeetingSchema.findOneAndDelete({
       meetingId: meetingId,
     });
     if (meetingData) {
@@ -314,6 +318,9 @@ const deleteMeeting = async (req, res) => {
     res.status(400).json({ status: "Fail", msg: "Error in Deleting meeting" });
   }
 };
+
+// const createMeeting = async (req)
+
 
 module.exports = {
   createMeeting,
