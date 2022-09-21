@@ -65,7 +65,7 @@ const createMeeting = (req, res) => {
       var name = patientName.replace(/\s+/g, "");
       const docName = done.fullName;
       const meetingLink =
-        jitsiVideoLink + "/" + doctorId + "/" + name + "/" + dateTimeForMeeting;
+        jitsiVideoLink + "/" + doctorId + "/" + name + dateTimeForMeeting;
 
       //if doctor id is found
       doctorMeetingSchema.create(
@@ -192,6 +192,7 @@ const viewForGivenDoctorId = (req, res) => {
         done.forEach((data) => {
           let element = {};
           element.meetingId = data["meetingId"];
+          element.active = data["active"];
           element.patientName = data["patientDetail"]["patientName"];
           element.age = data["patientDetail"]["age"];
           element.gender = data["patientDetail"]["gender"];

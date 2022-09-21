@@ -120,7 +120,7 @@ const sendMeetingLink = async (
 ) => {
   //geting dateFrom dateRequested timestamp
   let dateTimestamp = new Date(dateRequested);
-  let dateofAppointment = dateTimestamp.toString();
+  let dateofAppointment = dateTimestamp.toLocaleDateString("en-US");
 
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",

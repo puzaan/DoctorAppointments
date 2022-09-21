@@ -62,7 +62,7 @@ const columns = [
     sortable: false,
     disableColumnMenu: true,
     renderCell: (params) =>
-      params.row.approved ? (
+      params.row.active ? (
         <Stack direction="row" spacing={1}>
           <Chip label="Not Attended" size="small" color="error" />
         </Stack>
