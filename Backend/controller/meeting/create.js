@@ -234,10 +234,14 @@ const sendPdfToClient = (req, res) => {
         return;
       }
       if (done) {
-        //const tempDoctor=await doctorSchema.findOne({"doctorId":done.doctorDetail});
+        const tempDoctor = await doctorSignupSchema.findOne({
+          doctorSinId: done.doctorSinId,
+        });
         const fileAddress = generatePdfFunction(
           req.params.id,
-          done["doctorDetail"],
+          tempDoctor["fullName"],
+          tempDoctor["MBBS"],
+          tempDoctor["NMC_number"],
           done["patientDetail"],
           done["prescription"]
         );

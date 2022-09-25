@@ -5,12 +5,14 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@vonage/server-sdk": "^2.11.2",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
@@ -25,13 +27,14 @@
     "multer": "^1.4.4",
     "node-fetch": "^2.6.7",
     "nodemailer": "^6.7.3",
-    "nodemon": "^2.0.15",
+    "nodemon": "^2.0.20",
     "path": "^0.12.7",
     "pdf-lib": "^1.17.1",
     "pdfkit": "^0.13.0",
     "pdfreader": "^2.0.0",
     "socket.io": "^4.5.1",
-    "twilio": "^3.82.0",
+    "twilio": "^3.82.1",
+    "viber-bot": "^1.0.18",
     "xss-clean": "^0.1.1"
   }
 }
