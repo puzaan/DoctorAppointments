@@ -259,7 +259,7 @@ const sendPdfToClient = (req, res) => {
           { meetingId: meetingId },
           { pdfLink: fileAddressInHost }
         );
-        console.log(fileAddress);
+        // console.log(fileAddress);
 
         res
           .status(200)
