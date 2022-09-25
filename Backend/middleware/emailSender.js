@@ -83,7 +83,7 @@ const testEmailSenderAdmin = async (req, emailid, passwordused) => {
   });
 };
 
-const sendPdfEmailSender = async (req, emailid, link) => {
+const sendPdfEmailSender = async (req, emailid, link, patientName, docName) => {
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
@@ -99,13 +99,23 @@ const sendPdfEmailSender = async (req, emailid, link) => {
     to: emailid, // list of receivers
     subject: "Prescription pdf has been generated.", // Subject line
     text:
-      "You are receiving this because your prescription has been generated and stored in the database.\n\n" +
-      "Now you can view your PRESCRIPTION pdf file by using below link\n\n" +
-      "Please click on the following link, or paste this into your browser to complete the process :\n\n" +
-      "PDF link:   " +
+      "Dear: " +
+      patientName +
+      "\n\n" +
+      "As per your request, you consultation with Dr. " +
+      docName +
+      "\n\n" +
+      "Your Prescription has been Created" +
+      "\n\n" +
+      "Please follow the link to go to View your prescription:\n\n" +
+      "Prescription Link:   " +
       link +
       "\n\n" +
-      "If you did not request this, please ignore this email.\n", // plain text body
+      "If you did not request this meeting, please ignore this email.\n" +
+      "\n\n\n" +
+      "Thank you," +
+      "\n" +
+      "xyba Health Technologies", // plain text body
   });
 };
 

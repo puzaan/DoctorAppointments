@@ -251,7 +251,9 @@ const sendPdfToClient = (req, res) => {
         sendPdfEmailSender(
           req,
           done["patientDetail"]["patientEmail"],
-          fileAddressInHost
+          fileAddressInHost,
+          done["patientDetail"]["patientName"],
+          tempDoctor["fullName"]
         );
         await doctorMeetingSchema.findOneAndUpdate(
           { meetingId: meetingId },
