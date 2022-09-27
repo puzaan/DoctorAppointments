@@ -19,7 +19,7 @@ const HomePage = () => {
         .then((receivedData) => setAllDoctorLis(receivedData.data));
     };
     getAllDoctorList();
-  }, []);
+  }, [allDoctorList]);
   return (
     <Page title="Xyba.health">
       <FrontPageLayout />

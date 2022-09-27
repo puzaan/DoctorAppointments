@@ -46,18 +46,25 @@ async function generatePdfFunction(
     height: 720,
   });
 
-  doc.fontSize(10).text(patient["patientName"], 90, 192);
-  doc.fontSize(10).text(patient["age"], 315, 193); //+textData["prescription"]["patientName"]
-  doc.fontSize(10).text("/  " + patient["gender"], 363, 193); //+textData["prescription"]["Ward"]
-  doc.fontSize(10).text(patient["occupation"], 130, 219); //+textData["prescription"]["dob"]
-  doc.fontSize(10).text(patient["address"], 317, 218); //+textData["prescription"]["gender"]
-  doc.fontSize(10).text(patient["phoneNumber"], 490, 218); //+textData["prescription"]["bedNo"]
-  doc.fontSize(10).text("         " + prescription["complaints"], 10, 300); //+textData["prescription"]["inPatientNo"]
-  doc.fontSize(10).text("         " + prescription["observation"], 10, 433); //+textData["prescription"]["unit"]
-  doc.fontSize(10).text("         " + prescription["advise"], 10, 549); //+textData["prescription"]["consultant"]
-  doc.fontSize(8).text(fullName, 483, 674); //+textData["prescription"]["diagnosis"]
-  doc.fontSize(8).text(MBBS, 440, 690); //+textData["prescription"]["chiefComplaint"]
-  doc.fontSize(8).text(NMC_number, 448, 706); //+textData["prescription"]["historyOfPresentIllness"]
+  doc.fontSize(10).text("01-4790238", 247, 13);
+  doc.fontSize(10).text("info@xyba.health", 245, 23, {
+    link: "https://mail.google.com/mail/u/0/#inbox?compose=CllgCJlKnfhbHZMDCtMLclrNWWvfffShLXfHrgXfpsLpZZjvdjhRnlZHbcDWbFFPlVcqwjTbkWL",
+  });
+  doc.fontSize(10).text("xyba.health", 255, 35, {
+    link: "https://xyba.health",
+  });
+  doc.fontSize(10).text(patient["patientName"], 85, 100);
+  doc.fontSize(10).text(patient["age"], 315, 100); //+textData["prescription"]["patientName"]
+  doc.fontSize(10).text("/  " + patient["gender"], 363, 100); //+textData["prescription"]["Ward"]
+  doc.fontSize(10).text(patient["occupation"], 120, 120); //+textData["prescription"]["dob"]
+  doc.fontSize(10).text(patient["address"], 317, 118); //+textData["prescription"]["gender"]
+  doc.fontSize(10).text(patient["phoneNumber"], 485, 120); //+textData["prescription"]["bedNo"]
+  doc.fontSize(10).text("         " + prescription["complaints"], 10, 170); //+textData["prescription"]["inPatientNo"]
+  doc.fontSize(10).text("         " + prescription["observation"], 10, 260); //+textData["prescription"]["unit"]
+  doc.fontSize(10).text("         " + prescription["advise"], 10, 350); //+textData["prescription"]["advise"]
+  doc.fontSize(8).text(fullName, 483, 683); //+textData["prescription"]["diagnosis"]
+  doc.fontSize(8).text(MBBS, 445, 695); //+textData["prescription"]["chiefComplaint"]
+  doc.fontSize(8).text(NMC_number, 448, 708); //+textData["prescription"]["historyOfPresentIllness"]
   // Add an image, constrain it to a given size, and center it vertically and horizontally
 
   // Add another page
